@@ -1,0 +1,99 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: MAIN
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+          - generic [ref=e25]:
+            - paragraph [ref=e26]: PROJECTS
+            - link "All Projects" [ref=e28] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e29]
+              - text: All Projects
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: REPORTS
+            - generic [ref=e33]:
+              - link "Summary" [ref=e34] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e35]
+                - text: Summary
+              - link "Project Breakdown" [ref=e37] [cursor=pointer]:
+                - /url: /reports/projects
+                - img [ref=e38]
+                - text: Project Breakdown
+              - link "Team Overview" [ref=e101] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e102]
+                - text: Team Overview
+              - link "Block Generator" [ref=e41] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e42]
+                - text: Block Generator
+          - generic [ref=e107]:
+            - paragraph [ref=e108]: ADMIN
+            - link "Users" [ref=e110] [cursor=pointer]:
+              - /url: /admin/users
+              - img [ref=e111]
+              - text: Users
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - generic [ref=e48]: A
+            - generic [ref=e49]:
+              - paragraph [ref=e123]: Admin User
+              - generic [ref=e50]: admin
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - link [ref=e53] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e54]:
+                  - img
+              - button [ref=e55] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e56] [cursor=pointer]:
+              - img
+    - main [ref=e57]:
+      - generic [ref=e124]:
+        - generic [ref=e126]:
+          - heading "upep.mx" [level=1] [ref=e127]
+          - paragraph [ref=e128]: Task breakdown · UPEP
+        - generic [ref=e129]:
+          - generic [ref=e130]:
+            - generic [ref=e131]:
+              - text: From
+              - textbox [ref=e132]: 2026-05-03
+            - generic [ref=e133]:
+              - text: To
+              - textbox [ref=e134]: 2026-05-10
+            - button "Apply" [ref=e136] [cursor=pointer]
+          - generic [ref=e137]:
+            - button "This Week" [ref=e138] [cursor=pointer]
+            - button "Last Week" [ref=e139] [cursor=pointer]
+            - button "This Month" [ref=e140] [cursor=pointer]
+            - button "Last Month" [ref=e141] [cursor=pointer]
+        - table [ref=e144]:
+          - rowgroup [ref=e145]:
+            - row "Task Estimated Logged Entries" [ref=e146]:
+              - columnheader "Task" [ref=e147]
+              - columnheader "Estimated" [ref=e148]
+              - columnheader "Logged" [ref=e149]
+              - columnheader "Entries" [ref=e150]
+          - rowgroup [ref=e151]:
+            - row "Frontend Development — 2.5h 1" [ref=e152]:
+              - cell "Frontend Development" [ref=e153]
+              - cell "—" [ref=e154]
+              - cell "2.5h" [ref=e155]
+              - cell "1" [ref=e156]
+  - alert [ref=e157]

@@ -1,0 +1,121 @@
+- generic:
+  - alert
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Users
+              - paragraph: Manage team members and their roles
+          - generic:
+            - generic:
+              - table:
+                - rowgroup:
+                  - row:
+                    - columnheader: Name
+                    - columnheader: Email
+                    - columnheader: Role
+                    - columnheader: Status
+                    - columnheader: Joined
+                    - columnheader
+                - rowgroup:
+                  - row:
+                    - cell: Admin User
+                    - cell: admin@wisdmlabs.com
+                    - cell: admin
+                    - cell: Active
+                    - cell: 5/7/2026
+                    - cell:
+                      - button:
+                        - img
+  - dialog "Edit User" [ref=e134]:
+    - heading "Edit User" [level=2] [ref=e136]
+    - generic [ref=e137]:
+      - generic [ref=e138]:
+        - paragraph [ref=e139]: Admin User
+        - paragraph [ref=e140]: admin@wisdmlabs.com
+      - generic [ref=e141]:
+        - text: Role
+        - combobox [active] [ref=e142] [cursor=pointer]:
+          - generic: Admin
+          - img [ref=e143]
+        - combobox [ref=e145]
+      - generic [ref=e146]:
+        - text: Status
+        - combobox [ref=e147] [cursor=pointer]:
+          - generic: Active
+          - img [ref=e148]
+        - combobox [ref=e150]
+      - button "Save changes" [ref=e151] [cursor=pointer]
+    - button "Close" [ref=e152] [cursor=pointer]:
+      - img [ref=e153]
+      - generic [ref=e156]: Close

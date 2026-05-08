@@ -1,0 +1,2 @@
+date,project,task,hours,billable,ai_used,notes
+2026-05-06,upep.mx,Frontend Development,2.5,true,true,"Cart checkout UI implementation"

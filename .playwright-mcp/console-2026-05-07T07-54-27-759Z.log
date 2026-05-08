@@ -1,0 +1,1148 @@
+[     183ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[     734ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/fce0c722d9b4184f.webpack.hot-update.json:0
+[    1088ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[   16792ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ webpack-internal:///(app-pages-browser)/./node_modules/@radix-ui/react-dialog/dist/index.mjs:467
+[   16794ms] [WARNING] Warning: Missing `Description` or `aria-describedby={undefined}` for {DialogContent}. @ webpack-internal:///(app-pages-browser)/./node_modules/@radix-ui/react-dialog/dist/index.mjs:467
+[   55714ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[   56114ms] [LOG] [Fast Refresh] done in 400ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  257985ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  258311ms] [LOG] [Fast Refresh] done in 327ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  266925ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  267121ms] [LOG] [Fast Refresh] done in 195ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  267136ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  267244ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  267729ms] [LOG] [Fast Refresh] done in 484ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  267988ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=8aegy:0
+[  268736ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  275653ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  275838ms] [LOG] [Fast Refresh] done in 184ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  275900ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  276036ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  276453ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=8aegy:0
+[  277775ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  282937ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  283152ms] [LOG] [Fast Refresh] done in 216ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  283190ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  283570ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  283783ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  285808ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  286143ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=8aegy:0
+[  286144ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/_next/static/webpack/d55ad4baf2bf56c0.webpack.hot-update.json:0
+[  286144ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:112
+[  286208ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=8aegy:0
+[  286211ms] [ERROR] Failed to fetch RSC payload for http://localhost:3002/projects/69fc451f0697be4dce55ea31. Falling back to browser navigation. TypeError: Failed to fetch
+    at fetchServerResponse (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/fetch-server-response.js:59:27)
+    at fastRefreshReducerImpl (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/reducers/fast-refresh-reducer.js:33:67)
+    at clientReducer (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/router-reducer/router-reducer.js:41:67)
+    at Object.action (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:150:55)
+    at runAction (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:56:38)
+    at runRemainingActions (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:30:13)
+    at handleResult (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/shared/lib/router/action-queue.js:66:9) @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  286213ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  286421ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29889
+[  286455ms] Error: Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found
+
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at getNotFoundError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\parseNotFoundError.js:124:16)
+    at async getModuleBuildError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\webpackModuleError.js:104:27)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:29:49)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:27:21)
+[  286456ms] [LOG] [HMR] connected @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/websocket.js:38
+[  286458ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  286488ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[  286821ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  287103ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  287132ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/_next/static/webpack/5a69795adba4d7fe.webpack.hot-update.json:0
+[  287132ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:347
+[  287137ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/favicon.ico:0
+[  287182ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  287330ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29889
+[  287337ms] Error: Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found
+
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at getNotFoundError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\parseNotFoundError.js:124:16)
+    at async getModuleBuildError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\webpackModuleError.js:104:27)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:29:49)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:27:21)
+[  287340ms] [LOG] [HMR] connected @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/websocket.js:38
+[  287341ms] [ERROR] ./app/(dashboard)/dashboard/page.tsx:5:1
+Module not found: Can't resolve './DashboardClient'
+  3 | import TimeEntry from "@/models/TimeEntry";
+  4 | import { PageHeader } from "@/components/layout/PageHeader";
+> 5 | import { DashboardClient } from "./DashboardClient";
+    | ^
+  6 | import { getWeekRange } from "@/lib/time-utils";
+  7 |
+  8 | export default async function DashboardPage() {
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  303142ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[  303513ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:12:1
+Module not found: Can't resolve '@/components/modals/LogTimeModal'
+  10 | import { Badge } from "@/components/ui/badge";
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+> 12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+     | ^
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  303513ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  303514ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  304021ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/_next/static/webpack/5a69795adba4d7fe.webpack.hot-update.json:0
+[  304021ms] [WARNING] [Fast Refresh] performing full reload
+
+Fast Refresh will perform a full reload when you edit a file that's imported by modules outside of the React rendering tree.
+You might have a file which exports a React component but also exports a value that is imported by a non-React component file.
+Consider migrating the non-React component export to a separate file and importing it into both files.
+
+It is also possible the parent component of the component you edited is a class component, which disables Fast Refresh.
+Fast Refresh requires at least one parent function component in your React tree. @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:347
+[  304072ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  304222ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29889
+[  304237ms] Error: Module not found: Can't resolve '@/components/modals/LogTimeModal'
+  10 | import { Badge } from "@/components/ui/badge";
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+> 12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+     | ^
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+
+https://nextjs.org/docs/messages/module-not-found
+
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at getNotFoundError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\parseNotFoundError.js:124:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getModuleBuildError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\webpackModuleError.js:104:27)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:29:49)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:27:21)
+[  304237ms] [LOG] [HMR] connected @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/websocket.js:38
+[  304238ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:12:1
+Module not found: Can't resolve '@/components/modals/LogTimeModal'
+  10 | import { Badge } from "@/components/ui/badge";
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+> 12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+     | ^
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  304238ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  304238ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  324758ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:12:1
+Module not found: Can't resolve '@/components/modals/LogTimeModal'
+  10 | import { Badge } from "@/components/ui/badge";
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+> 12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+     | ^
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  324758ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  324758ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325058ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325058ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325058ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325300ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325300ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  325300ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361634ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:13:1
+Module not found: Can't resolve '@/components/modals/EditLogModal'
+  11 | import { Clock, Plus, Pencil, Trash2, Inbox, BrainCircuit, DollarSign, Ban } from "lucide-react";
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+> 13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+     | ^
+  14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361634ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361634ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361973ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361973ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  361974ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  362200ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  362200ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  362200ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  369380ms] [ERROR] ./app/(dashboard)/dashboard/DashboardClient.tsx:14:1
+Module not found: Can't resolve '@/components/modals/ConfirmDeleteModal'
+  12 | import { LogTimeModal } from "@/components/modals/LogTimeModal";
+  13 | import { EditLogModal } from "@/components/modals/EditLogModal";
+> 14 | import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
+     | ^
+  15 | import { formatDate } from "@/lib/time-utils";
+  16 | import { cn } from "@/lib/utils";
+  17 |
+
+https://nextjs.org/docs/messages/module-not-found @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  369380ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  369380ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  369380ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[  369588ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  369588ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  380922ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  380922ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381260ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381260ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381260ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[  381442ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381442ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381443ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381443ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381575ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381575ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381715ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381715ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381794ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  381942ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///./node_modules/react-dom/cjs/react-dom.development.js:29889
+[  381958ms] Error: Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at getNotFoundError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\parseNotFoundError.js:124:16)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async getModuleBuildError (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\webpackModuleError.js:104:27)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:29:49)
+    at async (file://C:\Users\saniy\Desktop\work\wisdm-smart-logger\node_modules\next\dist\build\webpack\plugins\wellknown-errors-plugin\index.js:27:21)
+[  381959ms] [LOG] [HMR] connected @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/websocket.js:38
+[  381960ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  381961ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421322ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421322ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421516ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421516ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421803ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  421803ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  424254ms] [ERROR] ./components/modals/EditLogModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  424255ms] [ERROR] ./components/modals/LogTimeModal.tsx:11:1
+Module not found: Can't resolve '@/components/ui/checkbox'
+   9 | import { Label } from "@/components/ui/label";
+  10 | import { Textarea } from "@/components/ui/textarea";
+> 11 | import { Checkbox } from "@/components/ui/checkbox";
+     | ^
+  12 | import {
+  13 |   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+  14 | } from "@/components/ui/select";
+
+https://nextjs.org/docs/messages/module-not-found
+
+Import trace for requested module:
+./app/(dashboard)/dashboard/DashboardClient.tsx @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/internal/helpers/hydration-error-info.js:62
+[  424798ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:221
+[  425662ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/webpack/5a69795adba4d7fe.webpack.hot-update.json:0
+[  425662ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///./node_modules/next/dist/client/components/react-dev-overlay/pages/hot-reloader-client.js:349
+[  426301ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  429277ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  429847ms] [LOG] [Fast Refresh] done in 570ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  433135ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  433393ms] [LOG] [Fast Refresh] done in 257ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  572377ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  572880ms] [LOG] [Fast Refresh] done in 503ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  721893ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  722782ms] [LOG] [Fast Refresh] done in 889ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  722797ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  722894ms] [LOG] [Fast Refresh] done in 97ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  723687ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=8aegy:0
+[  723788ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  724035ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  730640ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  730852ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  730876ms] [LOG] [Fast Refresh] done in 24ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  731139ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  731163ms] [LOG] [Fast Refresh] done in 23ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  732490ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=1kfer:0
+[  732900ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js:0
+[  733148ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  853197ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853206ms] [ERROR] Warning: An error occurred during hydration. The server HTML was replaced with client content in <%s>. #document @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  853214ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853214ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853214ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853215ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853215ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853215ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853215ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853215ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853216ms] ChunkLoadError: Loading chunk app/(dashboard)/projects/[id]/page failed.
+(timeout: http://localhost:3002/_next/static/chunks/app/(dashboard)/projects/%5Bid%5D/page.js)
+    at __webpack_require__.f.j (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:852:29)
+    at http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:155:40
+    at Array.reduce (<anonymous>)
+    at __webpack_require__.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:154:67)
+    at fn.e (http://localhost:3002/_next/static/chunks/webpack.js?v=1778141200433:391:50)
+    at loadChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:251:30)
+    at preloadModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:173:22)
+    at resolveModule (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1819:17)
+    at processFullRow (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:1908:9)
+    at processBinaryChunk (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-server-dom-webpack/cjs/react-server-dom-webpack-client.browser.development.js:2078:7)
+[  853221ms] [ERROR] The above error occurred in the <NotFoundErrorBoundary> component:
+
+    at Lazy
+    at div
+    at ProjectDetailPage (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at div
+    at main
+    at div
+    at DashboardShell (webpack-internal:///(app-pages-browser)/./components/layout/DashboardShell.tsx:20:11)
+    at DashboardLayout (Server)
+    at InnerLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:243:11)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at LoadingBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:349:11)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at InnerScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:153:9)
+    at ScrollAndFocusHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:228:11)
+    at RenderFromTemplateContext (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/render-from-template-context.js:16:44)
+    at OuterLayoutRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/layout-router.js:370:11)
+    at SessionProvider (webpack-internal:///(app-pages-browser)/./node_modules/next-auth/react.js:262:13)
+    at SessionProviderWrapper (webpack-internal:///(app-pages-browser)/./components/SessionProviderWrapper.tsx:10:11)
+    at V (webpack-internal:///(app-pages-browser)/./node_modules/next-themes/dist/index.mjs:54:24)
+    at J (webpack-internal:///(app-pages-browser)/./node_modules/next-themes/dist/index.mjs:47:47)
+    at body
+    at html
+    at RootLayout (Server)
+    at RedirectErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:74:9)
+    at RedirectBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/redirect-boundary.js:82:11)
+    at NotFoundErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:76:9)
+    at NotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/not-found-boundary.js:84:11)
+    at DevRootNotFoundBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/dev-root-not-found-boundary.js:33:11)
+    at ReactDevOverlay (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/ReactDevOverlay.js:87:9)
+    at HotReload (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:321:11)
+    at Router (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:207:11)
+    at ErrorBoundaryHandler (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:113:9)
+    at ErrorBoundary (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/error-boundary.js:160:11)
+    at AppRouter (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/app-router.js:585:13)
+    at ServerRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:112:27)
+    at Root (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:117:11)
+
+React will try to recreate this component tree from scratch using the error boundary you provided, ReactDevOverlay. @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/app-index.js:32
+[  853222ms] Error: There was an error while hydrating. Because the error happened outside of a Suspense boundary, the entire root will switch to client rendering.
+See more info here: https://nextjs.org/docs/messages/react-hydration-error
+    at updateHostRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:16571:57)
+    at beginWork$1 (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:18486:14)
+    at beginWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:26927:14)
+    at performUnitOfWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:25748:12)
+    at workLoopSync (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:25464:5)
+    at renderRootSync (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:25419:7)
+    at recoverFromConcurrentError (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:24597:20)
+    at performConcurrentWorkOnRoot (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:24542:26)
+    at workLoop (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:256:34)
+    at flushWork (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:225:14)
+    at MessagePort.performWorkUntilDeadline (webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/scheduler/cjs/scheduler.development.js:534:21)
+[  854609ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  854817ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  854840ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[  854973ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  854994ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[  855300ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[  855642ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  855896ms] [WARNING] [Fast Refresh] performing full reload because your application had an unrecoverable error @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:114
+[  856292ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[  856563ms] [INFO] %cDownload the React DevTools for a better development experience: https://reactjs.org/link/react-devtools font-weight:bold @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/compiled/react-dom/cjs/react-dom.development.js:38559
+[  921335ms] [LOG] [Fast Refresh] rebuilding @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:186
+[  921581ms] [LOG] [Fast Refresh] done in 246ms @ webpack-internal:///(app-pages-browser)/./node_modules/next/dist/client/components/react-dev-overlay/app/hot-reloader-client.js:43
+[  922045ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31?_rsc=1kfer:0
+[  922533ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/projects/69fc451f0697be4dce55ea31:0
+[ 2494866ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/api/auth/session:0
+[ 2494866ms] [ERROR] F: Unexpected token 'I', "Internal S"... is not valid JSON. Read more at https://errors.authjs.dev#autherror
+    at J (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:4821)
+    at async eo (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:6612)
+    at async Y._getSession (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:9287) @ http://localhost:3002/_next/static/chunks/117-a3a580c541fa1b4d.js:0
+[ 2495338ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://localhost:3002/api/auth/session:0
+[ 2495338ms] [ERROR] F: Unexpected token 'I', "Internal S"... is not valid JSON. Read more at https://errors.authjs.dev#autherror
+    at J (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:4821)
+    at async eo (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:6612)
+    at async Y._getSession (http://localhost:3002/_next/static/chunks/934-8e71fe7571ae3273.js:1:9287) @ http://localhost:3002/_next/static/chunks/117-a3a580c541fa1b4d.js:0
+[ 2496078ms] [ERROR] Failed to fetch RSC payload for http://localhost:3002/logs. Falling back to browser navigation. Error: Failed to read a RSC payload created by a development version of React on the server while using a production version on the client. Always use matching versions on the server and the client.
+    at t (http://localhost:3002/_next/static/chunks/117-a3a580c541fa1b4d.js:2:20435) @ http://localhost:3002/_next/static/chunks/117-a3a580c541fa1b4d.js:0
+[ 2496980ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/css/app/layout.css?v=1778142963929:0
+[ 2497017ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/chunks/app/layout.js:0
+[ 2497018ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/chunks/main-app.js?v=1778142963929:0
+[ 2497019ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/chunks/app-pages-internals.js:0
+[ 2497020ms] [ERROR] Failed to load resource: the server responded with a status of 404 (Not Found) @ http://localhost:3002/_next/static/chunks/app/(dashboard)/layout.js:0

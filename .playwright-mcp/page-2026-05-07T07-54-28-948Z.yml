@@ -1,0 +1,124 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e10]: Smart Logger
+      - navigation [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: MAIN
+          - generic [ref=e14]:
+            - link "Dashboard" [ref=e15] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e16]
+              - text: Dashboard
+            - link "My Logs" [ref=e21] [cursor=pointer]:
+              - /url: /logs
+              - img [ref=e22]
+              - text: My Logs
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: PROJECTS
+          - link "All Projects" [ref=e28] [cursor=pointer]:
+            - /url: /projects
+            - img [ref=e29]
+            - text: All Projects
+        - generic [ref=e31]:
+          - paragraph [ref=e32]: REPORTS
+          - generic [ref=e33]:
+            - link "Summary" [ref=e34] [cursor=pointer]:
+              - /url: /reports/summary
+              - img [ref=e35]
+              - text: Summary
+            - link "Project Breakdown" [ref=e37] [cursor=pointer]:
+              - /url: /reports/projects
+              - img [ref=e38]
+              - text: Project Breakdown
+            - link "Block Generator" [ref=e41] [cursor=pointer]:
+              - /url: /reports/block-generator
+              - img [ref=e42]
+              - text: Block Generator
+      - generic [ref=e45]:
+        - generic [ref=e46]:
+          - generic [ref=e48]: U
+          - generic [ref=e49]:
+            - paragraph
+            - generic [ref=e50]: dev
+        - generic [ref=e51]:
+          - generic [ref=e52]:
+            - link [ref=e53] [cursor=pointer]:
+              - /url: /profile
+              - button [ref=e54]:
+                - img
+            - button [ref=e55] [cursor=pointer]:
+              - img
+          - button "Toggle theme" [ref=e56] [cursor=pointer]:
+            - img
+  - main [ref=e57]:
+    - generic [ref=e59]:
+      - generic [ref=e61]:
+        - heading "Projects" [level=1] [ref=e62]
+        - paragraph [ref=e63]: All active projects and their tasks
+      - button "New Project" [ref=e65] [cursor=pointer]:
+        - img
+        - text: New Project
+      - table [ref=e68]:
+        - rowgroup [ref=e69]:
+          - row "Project Client Budget Status" [ref=e70]:
+            - columnheader "Project" [ref=e71]
+            - columnheader "Client" [ref=e72]
+            - columnheader "Budget" [ref=e73]
+            - columnheader "Status" [ref=e74]
+            - columnheader [ref=e75]
+        - rowgroup [ref=e76]:
+          - row "ldgr-plugin WisdmLabs 300h Active" [ref=e77]:
+            - cell "ldgr-plugin" [ref=e78]
+            - cell "WisdmLabs" [ref=e79]
+            - cell "300h" [ref=e80]
+            - cell "Active" [ref=e81]
+            - cell [ref=e82]:
+              - generic [ref=e83]:
+                - link [ref=e84] [cursor=pointer]:
+                  - /url: /projects/69fc45200697be4dce55ea43
+                  - button [ref=e85]:
+                    - img
+                - button [ref=e86] [cursor=pointer]:
+                  - img
+          - row "two-lines-press Two Lines Press 200h Active" [ref=e87]:
+            - cell "two-lines-press" [ref=e88]
+            - cell "Two Lines Press" [ref=e89]
+            - cell "200h" [ref=e90]
+            - cell "Active" [ref=e91]
+            - cell [ref=e92]:
+              - generic [ref=e93]:
+                - link [ref=e94] [cursor=pointer]:
+                  - /url: /projects/69fc451f0697be4dce55ea38
+                  - button [ref=e95]:
+                    - img
+                - button [ref=e96] [cursor=pointer]:
+                  - img
+          - row "upep.mx UPEP 500h Active" [ref=e97]:
+            - cell "upep.mx" [ref=e98]
+            - cell "UPEP" [ref=e99]
+            - cell "500h" [ref=e100]
+            - cell "Active" [ref=e101]
+            - cell [ref=e102]:
+              - generic [ref=e103]:
+                - link [ref=e104] [cursor=pointer]:
+                  - /url: /projects/69fc451f0697be4dce55ea31
+                  - button [ref=e105]:
+                    - img
+                - button [ref=e106] [cursor=pointer]:
+                  - img
+          - row "wisdmlabs-internal — — Active" [ref=e107]:
+            - cell "wisdmlabs-internal" [ref=e108]
+            - cell "—" [ref=e109]
+            - cell "—" [ref=e110]
+            - cell "Active" [ref=e111]
+            - cell [ref=e112]:
+              - generic [ref=e113]:
+                - link [ref=e114] [cursor=pointer]:
+                  - /url: /projects/69fc451f0697be4dce55ea3d
+                  - button [ref=e115]:
+                    - img
+                - button [ref=e116] [cursor=pointer]:
+                  - img

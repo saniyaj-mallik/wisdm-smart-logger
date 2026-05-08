@@ -1,0 +1,164 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Projects
+              - paragraph: All active projects and their tasks
+          - generic:
+            - button:
+              - img
+              - text: New Project
+          - generic:
+            - generic:
+              - table:
+                - rowgroup:
+                  - row:
+                    - columnheader: Project
+                    - columnheader: Client
+                    - columnheader: Budget
+                    - columnheader: Status
+                    - columnheader
+                - rowgroup:
+                  - row:
+                    - cell: ldgr-plugin
+                    - cell: WisdmLabs
+                    - cell: 300h
+                    - cell: Active
+                    - cell:
+                      - generic:
+                        - link:
+                          - /url: /projects/69fc45200697be4dce55ea43
+                          - button:
+                            - img
+                        - button:
+                          - img
+                  - row:
+                    - cell: two-lines-press
+                    - cell: Two Lines Press
+                    - cell: 200h
+                    - cell: Active
+                    - cell:
+                      - generic:
+                        - link:
+                          - /url: /projects/69fc451f0697be4dce55ea38
+                          - button:
+                            - img
+                        - button:
+                          - img
+                  - row:
+                    - cell: upep.mx
+                    - cell: UPEP
+                    - cell: 500h
+                    - cell: Active
+                    - cell:
+                      - generic:
+                        - link:
+                          - /url: /projects/69fc451f0697be4dce55ea31
+                          - button:
+                            - img
+                        - button:
+                          - img
+                  - row:
+                    - cell: wisdmlabs-internal
+                    - cell: —
+                    - cell: —
+                    - cell: Active
+                    - cell:
+                      - generic:
+                        - link:
+                          - /url: /projects/69fc451f0697be4dce55ea3d
+                          - button:
+                            - img
+                        - button:
+                          - img
+  - alert
+  - dialog "New Project" [ref=e142]:
+    - heading "New Project" [level=2] [ref=e144]
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - text: Project name *
+        - textbox "Project name *" [active] [ref=e147]
+      - generic [ref=e148]:
+        - text: Client name
+        - textbox "Client name" [ref=e149]
+      - generic [ref=e150]:
+        - text: Budget hours
+        - spinbutton "Budget hours" [ref=e151]
+      - generic [ref=e152]:
+        - text: Description
+        - textbox "Description" [ref=e153]
+      - button "Create project" [ref=e154] [cursor=pointer]
+    - button "Close" [ref=e155] [cursor=pointer]:
+      - img [ref=e156]
+      - generic [ref=e159]: Close

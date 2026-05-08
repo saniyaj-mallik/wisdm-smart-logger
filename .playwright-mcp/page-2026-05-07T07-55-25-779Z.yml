@@ -1,0 +1,142 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: MAIN
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+          - generic [ref=e25]:
+            - paragraph [ref=e26]: PROJECTS
+            - link "All Projects" [ref=e28] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e29]
+              - text: All Projects
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: REPORTS
+            - generic [ref=e33]:
+              - link "Summary" [ref=e34] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e35]
+                - text: Summary
+              - link "Project Breakdown" [ref=e37] [cursor=pointer]:
+                - /url: /reports/projects
+                - img [ref=e38]
+                - text: Project Breakdown
+              - link "Team Overview" [ref=e117] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e118]
+                - text: Team Overview
+              - link "Block Generator" [ref=e41] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e42]
+                - text: Block Generator
+          - generic [ref=e123]:
+            - paragraph [ref=e124]: ADMIN
+            - link "Users" [ref=e126] [cursor=pointer]:
+              - /url: /admin/users
+              - img [ref=e127]
+              - text: Users
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - generic [ref=e48]: A
+            - generic [ref=e49]:
+              - paragraph [ref=e139]: Admin User
+              - generic [ref=e50]: admin
+          - generic [ref=e51]:
+            - generic [ref=e52]:
+              - link [ref=e53] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e54]:
+                  - img
+              - button [ref=e55] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e56] [cursor=pointer]:
+              - img
+    - main [ref=e57]:
+      - generic [ref=e170]:
+        - generic [ref=e172]:
+          - heading "upep.mx" [level=1] [ref=e173]
+          - paragraph [ref=e174]: "Client: UPEP"
+        - generic [ref=e175]:
+          - generic [ref=e178]:
+            - generic [ref=e179]:
+              - paragraph [ref=e180]: Client
+              - paragraph [ref=e181]: UPEP
+            - generic [ref=e182]:
+              - paragraph [ref=e183]: Budget
+              - paragraph [ref=e184]: 500h
+            - generic [ref=e185]:
+              - paragraph [ref=e186]: Status
+              - text: Active
+            - button "Edit project" [ref=e188] [cursor=pointer]:
+              - img
+              - text: Edit project
+          - generic [ref=e189]:
+            - generic [ref=e190]:
+              - heading "Tasks" [level=2] [ref=e191]
+              - button "Add Task" [ref=e192] [cursor=pointer]:
+                - img
+                - text: Add Task
+            - table [ref=e195]:
+              - rowgroup [ref=e196]:
+                - row "Task Estimated Status" [ref=e197]:
+                  - columnheader "Task" [ref=e198]
+                  - columnheader "Estimated" [ref=e199]
+                  - columnheader "Status" [ref=e200]
+                  - columnheader [ref=e201]
+              - rowgroup [ref=e202]:
+                - row "Backend Development — Active" [ref=e203]:
+                  - cell "Backend Development" [ref=e204]
+                  - cell "—" [ref=e205]
+                  - cell "Active" [ref=e206]
+                  - cell [ref=e207]:
+                    - button [ref=e208] [cursor=pointer]:
+                      - img
+                - row "Deployment — Active" [ref=e209]:
+                  - cell "Deployment" [ref=e210]
+                  - cell "—" [ref=e211]
+                  - cell "Active" [ref=e212]
+                  - cell [ref=e213]:
+                    - button [ref=e214] [cursor=pointer]:
+                      - img
+                - row "Discovery & Planning — Active" [ref=e215]:
+                  - cell "Discovery & Planning" [ref=e216]
+                  - cell "—" [ref=e217]
+                  - cell "Active" [ref=e218]
+                  - cell [ref=e219]:
+                    - button [ref=e220] [cursor=pointer]:
+                      - img
+                - row "Frontend Development — Active" [ref=e221]:
+                  - cell "Frontend Development" [ref=e222]
+                  - cell "—" [ref=e223]
+                  - cell "Active" [ref=e224]
+                  - cell [ref=e225]:
+                    - button [ref=e226] [cursor=pointer]:
+                      - img
+                - row "QA Testing — Active" [ref=e227]:
+                  - cell "QA Testing" [ref=e228]
+                  - cell "—" [ref=e229]
+                  - cell "Active" [ref=e230]
+                  - cell [ref=e231]:
+                    - button [ref=e232] [cursor=pointer]:
+                      - img
+                - row "UI Design — Active" [ref=e233]:
+                  - cell "UI Design" [ref=e234]
+                  - cell "—" [ref=e235]
+                  - cell "Active" [ref=e236]
+                  - cell [ref=e237]:
+                    - button [ref=e238] [cursor=pointer]:
+                      - img
+  - alert [ref=e140]

@@ -1,0 +1,183 @@
+- generic:
+  - alert
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Dashboard
+              - paragraph: Welcome back, Admin User
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic: This Week
+                  - generic:
+                    - img
+                - generic:
+                  - paragraph: 2.5h
+              - generic:
+                - generic:
+                  - generic: Billable
+                  - generic:
+                    - img
+                - generic:
+                  - paragraph: 2.5h
+              - generic:
+                - generic:
+                  - generic: Non-Billable
+                  - generic:
+                    - img
+                - generic:
+                  - paragraph: 0h
+              - generic:
+                - generic:
+                  - generic: AI Assisted
+                  - generic:
+                    - img
+                - generic:
+                  - paragraph: 1 logs
+            - generic:
+              - generic:
+                - heading [level=2]: Recent Logs
+                - button:
+                  - img
+                  - text: Log Time
+              - generic:
+                - generic:
+                  - table:
+                    - rowgroup:
+                      - row:
+                        - columnheader: Date
+                        - columnheader: Project
+                        - columnheader: Task
+                        - columnheader: Hours
+                        - columnheader: Tags
+                        - columnheader
+                    - rowgroup:
+                      - row:
+                        - cell: 07 May 2026
+                        - cell: upep.mx
+                        - cell: Frontend Development
+                        - cell: 2.5h
+                        - cell:
+                          - generic:
+                            - generic: Billable
+                            - generic: AI
+                        - cell:
+                          - generic:
+                            - button:
+                              - img
+                            - button:
+                              - img
+  - dialog "Log Time" [ref=e270]:
+    - heading "Log Time" [level=2] [ref=e272]
+    - generic [ref=e273]:
+      - generic [ref=e274]:
+        - text: Project
+        - combobox [ref=e275] [cursor=pointer]:
+          - generic: wisdmlabs-internal
+          - img [ref=e276]
+        - combobox [ref=e278]
+      - generic [ref=e279]:
+        - text: Task
+        - combobox [ref=e280] [cursor=pointer]:
+          - generic: Sprint Planning
+          - img [ref=e281]
+        - combobox [ref=e324]
+      - generic [ref=e284]:
+        - text: Date
+        - textbox [ref=e285]: 2026-05-07
+      - generic [ref=e286]:
+        - text: Time Entry
+        - generic [ref=e287]:
+          - button "Enter Hours" [ref=e288] [cursor=pointer]
+          - button "Start / End" [ref=e289] [cursor=pointer]
+        - spinbutton [active] [ref=e290]: "1"
+      - generic [ref=e291]:
+        - generic [ref=e292]:
+          - checkbox "Billable" [ref=e293] [cursor=pointer]
+          - checkbox
+          - generic [ref=e294] [cursor=pointer]: Billable
+        - generic [ref=e295]:
+          - checkbox "AI Used" [ref=e296] [cursor=pointer]
+          - checkbox
+          - generic [ref=e297] [cursor=pointer]: AI Used
+      - generic [ref=e298]:
+        - generic [ref=e299]: Notes (optional)
+        - textbox "What did you work on?" [ref=e300]
+      - generic [ref=e301]:
+        - button "Cancel" [ref=e302] [cursor=pointer]
+        - button "Save Log" [ref=e341] [cursor=pointer]
+    - button "Close" [ref=e303] [cursor=pointer]:
+      - img [ref=e304]
+      - generic [ref=e307]: Close
