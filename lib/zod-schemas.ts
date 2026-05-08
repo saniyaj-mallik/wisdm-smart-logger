@@ -47,6 +47,7 @@ export const CreateTaskSchema = z.object({
   name: z.string().min(1).max(200).trim(),
   description: z.string().max(500).nullable().optional(),
   estimatedHours: z.number().positive().max(10000).nullable().optional(),
+  assignees: z.array(z.string()).optional(),
 });
 
 export const UpdateTaskSchema = CreateTaskSchema.partial().extend({
