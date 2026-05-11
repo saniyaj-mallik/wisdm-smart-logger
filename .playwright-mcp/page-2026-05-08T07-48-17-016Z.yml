@@ -1,0 +1,27 @@
+- dialog "Unhandled Runtime Error" [ref=e144]:
+  - generic [ref=e145]:
+    - generic [ref=e146]:
+      - generic [ref=e147]:
+        - navigation [ref=e148]:
+          - button "previous" [disabled] [ref=e149]:
+            - img "previous" [ref=e150]
+          - button "next" [disabled] [ref=e152]:
+            - img "next" [ref=e153]
+          - generic [ref=e155]: 1 of 1 error
+          - generic [ref=e156]:
+            - text: Next.js (14.2.35) is outdated
+            - link "(learn more)" [ref=e158] [cursor=pointer]:
+              - /url: https://nextjs.org/docs/messages/version-staleness
+        - button "Close" [ref=e159] [cursor=pointer]:
+          - img [ref=e161]
+      - heading "Unhandled Runtime Error" [level=1] [ref=e164]
+      - paragraph [ref=e165]: "TypeError: Cannot read properties of undefined (reading 'length')"
+    - generic [ref=e166]:
+      - heading "Source" [level=2] [ref=e167]
+      - generic [ref=e168]:
+        - link "app\\(dashboard)\\projects\\[id]\\ProjectDetail.tsx (197:27) @ length" [ref=e170] [cursor=pointer]:
+          - generic [ref=e171]: app\(dashboard)\projects\[id]\ProjectDetail.tsx (197:27) @ length
+          - img [ref=e172]
+        - generic [ref=e176]: "195 | <span className=\"text-xs text-muted-foreground font-mono\">{task.estimatedHours}h est.</span> 196 | )} > 197 | {task.assignees.length > 0 && ( | ^ 198 | <div className=\"flex items-center gap-1.5\"> 199 | <div className=\"flex -space-x-1.5\"> 200 | {task.assignees.slice(0, 5).map((a) => ("
+      - heading "Call Stack" [level=2] [ref=e177]
+      - button "Show collapsed frames" [ref=e178] [cursor=pointer]

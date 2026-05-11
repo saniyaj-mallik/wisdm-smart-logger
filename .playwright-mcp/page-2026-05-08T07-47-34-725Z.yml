@@ -1,0 +1,125 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: MAIN
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+          - generic [ref=e25]:
+            - paragraph [ref=e26]: PROJECTS
+            - link "All Projects" [ref=e28] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e29]
+              - text: All Projects
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: REPORTS
+            - generic [ref=e33]:
+              - link "Summary" [ref=e34] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e35]
+                - text: Summary
+              - link "Project Breakdown" [ref=e37] [cursor=pointer]:
+                - /url: /reports/projects
+                - img [ref=e38]
+                - text: Project Breakdown
+              - link "Team Overview" [ref=e41] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e42]
+                - text: Team Overview
+              - link "Block Generator" [ref=e47] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e48]
+                - text: Block Generator
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: ADMIN
+            - link "Users" [ref=e54] [cursor=pointer]:
+              - /url: /admin/users
+              - img [ref=e55]
+              - text: Users
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e70]: A
+            - generic [ref=e71]:
+              - paragraph [ref=e72]: Admin User
+              - generic [ref=e73]: admin
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - link [ref=e76] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e77]:
+                  - img
+              - button [ref=e78] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e79] [cursor=pointer]:
+              - img
+    - main [ref=e80]:
+      - generic [ref=e82]:
+        - generic [ref=e84]:
+          - heading "Dashboard" [level=1] [ref=e85]
+          - paragraph [ref=e86]: Welcome back, Admin User
+        - generic [ref=e87]:
+          - generic [ref=e88]:
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - generic [ref=e91]: This Week
+                - img [ref=e93]
+              - paragraph [ref=e97]: 2.5h
+            - generic [ref=e98]:
+              - generic [ref=e99]:
+                - generic [ref=e100]: Billable
+                - img [ref=e102]
+              - paragraph [ref=e105]: 2.5h
+            - generic [ref=e106]:
+              - generic [ref=e107]:
+                - generic [ref=e108]: Non-Billable
+                - img [ref=e110]
+              - paragraph [ref=e114]: 0h
+            - generic [ref=e115]:
+              - generic [ref=e116]:
+                - generic [ref=e117]: AI Assisted
+                - img [ref=e119]
+              - paragraph [ref=e132]: 1 logs
+          - generic [ref=e133]:
+            - generic [ref=e134]:
+              - heading "Recent Logs" [level=2] [ref=e135]
+              - button "Log Time" [ref=e136] [cursor=pointer]:
+                - img
+                - text: Log Time
+            - table [ref=e139]:
+              - rowgroup [ref=e140]:
+                - row "Date Project Task Hours Tags" [ref=e141]:
+                  - columnheader "Date" [ref=e142]
+                  - columnheader "Project" [ref=e143]
+                  - columnheader "Task" [ref=e144]
+                  - columnheader "Hours" [ref=e145]
+                  - columnheader "Tags" [ref=e146]
+                  - columnheader [ref=e147]
+              - rowgroup [ref=e148]:
+                - row "07 May 2026 upep.mx Frontend Development 2.5h Billable AI" [ref=e149]:
+                  - cell "07 May 2026" [ref=e150]
+                  - cell "upep.mx" [ref=e151]
+                  - cell "Frontend Development" [ref=e152]
+                  - cell "2.5h" [ref=e153]
+                  - cell "Billable AI" [ref=e154]:
+                    - generic [ref=e155]:
+                      - generic [ref=e156]: Billable
+                      - generic [ref=e157]: AI
+                  - cell [ref=e158]:
+                    - generic [ref=e159]:
+                      - button [ref=e160] [cursor=pointer]:
+                        - img
+                      - button [ref=e161] [cursor=pointer]:
+                        - img
+  - alert [ref=e162]

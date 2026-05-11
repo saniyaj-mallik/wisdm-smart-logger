@@ -1,0 +1,167 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - link:
+            - /url: /projects
+            - img
+            - text: All Projects
+          - generic:
+            - generic:
+              - button:
+                - heading [level=1]: upep.mx
+                - img
+              - generic:
+                - generic: "Client: UPEP"
+                - generic:
+                  - img
+                  - text: 500h budget
+                - generic: Active
+          - generic:
+            - generic:
+              - heading [level=2]:
+                - text: Tasks
+                - generic: 6 active
+              - button:
+                - img
+                - text: Add Task
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Backend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Deployment
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Discovery & Planning
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Frontend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: QA Testing
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: UI Design
+                - button:
+                  - img
+  - alert
+  - dialog "Edit Project" [ref=e138]:
+    - heading "Edit Project" [level=2] [ref=e140]
+    - generic [ref=e141]:
+      - generic [ref=e142]:
+        - text: Project name *
+        - textbox "Project name *" [active] [ref=e143]: upep.mx
+      - generic [ref=e144]:
+        - text: Client name
+        - textbox "Client name" [ref=e145]: UPEP
+      - generic [ref=e146]:
+        - text: Budget hours
+        - spinbutton "Budget hours" [ref=e147]: "500"
+      - generic [ref=e148]:
+        - text: Description
+        - textbox "Description" [ref=e149]
+      - generic [ref=e150]:
+        - text: Project color
+        - generic [ref=e151]:
+          - button [ref=e152] [cursor=pointer]
+          - button [ref=e153] [cursor=pointer]
+          - button [ref=e154] [cursor=pointer]
+          - button [ref=e155] [cursor=pointer]
+          - button [ref=e156] [cursor=pointer]
+          - button [ref=e157] [cursor=pointer]
+          - button [ref=e158] [cursor=pointer]
+          - button [ref=e159] [cursor=pointer]
+          - button [ref=e160] [cursor=pointer]
+          - button [ref=e161] [cursor=pointer]
+      - button "Save changes" [ref=e162] [cursor=pointer]
+    - button "Archive project" [ref=e163] [cursor=pointer]
+    - button "Close" [ref=e164] [cursor=pointer]:
+      - img [ref=e165]
+      - generic [ref=e168]: Close

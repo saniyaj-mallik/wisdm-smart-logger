@@ -1,0 +1,175 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - link:
+            - /url: /projects
+            - img
+            - text: All Projects
+          - generic:
+            - generic:
+              - button:
+                - heading [level=1]: upep.mx
+                - img
+              - generic:
+                - generic: "Client: UPEP"
+                - generic:
+                  - img
+                  - text: 500h budget
+                - generic: Active
+          - generic:
+            - generic:
+              - heading [level=2]:
+                - text: Tasks
+                - generic: 7 active
+              - button:
+                - img
+                - text: Add Task
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Backend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Deployment
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Discovery & Planning
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Frontend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Performance Optimisation
+                  - generic:
+                    - generic:
+                      - generic:
+                        - generic:
+                          - generic: A
+                        - generic:
+                          - generic: S
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: QA Testing
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: UI Design
+                - button:
+                  - img
+  - alert
+  - dialog "Edit Task" [ref=e221]:
+    - heading "Edit Task" [level=2] [ref=e223]
+    - generic [ref=e224]:
+      - generic [ref=e225]:
+        - text: Task name *
+        - textbox "Task name *" [active] [ref=e226]: Performance Optimisation
+      - generic [ref=e227]:
+        - text: Estimated hours
+        - spinbutton "Estimated hours" [ref=e228]
+      - generic [ref=e229]:
+        - text: Description
+        - textbox "Description" [ref=e230]
+      - generic [ref=e231]:
+        - text: Assign to
+        - generic [ref=e232]:
+          - button "A Admin User(you)" [ref=e233] [cursor=pointer]:
+            - generic [ref=e235]: A
+            - paragraph [ref=e237]: Admin User(you)
+            - img [ref=e239]
+          - button "S saniyaj" [ref=e241] [cursor=pointer]:
+            - generic [ref=e243]: S
+            - paragraph [ref=e245]: saniyaj
+            - img [ref=e247]
+      - button "Save changes" [ref=e249] [cursor=pointer]
+    - button "Archive task" [ref=e250] [cursor=pointer]
+    - button "Close" [ref=e251] [cursor=pointer]:
+      - img [ref=e252]
+      - generic [ref=e255]: Close

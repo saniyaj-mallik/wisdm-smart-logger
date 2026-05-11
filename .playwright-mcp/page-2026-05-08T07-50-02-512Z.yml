@@ -1,0 +1,159 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - link:
+            - /url: /projects
+            - img
+            - text: All Projects
+          - generic:
+            - generic:
+              - button:
+                - heading [level=1]: upep.mx
+                - img
+              - generic:
+                - generic: "Client: UPEP"
+                - generic:
+                  - img
+                  - text: 500h budget
+                - generic: Active
+          - generic:
+            - generic:
+              - heading [level=2]:
+                - text: Tasks
+                - generic: 6 active
+              - button:
+                - img
+                - text: Add Task
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Backend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Deployment
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Discovery & Planning
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: Frontend Development
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: QA Testing
+                - button:
+                  - img
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: UI Design
+                - button:
+                  - img
+  - alert
+  - dialog "Add Task" [ref=e173]:
+    - heading "Add Task" [level=2] [ref=e175]
+    - generic [ref=e176]:
+      - generic [ref=e177]:
+        - text: Task name *
+        - textbox "Task name *" [active] [ref=e178]
+      - generic [ref=e179]:
+        - text: Estimated hours
+        - spinbutton "Estimated hours" [ref=e180]
+      - generic [ref=e181]:
+        - text: Description
+        - textbox "Description" [ref=e182]
+      - generic [ref=e183]:
+        - text: Assign to
+        - generic [ref=e184]:
+          - button "A Admin User(you)" [ref=e185] [cursor=pointer]:
+            - generic [ref=e187]: A
+            - paragraph [ref=e189]: Admin User(you)
+          - button "S saniyaj" [ref=e191] [cursor=pointer]:
+            - generic [ref=e193]: S
+            - paragraph [ref=e195]: saniyaj
+      - button "Add task" [ref=e197] [cursor=pointer]
+    - button "Close" [ref=e198] [cursor=pointer]:
+      - img [ref=e199]
+      - generic [ref=e202]: Close
