@@ -1,0 +1,150 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/projects
+                - img
+                - text: Project Breakdown
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+        - generic:
+          - generic:
+            - generic:
+              - generic: A
+            - generic:
+              - paragraph: Admin User
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - button:
+              - img
+            - generic: May 2026
+            - button:
+              - img
+            - combobox [expanded]:
+              - generic: Admin User (me)
+              - img
+            - generic:
+              - button:
+                - img
+                - text: Add
+          - generic:
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: MON
+                    - generic: "11"
+                  - generic: "0"
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Add log
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: TUE
+                    - generic: "12"
+                  - generic: "0"
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Add log
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: WED
+                    - generic: "13"
+                  - generic: "0"
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Add log
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: THU
+                    - generic: "14"
+                  - generic: "0"
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Add log
+              - generic:
+                - generic:
+                  - generic:
+                    - generic: FRI
+                    - generic: "15"
+                  - generic: "0"
+                - generic:
+                  - generic:
+                    - generic:
+                      - img
+                    - generic: Add log
+  - alert
+  - listbox [ref=e135]:
+    - option "Admin User (me)" [active] [selected] [ref=e136]:
+      - img [ref=e139]
+      - generic [ref=e141]: Admin User (me)
+    - option "saniyaj" [ref=e142]:
+      - generic [ref=e144]: saniyaj

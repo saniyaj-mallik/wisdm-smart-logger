@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/select";
 import { Loader2, Copy, Download, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import * as XLSX from "xlsx";
 
-type Format = "text" | "markdown" | "csv";
+type Format = "text" | "markdown" | "csv" | "xlsx";
 type GroupBy = "project-task" | "day" | "project";
 type BillableFilter = "all" | "billable" | "non-billable";
 type Period = "this-week" | "last-week" | "this-month" | "last-month" | "custom";
@@ -79,7 +80,7 @@ export function BlockGeneratorClient({
       const res = await fetch("/api/reports/block", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ from, to, groupBy, billableFilter, format }),
+        body: JSON.stringify({ from, to, groupBy, billableFilter, format: format === "xlsx" ? "csv" : format }),
       });
       if (!res.ok) {
         const err = await res.json();
@@ -104,14 +105,29 @@ export function BlockGeneratorClient({
 
   function download() {
     if (!block) return;
-    const ext = format === "markdown" ? "md" : format === "csv" ? "csv" : "txt";
     const { from } = getEffectiveDates();
-    const filename = `time-report-${from}.${ext}`;
+
+    if (format === "xlsx") {
+      const wb = XLSX.read(block, { type: "string" });
+      const wbout = XLSX.write(wb, { bookType: "xlsx", type: "array" });
+      const blob = new Blob([wbout], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `time-report-${from}.xlsx`;
+      a.click();
+      URL.revokeObjectURL(url);
+      return;
+    }
+
+    const ext = format === "markdown" ? "md" : format === "csv" ? "csv" : "txt";
     const blob = new Blob([block], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = filename;
+    a.download = `time-report-${from}.${ext}`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -216,7 +232,7 @@ export function BlockGeneratorClient({
               Format
             </Label>
             <div className="space-y-1">
-              {(["text", "markdown", "csv"] as Format[]).map((f) => (
+              {(["text", "markdown", "csv", "xlsx"] as Format[]).map((f) => (
                 <label key={f} className="flex items-center gap-2 cursor-pointer text-sm capitalize">
                   <input
                     type="radio"
@@ -226,7 +242,7 @@ export function BlockGeneratorClient({
                     onChange={() => setFormat(f)}
                     className="accent-primary"
                   />
-                  {f === "text" ? "Plain Text" : f === "markdown" ? "Markdown" : "CSV"}
+                  {f === "text" ? "Plain Text" : f === "markdown" ? "Markdown" : f === "csv" ? "CSV" : "Excel (XLSX)"}
                 </label>
               ))}
             </div>
@@ -256,6 +272,9 @@ export function BlockGeneratorClient({
             </div>
           ) : block ? (
             <div className="space-y-3">
+              {format === "xlsx" && (
+                <p className="text-xs text-muted-foreground">Preview shows CSV data — download saves as .xlsx</p>
+              )}
               <pre className="font-mono text-xs leading-relaxed whitespace-pre-wrap break-words max-h-[60vh] overflow-y-auto rounded-md bg-muted p-4">
                 {block}
               </pre>

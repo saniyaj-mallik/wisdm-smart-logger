@@ -2,6 +2,7 @@ export interface BlockEntry {
   loggedAt: Date;
   projectName: string;
   taskName: string;
+  estimatedHours: number | null;
   hours: number;
   isBillable: boolean;
   aiUsed: boolean;
@@ -153,8 +154,9 @@ function formatCsv(entries: BlockEntry[]): string {
   const rows = sorted.map((e) => {
     const date = new Date(e.loggedAt).toISOString().slice(0, 10);
     const notes = `"${(e.notes ?? "").replace(/"/g, '""')}"`;
-    return [date, e.projectName, e.taskName, e.hours, e.isBillable, e.aiUsed, notes].join(",");
+    const estimated = e.estimatedHours ?? "";
+    return [date, e.projectName, e.taskName, estimated, e.hours, e.isBillable, e.aiUsed, notes].join(",");
   });
 
-  return ["date,project,task,hours,billable,ai_used,notes", ...rows].join("\n");
+  return ["date,project,task,estimated_hours,hours,billable,ai_used,notes", ...rows].join("\n");
 }

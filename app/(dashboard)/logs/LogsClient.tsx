@@ -2,6 +2,9 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import {
+  Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
+} from "@/components/ui/select";
 import { Plus, ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
 import { LogTimeModal } from "@/components/modals/LogTimeModal";
 import { EditLogModal } from "@/components/modals/EditLogModal";
@@ -20,6 +23,12 @@ interface LogEntry {
   projectId: { _id: string; name: string; color: string | null };
   taskId: { _id: string; name: string };
   userId: { _id: string; name: string; email: string };
+}
+
+interface UserOption {
+  _id: string;
+  name: string;
+  email: string;
 }
 
 // ── constants ──────────────────────────────────────────────────────────────
@@ -102,13 +111,18 @@ function fmtCircle(hours: number): string {
 export function LogsClient({
   entries,
   currentUserId,
+  viewingUserId,
   isManagerOrAdmin,
+  users,
 }: {
   entries: LogEntry[];
   currentUserId: string;
+  viewingUserId: string;
   isManagerOrAdmin: boolean;
+  users: UserOption[];
 }) {
   const router = useRouter();
+  const isViewingOwn = viewingUserId === currentUserId;
   const [weekOffset,    setWeekOffset]    = useState(0);
   const [logOpen,       setLogOpen]       = useState(false);
   const [defaultDate,   setDefaultDate]   = useState("");
@@ -174,10 +188,36 @@ export function LogsClient({
           </button>
         )}
 
+        {users.length > 0 && (
+          <Select
+            value={viewingUserId}
+            onValueChange={(id) => {
+              if (id === currentUserId) {
+                router.push("/logs");
+              } else {
+                router.push(`/logs?userId=${id}`);
+              }
+            }}
+          >
+            <SelectTrigger className="h-8 w-44 text-sm ml-2">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              {users.map((u) => (
+                <SelectItem key={u._id} value={u._id}>
+                  {u._id === currentUserId ? `${u.name} (me)` : u.name}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        )}
+
         <div className="ml-auto">
-          <Button size="sm" onClick={() => openAdd(todayKey)}>
-            <Plus className="h-4 w-4 mr-1" /> Add
-          </Button>
+          {isViewingOwn && (
+            <Button size="sm" onClick={() => openAdd(todayKey)}>
+              <Plus className="h-4 w-4 mr-1" /> Add
+            </Button>
+          )}
         </div>
       </div>
 
@@ -230,11 +270,14 @@ export function LogsClient({
 
                 {/* ── blocks area ── */}
                 <div
-                  className="flex-1 min-h-[500px] p-2 flex flex-col gap-2 cursor-pointer group/col relative bg-background"
-                  onClick={() => openAdd(dateKey)}
+                  className={cn(
+                    "flex-1 min-h-[500px] p-2 flex flex-col gap-2 relative bg-background",
+                    isViewingOwn ? "cursor-pointer group/col" : "cursor-default",
+                  )}
+                  onClick={() => isViewingOwn && openAdd(dateKey)}
                 >
-                  {/* empty-state hover hint */}
-                  {dayEntries.length === 0 && (
+                  {/* empty-state hover hint — only when viewing own logs */}
+                  {isViewingOwn && dayEntries.length === 0 && (
                     <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 opacity-0 group-hover/col:opacity-100 transition-opacity pointer-events-none">
                       <div className="h-10 w-10 rounded-full bg-muted flex items-center justify-center">
                         <Plus className="h-5 w-5 text-muted-foreground" />
@@ -244,9 +287,7 @@ export function LogsClient({
                   )}
 
                   {dayEntries.map((entry) => {
-                    const isOwn   = entry.userId?._id === currentUserId
-                                 || (entry.userId as unknown as string) === currentUserId;
-                    const canEdit = isOwn || isManagerOrAdmin;
+                    const canEdit = isViewingOwn;
                     const blockH  = Math.max(MIN_BLOCK_H, (entry.hours ?? 0.5) * PX_PER_HOUR);
                     const hexColor  = entry.projectId?.color;
                     const colorCls  = hexColor ? "" : projectColor(entry.projectId?._id ?? entry.projectId?.name ?? "x");
@@ -324,8 +365,8 @@ export function LogsClient({
                     );
                   })}
 
-                  {/* add-more button — visible on column hover when day has entries */}
-                  {dayEntries.length > 0 && (
+                  {/* add-more button — only visible when viewing own logs */}
+                  {isViewingOwn && dayEntries.length > 0 && (
                     <button
                       className={cn(
                         "w-full mt-auto border-2 border-dashed border-border/40 rounded-xl h-10",

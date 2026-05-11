@@ -101,6 +101,8 @@ export const BlockReportSchema = z.object({
   from: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   to: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   userId: z.string().optional(),
+  projectId: z.string().optional(),
+  taskIds: z.array(z.string()).optional(),
   groupBy: z.enum(["project-task", "day", "project"]).default("project-task"),
   billableFilter: z
     .enum(["all", "billable", "non-billable"])

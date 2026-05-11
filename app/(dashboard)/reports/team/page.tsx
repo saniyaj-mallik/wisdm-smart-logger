@@ -4,6 +4,7 @@ import TimeEntry from "@/models/TimeEntry";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { TeamOverviewTable } from "@/components/reports/TeamOverviewTable";
 import { ReportFilters } from "@/components/reports/ReportFilters";
+import { TeamManagementSection } from "@/components/teams/TeamManagementSection";
 import { getWeekRange } from "@/lib/time-utils";
 
 export default async function TeamReportPage({
@@ -67,9 +68,10 @@ export default async function TeamReportPage({
 
   return (
     <div>
-      <PageHeader title="Team Overview" description="Hours breakdown by team member" />
+      <PageHeader title="Team Overview" description="Hours breakdown and team collaboration" />
       <ReportFilters defaultFrom={from} defaultTo={to} />
       <TeamOverviewTable rows={data} />
+      <TeamManagementSection currentUserId={session.user.id} />
     </div>
   );
 }

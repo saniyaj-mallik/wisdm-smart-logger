@@ -45,7 +45,6 @@ const navGroups = [
         label: "Team Overview",
         href: "/reports/team",
         icon: Users,
-        managerOnly: true,
       },
       {
         label: "Block Generator",

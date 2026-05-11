@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { connectDB } from "@/lib/mongodb";
 import TimeEntry from "@/models/TimeEntry";
 import User from "@/models/User";
+import { Types } from "mongoose";
 import "@/models/Project";
 import "@/models/Task";
 import { BlockReportSchema } from "@/lib/zod-schemas";
@@ -32,6 +33,10 @@ export async function POST(req: Request) {
 
   if (data.billableFilter === "billable") filter.isBillable = true;
   if (data.billableFilter === "non-billable") filter.isBillable = false;
+  if (data.projectId) filter.projectId = new Types.ObjectId(data.projectId);
+  if (data.taskIds && data.taskIds.length > 0) {
+    filter.taskId = { $in: data.taskIds.map((id) => new Types.ObjectId(id)) };
+  }
 
   await connectDB();
 
@@ -39,7 +44,7 @@ export async function POST(req: Request) {
     TimeEntry.find(filter)
       .sort({ loggedAt: 1, createdAt: 1 })
       .populate("projectId", "name")
-      .populate("taskId", "name")
+      .populate("taskId", "name estimatedHours")
       .lean(),
     User.findById(targetUserId).lean(),
   ]);
@@ -49,7 +54,8 @@ export async function POST(req: Request) {
   const entries: BlockEntry[] = rawEntries.map((e) => ({
     loggedAt: e.loggedAt as Date,
     projectName: (e.projectId as { name: string }).name ?? "Unknown",
-    taskName: (e.taskId as { name: string }).name ?? "Unknown",
+    taskName: (e.taskId as { name: string; estimatedHours?: number }).name ?? "Unknown",
+    estimatedHours: (e.taskId as { estimatedHours?: number }).estimatedHours ?? null,
     hours: e.hours ?? 0,
     isBillable: e.isBillable,
     aiUsed: e.aiUsed,
