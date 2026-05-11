@@ -44,7 +44,7 @@ export default function ProfilePage() {
       setErrors(json.error?.fieldErrors ?? { _: [json.error] });
     } else {
       setSuccess(true);
-      await update();
+      if (body.name) await update({ name: body.name });
       router.refresh();
     }
     setLoading(false);

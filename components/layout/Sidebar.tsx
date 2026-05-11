@@ -8,12 +8,12 @@ import {
   FolderKanban,
   ListChecks,
   BarChart3,
-  PieChart,
   Users,
   FileText,
   UserCog,
   LogOut,
   User,
+  Sparkles,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -40,7 +40,6 @@ const navGroups = [
     label: "REPORTS",
     items: [
       { label: "Summary", href: "/reports/summary", icon: BarChart3 },
-      { label: "Project Breakdown", href: "/reports/projects", icon: PieChart },
       {
         label: "Team Overview",
         href: "/reports/team",
@@ -50,6 +49,11 @@ const navGroups = [
         label: "Block Generator",
         href: "/reports/block-generator",
         icon: FileText,
+      },
+      {
+        label: "AI Summary",
+        href: "/reports/ai-summary",
+        icon: Sparkles,
       },
     ],
   },

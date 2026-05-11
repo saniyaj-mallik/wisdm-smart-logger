@@ -4,6 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import Project from "@/models/Project";
 import Task from "@/models/Task";
 import User from "@/models/User";
+import TimeEntry from "@/models/TimeEntry";
 import { ProjectDetail } from "./ProjectDetail";
 
 export default async function ProjectDetailPage({
@@ -18,18 +19,27 @@ export default async function ProjectDetailPage({
   const project = await Project.findById(params.id).lean();
   if (!project) notFound();
 
-  const [tasks, users] = await Promise.all([
+  const [tasks, users, hoursAgg] = await Promise.all([
     Task.find({ projectId: params.id })
       .sort({ isActive: -1, name: 1 })
       .populate("assignees", "name email")
       .lean(),
     User.find({ isActive: true }).select("name email role").sort({ name: 1 }).lean(),
+    TimeEntry.aggregate([
+      { $match: { projectId: (project as any)._id } },
+      { $group: { _id: "$taskId", hoursSpent: { $sum: "$hours" } } },
+    ]),
   ]);
 
-  // Normalize tasks so assignees is always an array (existing tasks predate the field)
+  const hoursMap: Record<string, number> = {};
+  for (const row of hoursAgg) {
+    hoursMap[String(row._id)] = Math.round((row.hoursSpent ?? 0) * 100) / 100;
+  }
+
   const normalizedTasks = tasks.map((t: any) => ({
     ...t,
     assignees: t.assignees ?? [],
+    hoursSpent: hoursMap[String(t._id)] ?? 0,
   }));
 
   return (

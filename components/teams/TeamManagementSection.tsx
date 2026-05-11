@@ -2,7 +2,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
 import { CreateTeamModal } from "./CreateTeamModal";
 import { AddMemberModal } from "./AddMemberModal";
 import {
@@ -237,7 +236,6 @@ export function TeamManagementSection({ currentUserId }: { currentUserId: string
 
   return (
     <div>
-      <Separator className="my-8" />
       <div className="flex items-center justify-between mb-6">
         <div>
           <h2 className="text-lg font-semibold">Teams</h2>

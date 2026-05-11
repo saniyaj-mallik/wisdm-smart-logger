@@ -1,0 +1,232 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e10]: Smart Logger
+      - navigation [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: MAIN
+          - generic [ref=e14]:
+            - link "Dashboard" [ref=e15] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e16]
+              - text: Dashboard
+            - link "My Logs" [ref=e21] [cursor=pointer]:
+              - /url: /logs
+              - img [ref=e22]
+              - text: My Logs
+        - generic [ref=e25]:
+          - paragraph [ref=e26]: PROJECTS
+          - link "All Projects" [ref=e28] [cursor=pointer]:
+            - /url: /projects
+            - img [ref=e29]
+            - text: All Projects
+        - generic [ref=e31]:
+          - paragraph [ref=e32]: REPORTS
+          - generic [ref=e33]:
+            - link "Summary" [ref=e34] [cursor=pointer]:
+              - /url: /reports/summary
+              - img [ref=e35]
+              - text: Summary
+            - link "Project Breakdown" [ref=e37] [cursor=pointer]:
+              - /url: /reports/projects
+              - img [ref=e38]
+              - text: Project Breakdown
+            - link "Team Overview" [ref=e41] [cursor=pointer]:
+              - /url: /reports/team
+              - img [ref=e42]
+              - text: Team Overview
+            - link "Block Generator" [ref=e47] [cursor=pointer]:
+              - /url: /reports/block-generator
+              - img [ref=e48]
+              - text: Block Generator
+            - link "AI Summary" [ref=e51] [cursor=pointer]:
+              - /url: /reports/ai-summary
+              - img [ref=e52]
+              - text: AI Summary
+        - generic [ref=e55]:
+          - paragraph [ref=e56]: ADMIN
+          - link "Users" [ref=e58] [cursor=pointer]:
+            - /url: /admin/users
+            - img [ref=e59]
+            - text: Users
+      - generic [ref=e71]:
+        - generic [ref=e72]:
+          - generic [ref=e74]: U
+          - generic [ref=e75]:
+            - paragraph
+            - generic [ref=e76]: dev
+        - generic [ref=e77]:
+          - generic [ref=e78]:
+            - link [ref=e79] [cursor=pointer]:
+              - /url: /profile
+              - button [ref=e80]:
+                - img
+            - button [ref=e81] [cursor=pointer]:
+              - img
+          - button "Toggle theme" [ref=e82] [cursor=pointer]:
+            - img
+  - main [ref=e83]:
+    - generic [ref=e85]:
+      - generic [ref=e86]:
+        - generic [ref=e88]:
+          - heading "AI Analytics" [level=1] [ref=e89]
+          - paragraph [ref=e90]: Track how AI adoption impacts team efficiency, task estimates, and time savings
+        - combobox [ref=e91] [cursor=pointer]:
+          - img [ref=e92]
+        - combobox [ref=e94]
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - text: From
+            - textbox [ref=e98]: 2026-04-30
+          - generic [ref=e99]:
+            - text: To
+            - textbox [ref=e100]: 2026-05-30
+          - button "Apply" [ref=e102] [cursor=pointer]
+        - generic [ref=e103]:
+          - button "This Week" [ref=e104] [cursor=pointer]
+          - button "Last Week" [ref=e105] [cursor=pointer]
+          - button "This Month" [ref=e106] [cursor=pointer]
+          - button "Last Month" [ref=e107] [cursor=pointer]
+      - generic [ref=e108]:
+        - generic [ref=e109]:
+          - generic [ref=e110]:
+            - img [ref=e112]
+            - generic [ref=e115]: AI Hours
+          - generic [ref=e116]:
+            - paragraph [ref=e117]: 4.5h
+            - paragraph [ref=e118]: of 14.02h total logged
+        - generic [ref=e121]:
+          - generic [ref=e122]:
+            - img [ref=e124]
+            - generic [ref=e126]: Adoption Rate
+          - generic [ref=e127]:
+            - paragraph [ref=e128]: 25%
+            - paragraph [ref=e129]: 2 of 8 entries
+        - generic [ref=e132]:
+          - generic [ref=e133]:
+            - img [ref=e135]
+            - generic [ref=e138]: Avg Time Saved
+          - generic [ref=e139]:
+            - paragraph [ref=e140]: —
+            - paragraph [ref=e141]: per task vs non-AI
+        - generic [ref=e142]:
+          - generic [ref=e143]:
+            - img [ref=e145]
+            - generic [ref=e150]: AI-Active Users
+          - generic [ref=e151]:
+            - paragraph [ref=e152]: "2"
+            - paragraph [ref=e153]: of 2 team members
+      - generic [ref=e157]:
+        - generic [ref=e158]:
+          - heading "User AI Usage" [level=2] [ref=e159]
+          - paragraph [ref=e160]: Total hours vs AI-assisted, sorted by AI hours
+        - table [ref=e161]:
+          - rowgroup [ref=e162]:
+            - row "User Total AI Rate" [ref=e163]:
+              - columnheader "User" [ref=e164]
+              - columnheader "Total" [ref=e165]
+              - columnheader "AI" [ref=e166]
+              - columnheader "Rate" [ref=e167]
+          - rowgroup [ref=e168]:
+            - row "Admin User Admin 2.5h 2.5h 100%" [ref=e169]:
+              - cell "Admin User Admin" [ref=e170]:
+                - paragraph [ref=e171]: Admin User
+                - paragraph [ref=e172]: Admin
+              - cell "2.5h" [ref=e173]
+              - cell "2.5h" [ref=e174]
+              - cell "100%" [ref=e175]:
+                - generic [ref=e179]: 100%
+            - row "saniyaj Developer 11.52h 2h 14%" [ref=e180]:
+              - cell "saniyaj Developer" [ref=e181]:
+                - paragraph [ref=e182]: saniyaj
+                - paragraph [ref=e183]: Developer
+              - cell "11.52h" [ref=e184]
+              - cell "2h" [ref=e185]
+              - cell "14%" [ref=e186]:
+                - generic [ref=e190]: 14%
+      - generic [ref=e191]:
+        - generic [ref=e192]:
+          - heading "Task Efficiency with AI" [level=2] [ref=e193]:
+            - img [ref=e194]
+            - text: Task Efficiency with AI
+          - paragraph [ref=e197]: Tasks where AI use reduces time vs non-AI baseline or estimate
+        - table [ref=e199]:
+          - rowgroup [ref=e200]:
+            - row "Task Project User Estimated Actual Time Spent Saved" [ref=e201]:
+              - columnheader "Task" [ref=e202]
+              - columnheader "Project" [ref=e203]
+              - columnheader "User" [ref=e204]
+              - columnheader "Estimated" [ref=e205]
+              - columnheader "Actual Time Spent" [ref=e206]
+              - columnheader "Saved" [ref=e207]
+          - rowgroup [ref=e208]:
+            - row "Code Review ldgr-plugin saniyaj 10h 2h 80% under est." [ref=e209]:
+              - cell "Code Review" [ref=e210]:
+                - paragraph [ref=e211]: Code Review
+              - cell "ldgr-plugin" [ref=e212]:
+                - paragraph [ref=e213]: ldgr-plugin
+              - cell "saniyaj" [ref=e214]:
+                - paragraph [ref=e215]: saniyaj
+              - cell "10h" [ref=e216]
+              - cell "2h" [ref=e217]
+              - cell "80% under est." [ref=e218]:
+                - generic [ref=e219]: 80% under est.
+      - generic [ref=e220]:
+        - generic [ref=e221]:
+          - img [ref=e222]
+          - generic [ref=e224]:
+            - heading "Tasks Not Using AI" [level=2] [ref=e225]
+            - paragraph [ref=e226]: 4 tasks with zero AI-assisted entries — potential productivity opportunities
+        - table [ref=e228]:
+          - rowgroup [ref=e229]:
+            - row "Task Project User Logged Hours Entries Estimated" [ref=e230]:
+              - columnheader "Task" [ref=e231]
+              - columnheader "Project" [ref=e232]
+              - columnheader "User" [ref=e233]
+              - columnheader "Logged Hours" [ref=e234]
+              - columnheader "Entries" [ref=e235]
+              - columnheader "Estimated" [ref=e236]
+          - rowgroup [ref=e237]:
+            - row "Discovery & Planning upep.mx saniyaj 5h 1 —" [ref=e238]:
+              - cell "Discovery & Planning" [ref=e239]:
+                - paragraph [ref=e240]: Discovery & Planning
+              - cell "upep.mx" [ref=e241]:
+                - paragraph [ref=e242]: upep.mx
+              - cell "saniyaj" [ref=e243]:
+                - paragraph [ref=e244]: saniyaj
+              - cell "5h" [ref=e245]
+              - cell "1" [ref=e246]
+              - cell "—" [ref=e247]
+            - row "Plugin Integration two-lines-press saniyaj 1.02h 1 —" [ref=e248]:
+              - cell "Plugin Integration" [ref=e249]:
+                - paragraph [ref=e250]: Plugin Integration
+              - cell "two-lines-press" [ref=e251]:
+                - paragraph [ref=e252]: two-lines-press
+              - cell "saniyaj" [ref=e253]:
+                - paragraph [ref=e254]: saniyaj
+              - cell "1.02h" [ref=e255]
+              - cell "1" [ref=e256]
+              - cell "—" [ref=e257]
+            - row "Documentation ldgr-plugin saniyaj 1h 1 —" [ref=e258]:
+              - cell "Documentation" [ref=e259]:
+                - paragraph [ref=e260]: Documentation
+              - cell "ldgr-plugin" [ref=e261]:
+                - paragraph [ref=e262]: ldgr-plugin
+              - cell "saniyaj" [ref=e263]:
+                - paragraph [ref=e264]: saniyaj
+              - cell "1h" [ref=e265]
+              - cell "1" [ref=e266]
+              - cell "—" [ref=e267]
+            - row "d task dd saniyaj 0.5h 1 —" [ref=e268]:
+              - cell "d task" [ref=e269]:
+                - paragraph [ref=e270]: d task
+              - cell "dd" [ref=e271]:
+                - paragraph [ref=e272]: dd
+              - cell "saniyaj" [ref=e273]:
+                - paragraph [ref=e274]: saniyaj
+              - cell "0.5h" [ref=e275]
+              - cell "1" [ref=e276]
+              - cell "—" [ref=e277]

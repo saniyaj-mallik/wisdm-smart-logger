@@ -62,9 +62,11 @@ const PRESETS = [
 export function ReportFilters({
   defaultFrom,
   defaultTo,
+  children,
 }: {
   defaultFrom: string;
   defaultTo: string;
+  children?: React.ReactNode;
 }) {
   const router = useRouter();
   const pathname = usePathname();
@@ -105,7 +107,8 @@ export function ReportFilters({
         </div>
       </div>
 
-      <div className="flex gap-1 ml-auto flex-wrap">
+      <div className="flex gap-1 ml-auto flex-wrap items-center">
+        {children}
         {PRESETS.map((p) => (
           <Button
             key={p.label}

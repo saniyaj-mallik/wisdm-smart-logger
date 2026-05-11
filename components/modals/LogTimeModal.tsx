@@ -28,18 +28,22 @@ export function LogTimeModal({
   onOpenChange,
   onSuccess,
   defaultDate,
+  defaultProjectId,
+  defaultTaskId,
 }: {
   open: boolean;
   onOpenChange: (o: boolean) => void;
   onSuccess?: () => void;
   defaultDate?: string;
+  defaultProjectId?: string;
+  defaultTaskId?: string;
 }) {
   const router = useRouter();
 
   const [projects, setProjects]     = useState<Project[]>([]);
   const [tasks, setTasks]           = useState<Task[]>([]);
-  const [projectId, setProjectId]   = useState("");
-  const [taskId, setTaskId]         = useState("");
+  const [projectId, setProjectId]   = useState(defaultProjectId ?? "");
+  const [taskId, setTaskId]         = useState(defaultTaskId ?? "");
   const [date, setDate]             = useState(defaultDate ?? todayString());
   const [timeMode, setTimeMode]     = useState<TimeMode>("hours");
   const [hours, setHours]           = useState("");
@@ -73,9 +77,22 @@ export function LogTimeModal({
     if (!open) return;
     fetch("/api/projects")
       .then((r) => r.json())
-      .then(setProjects)
+      .then((projs: Project[]) => setProjects(projs))
       .catch(() => setProjects([]));
   }, [open]);
+
+  // Fetch tasks when a project is pre-selected on open
+  useEffect(() => {
+    if (!open || !defaultProjectId) return;
+    fetch(`/api/projects/${defaultProjectId}/tasks`)
+      .then((r) => r.json())
+      .then((data: Task[]) => {
+        setTasks(data);
+        // Re-apply taskId after tasks are loaded so Radix Select can resolve the label
+        if (defaultTaskId) setTaskId(defaultTaskId);
+      })
+      .catch(() => setTasks([]));
+  }, [open, defaultProjectId, defaultTaskId]);
 
   async function handleProjectChange(pid: string) {
     setProjectId(pid);
@@ -154,12 +171,13 @@ export function LogTimeModal({
 
   // ── form reset & submit ────────────────────────────────────────────────────
   function resetForm() {
-    setProjectId(""); setTaskId("");
+    setProjectId(defaultProjectId ?? "");
+    setTaskId(defaultTaskId ?? "");
     setDate(defaultDate ?? todayString());
     setTimeMode("hours"); setHours("");
     setStartTime(""); setEndTime("");
     setIsBillable(true); setAiUsed(false); setNotes(""); setError("");
-    setTasks([]);
+    if (!defaultProjectId) setTasks([]);
     setAddingProject(false); setNewProjectName(""); setProjectError("");
     setAddingTask(false); setNewTaskName(""); setTaskError("");
   }

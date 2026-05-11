@@ -37,7 +37,7 @@ interface LogEntry {
 
 const statCards = (stats: Stats) => [
   {
-    title: "This Week",
+    title: "Recent Total",
     value: `${stats.totalHours}h`,
     icon: Clock,
     color: "text-primary",
