@@ -20,7 +20,7 @@ interface Team {
   _id: string;
   name: string;
   description?: string;
-  leaderId: TeamMember;
+  leaderId: TeamMember | null;
   memberIds: TeamMember[];
 }
 
@@ -98,7 +98,7 @@ function TeamCard({
   onTeamUpdate: (team: Team) => void;
   onTeamDelete: (teamId: string) => void;
 }) {
-  const isLeader = team.leaderId._id === currentUserId;
+  const isLeader = team.leaderId?._id === currentUserId;
   const [addMemberOpen, setAddMemberOpen] = useState(false);
   const [removing, setRemoving] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
@@ -160,13 +160,15 @@ function TeamCard({
       </div>
 
       <div className="p-3 space-y-0.5">
-        <MemberRow
-          member={team.leaderId}
-          isLeader
-          canManage={false}
-          onRemove={() => {}}
-          removing={false}
-        />
+        {team.leaderId && (
+          <MemberRow
+            member={team.leaderId}
+            isLeader
+            canManage={false}
+            onRemove={() => {}}
+            removing={false}
+          />
+        )}
         {team.memberIds.map((member) => (
           <MemberRow
             key={member._id}
@@ -199,7 +201,7 @@ function TeamCard({
       <AddMemberModal
         teamId={team._id}
         currentMemberIds={team.memberIds.map((m) => m._id)}
-        leaderId={team.leaderId._id}
+        leaderId={team.leaderId?._id ?? ""}
         open={addMemberOpen}
         onOpenChange={setAddMemberOpen}
         onAdded={onTeamUpdate}
