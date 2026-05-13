@@ -17,6 +17,18 @@ import { Plus, X, Loader2 } from "lucide-react";
 interface Project { _id: string; name: string }
 interface Task    { _id: string; name: string }
 
+interface CustomFieldDef {
+  _id: string;
+  label: string;
+  type: "yes_no" | "number" | "text";
+  unit: string | null;
+}
+
+interface FieldState {
+  enabled: boolean;
+  value: string;
+}
+
 type TimeMode = "hours" | "range";
 
 function todayString() {
@@ -55,6 +67,10 @@ export function LogTimeModal({
   const [error, setError]           = useState("");
   const [submitting, setSubmitting] = useState(false);
 
+  // custom fields
+  const [customFieldDefs, setCustomFieldDefs] = useState<CustomFieldDef[]>([]);
+  const [fieldStates, setFieldStates]         = useState<Record<string, FieldState>>({});
+
   // quick-add project
   const [addingProject, setAddingProject]     = useState(false);
   const [newProjectName, setNewProjectName]   = useState("");
@@ -72,13 +88,18 @@ export function LogTimeModal({
     if (open) setDate(defaultDate ?? todayString());
   }, [open, defaultDate]);
 
-  // Fetch projects on open
+  // Fetch projects & active custom fields on open
   useEffect(() => {
     if (!open) return;
     fetch("/api/projects")
       .then((r) => r.json())
       .then((projs: Project[]) => setProjects(projs))
       .catch(() => setProjects([]));
+
+    fetch("/api/admin/custom-fields?active=true")
+      .then((r) => r.json())
+      .then((defs: CustomFieldDef[]) => setCustomFieldDefs(defs))
+      .catch(() => setCustomFieldDefs([]));
   }, [open]);
 
   // Fetch tasks when a project is pre-selected on open
@@ -88,7 +109,6 @@ export function LogTimeModal({
       .then((r) => r.json())
       .then((data: Task[]) => {
         setTasks(data);
-        // Re-apply taskId after tasks are loaded so Radix Select can resolve the label
         if (defaultTaskId) setTaskId(defaultTaskId);
       })
       .catch(() => setTasks([]));
@@ -130,7 +150,6 @@ export function LogTimeModal({
       setProjects((prev) => [...prev, created].sort((a, b) => a.name.localeCompare(b.name)));
       setNewProjectName("");
       setAddingProject(false);
-      // auto-select and fetch tasks
       await handleProjectChange(created._id);
     } finally {
       setSavingProject(false);
@@ -169,6 +188,33 @@ export function LogTimeModal({
     }
   }
 
+  // ── custom field helpers ───────────────────────────────────────────────────
+  function toggleField(fieldId: string, checked: boolean) {
+    setFieldStates((prev) => ({
+      ...prev,
+      [fieldId]: { enabled: checked, value: prev[fieldId]?.value ?? "" },
+    }));
+  }
+
+  function setFieldValue(fieldId: string, value: string) {
+    setFieldStates((prev) => ({
+      ...prev,
+      [fieldId]: { enabled: true, value },
+    }));
+  }
+
+  function buildCustomFields() {
+    return Object.entries(fieldStates)
+      .filter(([, s]) => s.enabled)
+      .map(([fieldId, s]) => {
+        const def = customFieldDefs.find((f) => f._id === fieldId);
+        let value: boolean | number | string = true;
+        if (def?.type === "number") value = parseFloat(s.value) || 0;
+        else if (def?.type === "text") value = s.value;
+        return { fieldId, value };
+      });
+  }
+
   // ── form reset & submit ────────────────────────────────────────────────────
   function resetForm() {
     setProjectId(defaultProjectId ?? "");
@@ -177,6 +223,7 @@ export function LogTimeModal({
     setTimeMode("hours"); setHours("");
     setStartTime(""); setEndTime("");
     setIsBillable(true); setAiUsed(false); setNotes(""); setError("");
+    setFieldStates({});
     if (!defaultProjectId) setTasks([]);
     setAddingProject(false); setNewProjectName(""); setProjectError("");
     setAddingTask(false); setNewTaskName(""); setTaskError("");
@@ -193,6 +240,7 @@ export function LogTimeModal({
 
     const body: Record<string, unknown> = {
       projectId, taskId, loggedAt: date, isBillable, aiUsed, notes: notes || null,
+      customFields: buildCustomFields(),
     };
 
     if (timeMode === "hours") {
@@ -280,11 +328,12 @@ export function LogTimeModal({
   // ── render ─────────────────────────────────────────────────────────────────
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
+      <DialogContent className="sm:max-w-md max-h-[90vh] flex flex-col p-0 gap-0">
+        <DialogHeader className="px-6 pt-5 pb-4 shrink-0 border-b border-border">
           <DialogTitle>Log Time</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="flex flex-col flex-1 min-h-0">
+        <div className="flex-1 overflow-y-auto scrollbar-modal px-6 py-5 space-y-4">
 
           {/* ── Project ── */}
           <div className="space-y-1.5">
@@ -421,6 +470,60 @@ export function LogTimeModal({
             </div>
           </div>
 
+          {/* ── Custom Fields ── */}
+          {customFieldDefs.length > 0 && (
+            <div className="space-y-1.5">
+              <Label>Custom Fields</Label>
+              <div className="space-y-2 rounded-md border border-border p-3">
+                {customFieldDefs.map((field) => {
+                  const state = fieldStates[field._id] ?? { enabled: false, value: "" };
+                  return (
+                    <div key={field._id}>
+                      <div className="flex items-center gap-2">
+                        <Checkbox
+                          id={`cf-${field._id}`}
+                          checked={state.enabled}
+                          onCheckedChange={(v: boolean | "indeterminate") =>
+                            toggleField(field._id, v === true)
+                          }
+                        />
+                        <Label htmlFor={`cf-${field._id}`} className="cursor-pointer font-normal">
+                          {field.label}
+                          {field.type === "number" && field.unit && (
+                            <span className="ml-1 text-xs text-muted-foreground">({field.unit})</span>
+                          )}
+                        </Label>
+                      </div>
+                      {state.enabled && field.type === "number" && (
+                        <div className="mt-1.5 ml-6">
+                          <Input
+                            type="number"
+                            step="0.01"
+                            min="0"
+                            placeholder={field.unit ? `Value in ${field.unit}` : "Enter value"}
+                            value={state.value}
+                            onChange={(e) => setFieldValue(field._id, e.target.value)}
+                            className="h-8 text-sm"
+                          />
+                        </div>
+                      )}
+                      {state.enabled && field.type === "text" && (
+                        <div className="mt-1.5 ml-6">
+                          <Input
+                            placeholder="Enter value"
+                            value={state.value}
+                            onChange={(e) => setFieldValue(field._id, e.target.value)}
+                            className="h-8 text-sm"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
           {/* ── Notes ── */}
           <div className="space-y-1.5">
             <Label>Notes <span className="text-muted-foreground">(optional)</span></Label>
@@ -430,6 +533,8 @@ export function LogTimeModal({
 
           {error && <p className="text-sm text-destructive">{error}</p>}
 
+        </div>
+        <div className="px-6 py-4 border-t border-border shrink-0">
           <DialogFooter>
             <Button type="button" variant="outline" onClick={() => handleOpenChange(false)}>
               Cancel
@@ -438,6 +543,7 @@ export function LogTimeModal({
               {submitting ? "Saving…" : "Save Log"}
             </Button>
           </DialogFooter>
+        </div>
         </form>
       </DialogContent>
     </Dialog>

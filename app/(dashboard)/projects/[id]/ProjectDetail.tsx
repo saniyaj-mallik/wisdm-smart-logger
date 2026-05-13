@@ -4,6 +4,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter,
+} from "@/components/ui/dialog";
 import {
   Sheet, SheetContent, SheetHeader, SheetTitle,
 } from "@/components/ui/sheet";
@@ -14,7 +19,7 @@ import { EditTaskModal } from "@/components/modals/EditTaskModal";
 import {
   ChevronLeft, Plus, Pencil, Inbox, Clock,
   CheckCircle2, Circle, ArchiveIcon, Users, ListChecks,
-  Loader2, BrainCircuit, DollarSign,
+  Loader2, BrainCircuit, DollarSign, CalendarCheck, History,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatDate } from "@/lib/time-utils";
@@ -39,6 +44,13 @@ interface Project {
   budgetHours?: number | null;
   color?: string | null;
   isActive: boolean;
+  reportFrequencyDays?: number;
+}
+
+interface ReportSendEntry {
+  _id: string;
+  sentAt: string;
+  sentBy?: { name: string };
 }
 
 interface User { _id: string; name: string; email: string; role: string }
@@ -156,6 +168,12 @@ export function ProjectDetail({
         </div>
       </div>
 
+      {/* Report Schedule */}
+      <ReportScheduleSection
+        projectId={project._id}
+        initialFrequencyDays={project.reportFrequencyDays ?? 14}
+      />
+
       {/* Tasks */}
       <div>
         <div className="flex items-center justify-between mb-4">
@@ -265,6 +283,292 @@ export function ProjectDetail({
         defaultProjectId={project._id}
         defaultTaskId={selectedTask?._id}
         onSuccess={() => setPanelRefreshKey((k) => k + 1)}
+      />
+    </div>
+  );
+}
+
+// ── Report Schedule helpers ───────────────────────────────────────────────────
+
+function parseDateStr(dateStr: string): Date {
+  const d = dateStr.slice(0, 10);
+  const [y, m, day] = d.split("-").map(Number);
+  return new Date(y, m - 1, day);
+}
+
+function daysUntilNext(sentAt: string, frequencyDays: number): number {
+  const last = parseDateStr(sentAt);
+  const nextDue = new Date(last);
+  nextDue.setDate(nextDue.getDate() + frequencyDays);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.ceil((nextDue.getTime() - today.getTime()) / 86400000);
+}
+
+function addDays(dateStr: string, days: number): string {
+  const d = parseDateStr(dateStr);
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
+
+function formatDateDisplay(dateStr: string): string {
+  const d = parseDateStr(dateStr);
+  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function relativeDateDisplay(dateStr: string): string {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const d = parseDateStr(dateStr);
+  const diff = Math.round((today.getTime() - d.getTime()) / 86400000);
+  if (diff === 0) return "today";
+  if (diff === 1) return "yesterday";
+  if (diff < 7) return `${diff}d ago`;
+  if (diff < 30) return `${Math.round(diff / 7)}w ago`;
+  return `${Math.round(diff / 30)}mo ago`;
+}
+
+// ── Log Send Modal (project detail) ─────────────────────────────────────────
+
+function LogSendProjectModal({ projectId, open, onOpenChange, onSaved }: {
+  projectId: string;
+  open: boolean;
+  onOpenChange: (o: boolean) => void;
+  onSaved: (send: ReportSendEntry) => void;
+}) {
+  const [sentAt, setSentAt] = useState(() => new Date().toISOString().slice(0, 10));
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (open) { setSentAt(new Date().toISOString().slice(0, 10)); setError(""); }
+  }, [open]);
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSaving(true);
+    setError("");
+    try {
+      const res = await fetch("/api/report-sends", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ projectId, sentAt }),
+      });
+      if (!res.ok) { setError("Failed to save"); return; }
+      onSaved(await res.json());
+      onOpenChange(false);
+    } catch {
+      setError("Network error");
+    } finally {
+      setSaving(false);
+    }
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-xs">
+        <DialogHeader>
+          <DialogTitle>Log Report Send</DialogTitle>
+        </DialogHeader>
+        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+          <div className="space-y-1.5">
+            <Label>Date Sent</Label>
+            <Input
+              type="date"
+              value={sentAt}
+              onChange={(e) => setSentAt(e.target.value)}
+              required
+            />
+          </div>
+          {error && <p className="text-sm text-destructive">{error}</p>}
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>Cancel</Button>
+            <Button type="submit" disabled={saving}>
+              {saving && <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />}
+              Log Send
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+// ── Report Schedule Section ───────────────────────────────────────────────────
+
+function ReportScheduleSection({ projectId, initialFrequencyDays }: {
+  projectId: string;
+  initialFrequencyDays: number;
+}) {
+  const [sends, setSends] = useState<ReportSendEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [frequencyDays, setFrequencyDays] = useState(initialFrequencyDays);
+  const [editingFreq, setEditingFreq] = useState(false);
+  const [freqInput, setFreqInput] = useState(String(initialFrequencyDays));
+  const [savingFreq, setSavingFreq] = useState(false);
+  const [logOpen, setLogOpen] = useState(false);
+
+  useEffect(() => {
+    fetch(`/api/report-sends?projectId=${projectId}`)
+      .then((r) => r.json())
+      .then((data) => setSends(Array.isArray(data) ? data : []))
+      .catch(() => setSends([]))
+      .finally(() => setLoading(false));
+  }, [projectId]);
+
+  const lastSend = sends[0] ?? null;
+  const days = lastSend ? daysUntilNext(lastSend.sentAt, frequencyDays) : null;
+
+  async function saveFrequency() {
+    const val = parseInt(freqInput);
+    if (isNaN(val) || val < 1 || val > 365) return;
+    setSavingFreq(true);
+    await fetch(`/api/projects/${projectId}`, {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ reportFrequencyDays: val }),
+    });
+    setFrequencyDays(val);
+    setEditingFreq(false);
+    setSavingFreq(false);
+  }
+
+  // Status badge
+  let statusLabel: string;
+  let statusBadge: string;
+  if (!lastSend) {
+    statusLabel = "Never sent"; statusBadge = "bg-muted text-muted-foreground";
+  } else if (days! < 0) {
+    statusLabel = `Overdue ${Math.abs(days!)}d`;
+    statusBadge = "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300";
+  } else if (days! === 0) {
+    statusLabel = "Due today";
+    statusBadge = "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300";
+  } else if (days! <= 3) {
+    statusLabel = `Due in ${days}d`;
+    statusBadge = "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300";
+  } else {
+    statusLabel = `Due in ${days}d`;
+    statusBadge = "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300";
+  }
+
+  return (
+    <div className="rounded-xl border border-border bg-card overflow-hidden">
+      {/* Header */}
+      <div className="px-5 py-3 flex items-center justify-between border-b border-border">
+        <div className="flex items-center gap-2">
+          <CalendarCheck className="h-4 w-4 text-muted-foreground" />
+          <h2 className="font-semibold text-sm">Report Schedule</h2>
+          {!loading && (
+            <span className={cn("text-[10px] font-semibold px-1.5 py-0.5 rounded-md", statusBadge)}>
+              {statusLabel}
+            </span>
+          )}
+        </div>
+        <div className="flex items-center gap-2">
+          <Link href="/reports/send-history" className="text-xs text-muted-foreground hover:text-primary flex items-center gap-1 transition-colors">
+            <History className="h-3 w-3" /> History
+          </Link>
+          <Button size="sm" onClick={() => setLogOpen(true)} className="h-7 text-xs gap-1 px-2.5">
+            <Plus className="h-3 w-3" /> Log Send
+          </Button>
+        </div>
+      </div>
+
+      {/* Stats row */}
+      <div className="px-5 py-3.5 flex items-center gap-5 flex-wrap border-b border-border">
+        {/* Frequency */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">Frequency:</span>
+          {editingFreq ? (
+            <div className="flex items-center gap-1.5">
+              <Input
+                type="number"
+                value={freqInput}
+                onChange={(e) => setFreqInput(e.target.value)}
+                className="h-6 w-14 text-xs px-1.5"
+                min="1"
+                max="365"
+              />
+              <span className="text-xs text-muted-foreground">days</span>
+              <Button size="sm" onClick={saveFrequency} disabled={savingFreq} className="h-6 text-xs px-2">
+                {savingFreq ? <Loader2 className="h-3 w-3 animate-spin" /> : "Save"}
+              </Button>
+              <Button
+                variant="ghost" size="sm"
+                onClick={() => { setEditingFreq(false); setFreqInput(String(frequencyDays)); }}
+                className="h-6 text-xs px-1.5"
+              >
+                ✕
+              </Button>
+            </div>
+          ) : (
+            <button
+              onClick={() => setEditingFreq(true)}
+              className="flex items-center gap-1 text-xs font-medium hover:text-primary group transition-colors"
+            >
+              Every {frequencyDays} days
+              <Pencil className="h-2.5 w-2.5 opacity-0 group-hover:opacity-60 transition-opacity" />
+            </button>
+          )}
+        </div>
+
+        <div className="w-px h-4 bg-border" />
+
+        {/* Last sent */}
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-muted-foreground">Last sent:</span>
+          <span className="text-xs font-medium">
+            {loading ? "…" : lastSend
+              ? `${relativeDateDisplay(lastSend.sentAt)} · ${formatDateDisplay(lastSend.sentAt)}`
+              : "Never"
+            }
+          </span>
+        </div>
+
+        {lastSend && days !== null && (
+          <>
+            <div className="w-px h-4 bg-border" />
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-muted-foreground">Next due:</span>
+              <span className="text-xs font-medium">
+                {formatDateDisplay(addDays(lastSend.sentAt, frequencyDays))}
+              </span>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Recent sends list */}
+      {!loading && sends.length > 0 && (
+        <div className="px-5 py-3 space-y-1.5">
+          {sends.slice(0, 3).map((s) => (
+            <div key={s._id} className="flex items-center justify-between text-xs">
+              <div className="flex items-center gap-2">
+                <div className="h-1.5 w-1.5 rounded-full bg-green-500 shrink-0" />
+                <span className="font-medium">{formatDateDisplay(s.sentAt)}</span>
+              </div>
+              <span className="text-muted-foreground">{relativeDateDisplay(s.sentAt)}</span>
+            </div>
+          ))}
+          {sends.length > 3 && (
+            <Link href="/reports/send-history" className="text-xs text-primary hover:underline block mt-1">
+              +{sends.length - 3} more →
+            </Link>
+          )}
+        </div>
+      )}
+
+      {!loading && sends.length === 0 && (
+        <div className="px-5 py-3">
+          <p className="text-xs text-muted-foreground">No reports sent yet — log the first send above.</p>
+        </div>
+      )}
+
+      <LogSendProjectModal
+        projectId={projectId}
+        open={logOpen}
+        onOpenChange={setLogOpen}
+        onSaved={(send) => setSends((prev) => [send, ...prev])}
       />
     </div>
   );

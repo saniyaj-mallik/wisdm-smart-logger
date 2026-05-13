@@ -1,0 +1,327 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+              - link:
+                - /url: /reports/ai-summary
+                - img
+                - text: AI Summary
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+              - link:
+                - /url: /admin/custom-fields
+                - img
+                - text: Custom Fields
+        - generic:
+          - generic:
+            - generic:
+              - generic: S
+            - generic:
+              - paragraph: Saniyaj Mallik
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Custom Fields
+              - paragraph: Define extra fields users can fill in when logging time
+          - generic:
+            - button:
+              - img
+              - text: New Field
+          - generic:
+            - generic:
+              - table:
+                - rowgroup:
+                  - row:
+                    - columnheader: Label
+                    - columnheader: Type
+                    - columnheader: Unit
+                    - columnheader: Status
+                    - columnheader: Uses
+                    - columnheader
+                - rowgroup:
+                  - row:
+                    - cell: test field
+                    - cell: Number
+                    - cell: —
+                    - cell: Active
+                    - cell: "1"
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button:
+                          - img
+                  - row:
+                    - cell: AI Saved Time?
+                    - cell: Number
+                    - cell: —
+                    - cell: Active
+                    - cell: "2"
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button:
+                          - img
+          - generic:
+            - heading [level=2]: Field Analytics
+            - paragraph: Usage statistics across all time log entries
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - text: test field
+                  - generic: Number
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: "1"
+                      - generic: 8% of 13 logs
+                    - paragraph: total uses
+                  - generic:
+                    - generic:
+                      - text: Total
+                      - paragraph: "5"
+                    - generic:
+                      - text: Average
+                      - paragraph: "5"
+                    - generic:
+                      - text: Min
+                      - paragraph: "5"
+                    - generic:
+                      - text: Max
+                      - paragraph: "5"
+                  - generic:
+                    - button:
+                      - img
+                      - text: View Detailed Report
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - text: AI Saved Time?
+                  - generic: Number
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: "2"
+                      - generic: 15% of 13 logs
+                    - paragraph: total uses
+                  - generic:
+                    - generic:
+                      - text: Total
+                      - paragraph: "1.82"
+                    - generic:
+                      - text: Average
+                      - paragraph: "1.82"
+                    - generic:
+                      - text: Min
+                      - paragraph: "1.82"
+                    - generic:
+                      - text: Max
+                      - paragraph: "1.82"
+                  - generic:
+                    - button:
+                      - img
+                      - text: View Detailed Report
+  - alert
+  - dialog "AI Saved Time?" [ref=e181]:
+    - button "Close" [active] [ref=e182] [cursor=pointer]:
+      - img [ref=e183]
+      - generic [ref=e186]: Close
+    - generic [ref=e187]:
+      - generic [ref=e188]:
+        - img [ref=e189]
+        - heading "AI Saved Time?" [level=2] [ref=e192]
+        - generic [ref=e193]: Number
+      - paragraph [ref=e194]: Detailed field report
+      - generic [ref=e195]:
+        - button "7d" [ref=e196] [cursor=pointer]
+        - button "30d" [ref=e197] [cursor=pointer]
+        - button "90d" [ref=e198] [cursor=pointer]
+        - button "All" [ref=e199] [cursor=pointer]
+        - generic [ref=e200]:
+          - textbox [ref=e201]: 2020-01-01
+          - generic [ref=e202]: –
+          - textbox [ref=e203]: 2026-05-13
+          - button "Apply" [ref=e204] [cursor=pointer]
+    - generic [ref=e205]:
+      - generic [ref=e206]:
+        - heading "Overview" [level=3] [ref=e207]
+        - generic [ref=e208]:
+          - generic [ref=e209]:
+            - generic [ref=e210]:
+              - paragraph [ref=e211]: Total Uses
+              - img [ref=e213]
+            - paragraph [ref=e215]: "2"
+            - paragraph [ref=e216]: out of 12 logs
+          - generic [ref=e217]:
+            - generic [ref=e218]:
+              - paragraph [ref=e219]: Adoption Rate
+              - img [ref=e221]
+            - paragraph [ref=e225]: 17%
+            - paragraph [ref=e226]: of all log entries
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - paragraph [ref=e229]: Total
+              - img [ref=e231]
+            - paragraph [ref=e233]: "1.82"
+            - paragraph [ref=e234]: min 1.82 · max 1.82
+          - generic [ref=e235]:
+            - generic [ref=e236]:
+              - paragraph [ref=e237]: Average
+              - img [ref=e239]
+            - paragraph [ref=e242]: "0.91"
+            - paragraph [ref=e243]: per use
+      - generic [ref=e244]:
+        - heading "Daily Usage" [level=3] [ref=e245]
+        - application [ref=e249]:
+          - generic [ref=e274]:
+            - generic [ref=e275]:
+              - generic [ref=e277]: Dec 31
+              - generic [ref=e279]: May 17
+              - generic [ref=e281]: Oct 1
+              - generic [ref=e283]: Jan 31
+              - generic [ref=e285]: Jun 1
+              - generic [ref=e287]: Oct 1
+              - generic [ref=e289]: Jan 31
+              - generic [ref=e291]: Jun 1
+              - generic [ref=e293]: Oct 1
+              - generic [ref=e295]: Jan 31
+              - generic [ref=e297]: Jun 1
+              - generic [ref=e299]: Oct 1
+              - generic [ref=e301]: Jan 31
+              - generic [ref=e303]: Jun 1
+              - generic [ref=e305]: Oct 1
+              - generic [ref=e307]: Jan 31
+              - generic [ref=e309]: Jun 1
+              - generic [ref=e311]: Oct 1
+              - generic [ref=e313]: May 12
+            - generic [ref=e314]:
+              - generic [ref=e316]: "0"
+              - generic [ref=e318]: "1"
+              - generic [ref=e320]: "2"
+              - generic [ref=e322]: "3"
+              - generic [ref=e324]: "4"
+      - generic [ref=e325]:
+        - heading "By User" [level=3] [ref=e326]
+        - generic [ref=e327]:
+          - application [ref=e330]:
+            - generic [ref=e346]:
+              - generic [ref=e347]:
+                - generic [ref=e349]: "0"
+                - generic [ref=e351]: "1"
+                - generic [ref=e353]: "2"
+                - generic [ref=e355]: "3"
+                - generic [ref=e357]: "4"
+              - generic [ref=e360]: SaniyajMallik
+              - generic [ref=e362]: "2"
+          - table [ref=e365]:
+            - rowgroup [ref=e366]:
+              - row "User Uses Total Avg" [ref=e367]:
+                - columnheader "User" [ref=e368]
+                - columnheader "Uses" [ref=e369]
+                - columnheader "Total" [ref=e370]
+                - columnheader "Avg" [ref=e371]
+            - rowgroup [ref=e372]:
+              - row "Saniyaj Mallik 2 1.82 0.91" [ref=e373]:
+                - cell "Saniyaj Mallik" [ref=e374]
+                - cell "2" [ref=e375]
+                - cell "1.82" [ref=e376]
+                - cell "0.91" [ref=e377]
+      - generic [ref=e378]:
+        - heading "By Project" [level=3] [ref=e379]
+        - application [ref=e383]:
+          - generic [ref=e399]:
+            - generic [ref=e400]:
+              - generic [ref=e402]: "0"
+              - generic [ref=e404]: "1"
+              - generic [ref=e406]: "2"
+              - generic [ref=e408]: "3"
+              - generic [ref=e410]: "4"
+            - generic [ref=e413]: smart-logger-internal
+            - generic [ref=e415]: "2"
+      - generic [ref=e416]:
+        - heading "Recent Entries" [level=3] [ref=e417]
+        - table [ref=e420]:
+          - rowgroup [ref=e421]:
+            - row "Date User Project / Task Value" [ref=e422]:
+              - columnheader "Date" [ref=e423]
+              - columnheader "User" [ref=e424]
+              - columnheader "Project / Task" [ref=e425]
+              - columnheader "Value" [ref=e426]
+          - rowgroup [ref=e427]:
+            - row "May 12, 2026 Saniyaj Mallik smart-logger-internal new task true" [ref=e428]:
+              - cell "May 12, 2026" [ref=e429]
+              - cell "Saniyaj Mallik" [ref=e430]
+              - cell "smart-logger-internal new task" [ref=e431]:
+                - paragraph [ref=e432]: smart-logger-internal
+                - paragraph [ref=e433]: new task
+              - cell "true" [ref=e434]:
+                - generic [ref=e435]: "true"
+            - row "May 12, 2026 Saniyaj Mallik smart-logger-internal new task 1.82" [ref=e436]:
+              - cell "May 12, 2026" [ref=e437]
+              - cell "Saniyaj Mallik" [ref=e438]
+              - cell "smart-logger-internal new task" [ref=e439]:
+                - paragraph [ref=e440]: smart-logger-internal
+                - paragraph [ref=e441]: new task
+              - cell "1.82" [ref=e442]:
+                - generic [ref=e443]: "1.82"
+  - generic: smart-logger-internal

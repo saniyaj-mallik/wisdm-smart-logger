@@ -53,7 +53,7 @@ export default function RegisterPage() {
           <CardDescription>Join WisdmLabs Smart Logger</CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} method="POST" className="space-y-4">
             <div className="space-y-1.5">
               <Label htmlFor="name">Full name</Label>
               <Input id="name" name="name" required />

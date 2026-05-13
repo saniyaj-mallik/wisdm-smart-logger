@@ -1,5 +1,10 @@
 import mongoose, { Schema, Document, Types } from "mongoose";
 
+export interface ICustomFieldValue {
+  fieldId: Types.ObjectId;
+  value: boolean | number | string;
+}
+
 export interface ITimeEntry extends Document {
   userId: Types.ObjectId;
   projectId: Types.ObjectId;
@@ -11,6 +16,7 @@ export interface ITimeEntry extends Document {
   isBillable: boolean;
   aiUsed: boolean;
   notes: string | null;
+  customFields: ICustomFieldValue[];
   createdAt: Date;
   updatedAt: Date;
 }
@@ -27,6 +33,15 @@ const TimeEntrySchema = new Schema<ITimeEntry>(
     isBillable:{ type: Boolean, default: true },
     aiUsed:    { type: Boolean, default: false },
     notes:     { type: String, default: null, maxlength: 1000 },
+    customFields: {
+      type: [
+        {
+          fieldId: { type: Schema.Types.ObjectId, ref: "CustomField", required: true },
+          value:   { type: Schema.Types.Mixed, required: true },
+        },
+      ],
+      default: [],
+    },
   },
   { timestamps: true }
 );

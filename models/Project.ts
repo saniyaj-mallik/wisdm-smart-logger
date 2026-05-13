@@ -7,6 +7,7 @@ export interface IProject extends Document {
   budgetHours: number | null;
   color: string | null;
   isActive: boolean;
+  reportFrequencyDays: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,6 +20,7 @@ const ProjectSchema = new Schema<IProject>(
     budgetHours: { type: Number, default: null, min: 0 },
     color: { type: String, default: null },
     isActive: { type: Boolean, default: true },
+    reportFrequencyDays: { type: Number, default: 14, min: 1, max: 365 },
   },
   { timestamps: true }
 );

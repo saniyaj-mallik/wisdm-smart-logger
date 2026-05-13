@@ -1,0 +1,140 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: GENERAL
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+              - link "All Projects" [ref=e25] [cursor=pointer]:
+                - /url: /projects
+                - img [ref=e26]
+                - text: All Projects
+          - generic [ref=e81]:
+            - paragraph [ref=e82]: SME
+            - generic [ref=e83]:
+              - link "Summary" [ref=e84] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e85]
+                - text: Summary
+              - link "Team Overview" [ref=e87] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e88]
+                - text: Team Overview
+              - link "Block Generator" [ref=e93] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e94]
+                - text: Block Generator
+              - link "Send History" [ref=e97] [cursor=pointer]:
+                - /url: /reports/send-history
+                - img [ref=e98]
+                - text: Send History
+              - link "AI Summary" [ref=e102] [cursor=pointer]:
+                - /url: /reports/ai-summary
+                - img [ref=e103]
+                - text: AI Summary
+          - generic [ref=e106]:
+            - paragraph [ref=e107]: ADMIN
+            - generic [ref=e108]:
+              - link "Users" [ref=e109] [cursor=pointer]:
+                - /url: /admin/users
+                - img [ref=e110]
+                - text: Users
+              - link "Custom Fields" [ref=e122] [cursor=pointer]:
+                - /url: /admin/custom-fields
+                - img [ref=e123]
+                - text: Custom Fields
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e31]: S
+            - generic [ref=e32]:
+              - paragraph [ref=e124]: Saniyaj Mallik
+              - generic [ref=e33]: admin
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - link [ref=e36] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e37]:
+                  - img
+              - button [ref=e38] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e39] [cursor=pointer]:
+              - img
+    - main [ref=e40]:
+      - generic [ref=e42]:
+        - generic [ref=e44]:
+          - heading "Block Report Generator" [level=1] [ref=e45]
+          - paragraph [ref=e46]: Generate a formatted time report ready to download or share
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - img [ref=e168]
+                - generic [ref=e52]: Project & Dates
+              - img [ref=e53]
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: "2"
+                - generic [ref=e58]: Select Tasks
+              - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: "3"
+              - generic [ref=e64]: Download Report
+          - generic [ref=e66]:
+            - generic [ref=e170]:
+              - generic [ref=e171]:
+                - generic [ref=e172]:
+                  - paragraph [ref=e173]: two-lines-press
+                  - paragraph [ref=e174]: 2026-05-11 → 2026-05-13
+                - button "Deselect all" [ref=e175] [cursor=pointer]
+              - table [ref=e177]:
+                - rowgroup [ref=e178]:
+                  - row "Task Estimated Actual" [ref=e179]:
+                    - columnheader [ref=e180]:
+                      - checkbox [checked] [ref=e181]
+                    - columnheader "Task" [ref=e182]
+                    - columnheader "Estimated" [ref=e183]
+                    - columnheader "Actual" [ref=e184]
+                - rowgroup [ref=e185]:
+                  - row "Content Migration — 0h" [ref=e186] [cursor=pointer]:
+                    - cell [ref=e187]:
+                      - checkbox [checked]
+                    - cell "Content Migration" [ref=e188]
+                    - cell "—" [ref=e189]
+                    - cell "0h" [ref=e190]
+                  - row "Plugin Integration — 0h" [ref=e191] [cursor=pointer]:
+                    - cell [ref=e192]:
+                      - checkbox [checked]
+                    - cell "Plugin Integration" [ref=e193]
+                    - cell "—" [ref=e194]
+                    - cell "0h" [ref=e195]
+                  - row "QA & Launch — 0h" [ref=e196] [cursor=pointer]:
+                    - cell [ref=e197]:
+                      - checkbox [checked]
+                    - cell "QA & Launch" [ref=e198]
+                    - cell "—" [ref=e199]
+                    - cell "0h" [ref=e200]
+                  - row "Theme Customisation — 0h" [ref=e201] [cursor=pointer]:
+                    - cell [ref=e202]:
+                      - checkbox [checked]
+                    - cell "Theme Customisation" [ref=e203]
+                    - cell "—" [ref=e204]
+                    - cell "0h" [ref=e205]
+              - paragraph [ref=e206]: 4 of 4 tasks selected
+            - generic [ref=e79]:
+              - button "← Back" [ref=e207] [cursor=pointer]
+              - button "Next" [ref=e208] [cursor=pointer]:
+                - text: Next
+                - img
+  - alert [ref=e80]

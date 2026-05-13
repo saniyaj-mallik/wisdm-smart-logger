@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Loader2, Download, ChevronRight, Check } from "lucide-react";
+import { Loader2, Download, ChevronRight, Check, CalendarCheck } from "lucide-react";
 import * as XLSX from "xlsx";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +18,43 @@ interface Project {
   name: string;
   clientName: string | null;
   color: string | null;
+  reportFrequencyDays: number;
+}
+
+interface ProjectSendStatus {
+  lastSentAt: string | null;
+  daysUntilNext: number | null;
+}
+
+function parseDateStr(dateStr: string): Date {
+  const d = dateStr.slice(0, 10);
+  const [y, m, day] = d.split("-").map(Number);
+  return new Date(y, m - 1, day);
+}
+
+function computeDaysUntilNext(sentAt: string, frequencyDays: number): number {
+  const last = parseDateStr(sentAt);
+  const nextDue = new Date(last);
+  nextDue.setDate(nextDue.getDate() + frequencyDays);
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return Math.ceil((nextDue.getTime() - today.getTime()) / 86400000);
+}
+
+function formatDateDisplay(dateStr: string): string {
+  const d = parseDateStr(dateStr);
+  return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+function relativeDateDisplay(dateStr: string): string {
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const d = parseDateStr(dateStr);
+  const diff = Math.round((today.getTime() - d.getTime()) / 86400000);
+  if (diff === 0) return "today";
+  if (diff === 1) return "yesterday";
+  if (diff < 7) return `${diff}d ago`;
+  if (diff < 30) return `${Math.round(diff / 7)}w ago`;
+  return `${Math.round(diff / 30)}mo ago`;
 }
 
 interface TaskRow {
@@ -55,6 +93,10 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
   const [to, setTo] = useState(() => new Date().toISOString().slice(0, 10));
   const [lastReportNote, setLastReportNote] = useState<string | null>(null);
 
+  // ── Send status ─────────────────────────────────────────────────────────────
+  const [projectSendStatus, setProjectSendStatus] = useState<ProjectSendStatus | null>(null);
+  const [statusLoading, setStatusLoading] = useState(false);
+
   // ── Step 2 ──────────────────────────────────────────────────────────────────
   const [tasks, setTasks] = useState<TaskRow[]>([]);
   const [tasksLoading, setTasksLoading] = useState(false);
@@ -65,6 +107,7 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
   const [block, setBlock] = useState<string | null>(null);
   const [generating, setGenerating] = useState(false);
   const [genError, setGenError] = useState("");
+  const [downloadLogged, setDownloadLogged] = useState(false);
 
   useEffect(() => {
     fetch("/api/projects")
@@ -73,6 +116,27 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
       .catch(() => {})
       .finally(() => setProjectsLoading(false));
   }, []);
+
+  useEffect(() => {
+    if (!selectedProjectId) { setProjectSendStatus(null); return; }
+    const project = projects.find((p) => p._id === selectedProjectId);
+    const freq = project?.reportFrequencyDays ?? 14;
+    setStatusLoading(true);
+    fetch(`/api/report-sends?projectId=${selectedProjectId}`)
+      .then((r) => r.json())
+      .then((sends: Array<{ sentAt: string | null; downloadedAt: string }>) => {
+        if (!Array.isArray(sends)) { setProjectSendStatus({ lastSentAt: null, daysUntilNext: null }); return; }
+        // Only consider entries that were actually sent to client
+        const lastSent = sends.find((s) => !!s.sentAt);
+        if (!lastSent?.sentAt) {
+          setProjectSendStatus({ lastSentAt: null, daysUntilNext: null });
+        } else {
+          setProjectSendStatus({ lastSentAt: lastSent.sentAt, daysUntilNext: computeDaysUntilNext(lastSent.sentAt, freq) });
+        }
+      })
+      .catch(() => setProjectSendStatus(null))
+      .finally(() => setStatusLoading(false));
+  }, [selectedProjectId, projects]);
 
   function handleProjectSelect(id: string) {
     setSelectedProjectId(id);
@@ -155,6 +219,7 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
   async function goToStep3() {
     setStep(3);
     setFormat("xlsx");
+    setDownloadLogged(false);
     await generateBlock("xlsx", Array.from(selectedTaskIds));
   }
 
@@ -219,8 +284,7 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
       a.click();
       URL.revokeObjectURL(url);
     } else {
-      const ext =
-        format === "markdown" ? "md" : format === "csv" ? "csv" : "txt";
+      const ext = format === "markdown" ? "md" : format === "csv" ? "csv" : "txt";
       const blob = new Blob([block], { type: "text/plain;charset=utf-8" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
@@ -230,7 +294,15 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
       URL.revokeObjectURL(url);
     }
 
+    // same point where we save to localStorage — also log to DB
     localStorage.setItem(`block-last-to-${selectedProjectId}`, to);
+    fetch("/api/report-sends", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ projectId: selectedProjectId, from, to, format }),
+    })
+      .then((res) => { if (res.ok) { setDownloadLogged(true); setProjectSendStatus(null); } })
+      .catch(() => {});
   }
 
   const selectedProject = projects.find((p) => p._id === selectedProjectId);
@@ -281,6 +353,7 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
         <CardContent className="pt-6">
           {/* ── Step 1: Project + Dates ──────────────────────────────────── */}
           {step === 1 && (
+            <>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <Label className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
@@ -358,6 +431,63 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
                 </div>
               </div>
             </div>
+
+            {/* ── Send status banner ──────────────────────────────────────── */}
+            {selectedProjectId && (
+              <div className="mt-4">
+                {statusLoading ? (
+                  <div className="h-12 rounded-lg bg-muted/20 animate-pulse" />
+                ) : projectSendStatus && (
+                  <div className={cn(
+                    "flex items-center justify-between rounded-lg border px-4 py-3 gap-3 flex-wrap",
+                    !projectSendStatus.lastSentAt
+                      ? "border-muted-foreground/20 bg-muted/20"
+                      : projectSendStatus.daysUntilNext! < 0
+                      ? "border-red-200 bg-red-50 dark:border-red-900/50 dark:bg-red-900/10"
+                      : projectSendStatus.daysUntilNext! <= 3
+                      ? "border-amber-200 bg-amber-50 dark:border-amber-900/50 dark:bg-amber-900/10"
+                      : "border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-900/10"
+                  )}>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <CalendarCheck className={cn("h-4 w-4 shrink-0",
+                        !projectSendStatus.lastSentAt ? "text-muted-foreground" :
+                        projectSendStatus.daysUntilNext! < 0 ? "text-red-600 dark:text-red-400" :
+                        projectSendStatus.daysUntilNext! <= 3 ? "text-amber-600 dark:text-amber-400" :
+                        "text-green-600 dark:text-green-400"
+                      )} />
+                      <span className="text-sm">
+                        {!projectSendStatus.lastSentAt
+                          ? "No block report has been sent for this project yet"
+                          : `Last report sent ${relativeDateDisplay(projectSendStatus.lastSentAt)} · ${formatDateDisplay(projectSendStatus.lastSentAt)}`
+                        }
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 shrink-0">
+                      {projectSendStatus.lastSentAt && projectSendStatus.daysUntilNext !== null && (
+                        <span className={cn("text-[11px] font-semibold px-1.5 py-0.5 rounded-md",
+                          projectSendStatus.daysUntilNext < 0
+                            ? "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300"
+                            : projectSendStatus.daysUntilNext <= 3
+                            ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                            : "bg-green-100 text-green-700 dark:bg-green-900/40 dark:text-green-300"
+                        )}>
+                          {projectSendStatus.daysUntilNext < 0
+                            ? `Overdue by ${Math.abs(projectSendStatus.daysUntilNext)}d`
+                            : projectSendStatus.daysUntilNext === 0
+                            ? "Due today"
+                            : `Due in ${projectSendStatus.daysUntilNext}d`
+                          }
+                        </span>
+                      )}
+                      <Link href="/reports/send-history" className="text-xs text-primary hover:underline whitespace-nowrap">
+                        View history →
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            </>
           )}
 
           {/* ── Step 2: Task Selection ────────────────────────────────────── */}
@@ -566,19 +696,23 @@ export function BlockGeneratorWizard({ userId }: { userId: string }) {
             )}
 
             {step === 3 && (
-              <Button
-                onClick={download}
-                disabled={!block || generating}
-                className="min-w-40"
-              >
-                <Download className="w-4 h-4 mr-2" />
-                Download{" "}
-                {format === "xlsx"
-                  ? "XLSX"
-                  : format === "markdown"
-                  ? "MD"
-                  : format.toUpperCase()}
-              </Button>
+              <div className="flex items-center gap-3 flex-wrap">
+                <Button onClick={download} disabled={!block || generating}>
+                  <Download className="w-4 h-4 mr-2" />
+                  {`Download ${format === "xlsx" ? "XLSX" : format === "markdown" ? "MD" : format.toUpperCase()}`}
+                </Button>
+                {downloadLogged && (
+                  <div className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 dark:border-green-900/50 dark:bg-green-900/10 px-3 py-2">
+                    <Check className="h-3.5 w-3.5 text-green-600 dark:text-green-400 shrink-0" />
+                    <span className="text-xs text-green-700 dark:text-green-300">
+                      Logged —{" "}
+                      <Link href="/reports/send-history" className="underline underline-offset-2 font-medium">
+                        mark as sent when you email it
+                      </Link>
+                    </span>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </CardContent>

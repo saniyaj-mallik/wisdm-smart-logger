@@ -14,6 +14,8 @@ import {
   LogOut,
   User,
   Sparkles,
+  SlidersHorizontal,
+  History,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -22,45 +24,37 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
+// Role hierarchy: dev=0, sme=1, manager=2, admin=3
+const ROLE_LEVEL: Record<string, number> = { dev: 0, sme: 1, manager: 2, admin: 3 };
+
 const navGroups = [
   {
-    label: "MAIN",
+    label: "GENERAL",
+    minLevel: 0,
     items: [
-      { label: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
-      { label: "My Logs", href: "/logs", icon: Clock },
+      { label: "Dashboard",           href: "/dashboard",               icon: LayoutDashboard },
+      { label: "My Logs",             href: "/logs",                    icon: Clock           },
+      { label: "All Projects",        href: "/projects",                icon: FolderKanban    },
+      { label: "Block Generator",     href: "/reports/block-generator", icon: FileText        },
+      { label: "Track Block Reports", href: "/reports/send-history",    icon: History         },
     ],
   },
   {
-    label: "PROJECTS",
+    label: "SME",
+    minLevel: 1,
     items: [
-      { label: "All Projects", href: "/projects", icon: FolderKanban },
-    ],
-  },
-  {
-    label: "REPORTS",
-    items: [
-      { label: "Summary", href: "/reports/summary", icon: BarChart3 },
-      {
-        label: "Team Overview",
-        href: "/reports/team",
-        icon: Users,
-      },
-      {
-        label: "Block Generator",
-        href: "/reports/block-generator",
-        icon: FileText,
-      },
-      {
-        label: "AI Summary",
-        href: "/reports/ai-summary",
-        icon: Sparkles,
-      },
+      { label: "Summary",       href: "/reports/summary",  icon: BarChart3 },
+      { label: "Team Overview", href: "/reports/team",     icon: Users     },
+      { label: "AI Summary",    href: "/reports/ai-summary", icon: Sparkles },
     ],
   },
   {
     label: "ADMIN",
-    adminOnly: true,
-    items: [{ label: "Users", href: "/admin/users", icon: UserCog }],
+    minLevel: 3,
+    items: [
+      { label: "Users",         href: "/admin/users",         icon: UserCog          },
+      { label: "Custom Fields", href: "/admin/custom-fields", icon: SlidersHorizontal },
+    ],
   },
 ];
 
@@ -88,9 +82,10 @@ export function SidebarContent() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-6">
+      <nav className="flex-1 overflow-y-auto scrollbar-modal px-3 py-4 space-y-6">
         {navGroups.map((group) => {
-            const visibleItems = group.items;
+          if ((ROLE_LEVEL[role] ?? 0) < group.minLevel) return null;
+          const visibleItems = group.items;
           if (!visibleItems.length) return null;
           return (
             <div key={group.label}>

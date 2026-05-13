@@ -41,6 +41,7 @@ export const CreateProjectSchema = z.object({
 
 export const UpdateProjectSchema = CreateProjectSchema.partial().extend({
   isActive: z.boolean().optional(),
+  reportFrequencyDays: z.number().int().min(1).max(365).optional(),
 });
 
 export const CreateTaskSchema = z.object({
@@ -52,6 +53,23 @@ export const CreateTaskSchema = z.object({
 
 export const UpdateTaskSchema = CreateTaskSchema.partial().extend({
   isActive: z.boolean().optional(),
+});
+
+// ── Custom Fields ─────────────────────────────────────────────────────────────
+
+export const CreateCustomFieldSchema = z.object({
+  label: z.string().min(1).max(100).trim(),
+  type: z.enum(["yes_no", "number", "text"]),
+  unit: z.string().max(50).nullable().optional(),
+});
+
+export const UpdateCustomFieldSchema = CreateCustomFieldSchema.partial().extend({
+  isActive: z.boolean().optional(),
+});
+
+const CustomFieldValueSchema = z.object({
+  fieldId: z.string().min(1),
+  value: z.union([z.boolean(), z.number(), z.string()]),
 });
 
 // ── Time Logging ─────────────────────────────────────────────────────────────
@@ -75,6 +93,7 @@ export const CreateLogSchema = z
     isBillable: z.boolean().default(true),
     aiUsed: z.boolean().default(false),
     notes: z.string().max(1000).nullable().optional(),
+    customFields: z.array(CustomFieldValueSchema).optional(),
   })
   .refine(
     (d) => d.hours != null || (d.startTime != null && d.endTime != null),
@@ -93,6 +112,16 @@ export const UpdateLogSchema = z.object({
   isBillable: z.boolean().optional(),
   aiUsed: z.boolean().optional(),
   notes: z.string().max(1000).nullable().optional(),
+  customFields: z.array(CustomFieldValueSchema).optional(),
+});
+
+// ── Report Sends ─────────────────────────────────────────────────────────────
+
+export const CreateReportSendSchema = z.object({
+  projectId: z.string().min(1),
+  from:      z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  to:        z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  format:    z.enum(["xlsx", "csv", "text", "markdown"]),
 });
 
 // ── Block Report ──────────────────────────────────────────────────────────────

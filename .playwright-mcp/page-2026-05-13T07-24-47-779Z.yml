@@ -1,0 +1,180 @@
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - generic:
+            - img
+          - generic: Smart Logger
+        - navigation:
+          - generic:
+            - paragraph: MAIN
+            - generic:
+              - link:
+                - /url: /dashboard
+                - img
+                - text: Dashboard
+              - link:
+                - /url: /logs
+                - img
+                - text: My Logs
+          - generic:
+            - paragraph: PROJECTS
+            - generic:
+              - link:
+                - /url: /projects
+                - img
+                - text: All Projects
+          - generic:
+            - paragraph: REPORTS
+            - generic:
+              - link:
+                - /url: /reports/summary
+                - img
+                - text: Summary
+              - link:
+                - /url: /reports/team
+                - img
+                - text: Team Overview
+              - link:
+                - /url: /reports/block-generator
+                - img
+                - text: Block Generator
+              - link:
+                - /url: /reports/ai-summary
+                - img
+                - text: AI Summary
+          - generic:
+            - paragraph: ADMIN
+            - generic:
+              - link:
+                - /url: /admin/users
+                - img
+                - text: Users
+              - link:
+                - /url: /admin/custom-fields
+                - img
+                - text: Custom Fields
+        - generic:
+          - generic:
+            - generic:
+              - generic: S
+            - generic:
+              - paragraph: Saniyaj Mallik
+              - generic: admin
+          - generic:
+            - generic:
+              - link:
+                - /url: /profile
+                - button:
+                  - img
+              - button:
+                - img
+            - button:
+              - img
+    - main:
+      - generic:
+        - generic:
+          - generic:
+            - generic:
+              - heading [level=1]: Custom Fields
+              - paragraph: Define extra fields users can fill in when logging time
+          - generic:
+            - button:
+              - img
+              - text: New Field
+          - generic:
+            - generic:
+              - table:
+                - rowgroup:
+                  - row:
+                    - columnheader: Label
+                    - columnheader: Type
+                    - columnheader: Unit
+                    - columnheader: Status
+                    - columnheader: Uses
+                    - columnheader
+                - rowgroup:
+                  - row:
+                    - cell: test field
+                    - cell: Number
+                    - cell: —
+                    - cell: Active
+                    - cell: "1"
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button:
+                          - img
+          - generic:
+            - heading [level=2]: Field Analytics
+            - paragraph: Usage statistics across all time log entries
+            - generic:
+              - generic:
+                - generic:
+                  - generic:
+                    - img
+                    - text: test field
+                  - generic: Number
+                - generic:
+                  - generic:
+                    - generic:
+                      - generic: "1"
+                      - generic: 8% of 12 logs
+                    - paragraph: total uses
+                  - generic:
+                    - generic:
+                      - text: Total
+                      - paragraph: "5"
+                    - generic:
+                      - text: Average
+                      - paragraph: "5"
+                    - generic:
+                      - text: Min
+                      - paragraph: "5"
+                    - generic:
+                      - text: Max
+                      - paragraph: "5"
+                  - generic:
+                    - button:
+                      - img
+                      - text: View Detailed Report
+  - alert
+  - dialog "test field" [ref=e145]:
+    - button "Close" [active] [ref=e146] [cursor=pointer]:
+      - img [ref=e147]
+      - generic [ref=e150]: Close
+    - generic [ref=e151]:
+      - generic [ref=e152]:
+        - img [ref=e153]
+        - heading "test field" [level=2] [ref=e156]
+        - generic [ref=e157]: Number
+      - paragraph [ref=e158]: Detailed field report
+      - generic [ref=e159]:
+        - textbox [ref=e160]: 2026-04-14
+        - generic [ref=e161]: to
+        - textbox [ref=e162]: 2026-05-13
+        - button "Apply" [ref=e163] [cursor=pointer]
+    - generic [ref=e164]:
+      - generic [ref=e165]:
+        - heading "Overview" [level=3] [ref=e166]
+        - generic [ref=e167]:
+          - generic [ref=e168]:
+            - paragraph [ref=e169]: Total Uses
+            - paragraph [ref=e170]: "0"
+          - generic [ref=e171]:
+            - paragraph [ref=e172]: "% of All Logs"
+            - paragraph [ref=e173]: 0%
+      - generic [ref=e174]:
+        - heading "Daily Usage" [level=3] [ref=e175]
+        - generic [ref=e177]: No data for this period
+      - generic [ref=e178]:
+        - heading "By User" [level=3] [ref=e179]
+        - paragraph [ref=e180]: No data
+      - generic [ref=e181]:
+        - heading "By Project" [level=3] [ref=e182]
+        - paragraph [ref=e183]: No data
+      - generic [ref=e184]:
+        - heading "Recent Entries" [level=3] [ref=e185]
+        - paragraph [ref=e186]: No entries in this period

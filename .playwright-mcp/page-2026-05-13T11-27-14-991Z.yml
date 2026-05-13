@@ -1,0 +1,118 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: GENERAL
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+              - link "All Projects" [ref=e25] [cursor=pointer]:
+                - /url: /projects
+                - img [ref=e26]
+                - text: All Projects
+          - generic [ref=e80]:
+            - paragraph [ref=e81]: SME
+            - generic [ref=e82]:
+              - link "Summary" [ref=e83] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e84]
+                - text: Summary
+              - link "Team Overview" [ref=e86] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e87]
+                - text: Team Overview
+              - link "Block Generator" [ref=e92] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e93]
+                - text: Block Generator
+              - link "Send History" [ref=e96] [cursor=pointer]:
+                - /url: /reports/send-history
+                - img [ref=e97]
+                - text: Send History
+              - link "AI Summary" [ref=e101] [cursor=pointer]:
+                - /url: /reports/ai-summary
+                - img [ref=e102]
+                - text: AI Summary
+          - generic [ref=e105]:
+            - paragraph [ref=e106]: ADMIN
+            - generic [ref=e107]:
+              - link "Users" [ref=e108] [cursor=pointer]:
+                - /url: /admin/users
+                - img [ref=e109]
+                - text: Users
+              - link "Custom Fields" [ref=e121] [cursor=pointer]:
+                - /url: /admin/custom-fields
+                - img [ref=e122]
+                - text: Custom Fields
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e31]: S
+            - generic [ref=e32]:
+              - paragraph [ref=e123]: Saniyaj Mallik
+              - generic [ref=e33]: admin
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - link [ref=e36] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e37]:
+                  - img
+              - button [ref=e38] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e39] [cursor=pointer]:
+              - img
+    - main [ref=e40]:
+      - generic [ref=e42]:
+        - generic [ref=e44]:
+          - heading "Block Report Generator" [level=1] [ref=e45]
+          - paragraph [ref=e46]: Generate a formatted time report ready to download or share
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - img [ref=e160]
+                - generic [ref=e52]: Project & Dates
+              - img [ref=e53]
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - img [ref=e186]
+                - generic [ref=e58]: Select Tasks
+              - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: "3"
+              - generic [ref=e64]: Download Report
+          - generic [ref=e66]:
+            - generic [ref=e188]:
+              - generic [ref=e189]:
+                - text: Format
+                - generic [ref=e190]:
+                  - generic [ref=e191] [cursor=pointer]:
+                    - radio "Excel (XLSX)" [checked] [ref=e192]
+                    - text: Excel (XLSX)
+                  - generic [ref=e193] [cursor=pointer]:
+                    - radio "CSV" [ref=e194]
+                    - text: CSV
+                  - generic [ref=e195] [cursor=pointer]:
+                    - radio "Plain Text" [ref=e196]
+                    - text: Plain Text
+                  - generic [ref=e197] [cursor=pointer]:
+                    - radio "Markdown" [ref=e198]
+                    - text: Markdown
+                - paragraph [ref=e199]: Preview shows CSV — downloads as .xlsx
+              - generic [ref=e201]: date,project,task,estimated_hours,hours,billable,ai_used,notes
+            - generic [ref=e79]:
+              - button "← Back" [ref=e184] [cursor=pointer]
+              - button "Download XLSX" [active] [ref=e203] [cursor=pointer]:
+                - img
+                - text: Download XLSX
+  - alert [ref=e149]

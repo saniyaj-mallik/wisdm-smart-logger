@@ -4,6 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import TimeEntry from "@/models/TimeEntry";
 import "@/models/Project";
 import "@/models/Task";
+import "@/models/CustomField";
 import { UpdateLogSchema } from "@/lib/zod-schemas";
 import { computeHours, stripTime } from "@/lib/time-utils";
 
@@ -19,6 +20,7 @@ export async function GET(
     .populate("projectId", "name")
     .populate("taskId", "name")
     .populate("userId", "name email")
+    .populate("customFields.fieldId", "label type unit")
     .lean();
 
   if (!entry) return NextResponse.json({ error: "Not found" }, { status: 404 });

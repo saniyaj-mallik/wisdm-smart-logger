@@ -1,0 +1,148 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e10]: Smart Logger
+      - navigation [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: GENERAL
+          - generic [ref=e14]:
+            - link "Dashboard" [ref=e15] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e16]
+              - text: Dashboard
+            - link "My Logs" [ref=e21] [cursor=pointer]:
+              - /url: /logs
+              - img [ref=e22]
+              - text: My Logs
+            - link "All Projects" [ref=e25] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e26]
+              - text: All Projects
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e31]: U
+          - generic [ref=e32]:
+            - paragraph
+            - generic [ref=e33]: dev
+        - generic [ref=e34]:
+          - generic [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: /profile
+              - button [ref=e37]:
+                - img
+            - button [ref=e38] [cursor=pointer]:
+              - img
+          - button "Toggle theme" [ref=e39] [cursor=pointer]:
+            - img
+  - main [ref=e40]:
+    - generic [ref=e42]:
+      - generic [ref=e44]:
+        - heading "Projects" [level=1] [ref=e45]
+        - paragraph [ref=e46]: All projects and their tasks
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - img
+          - textbox "Search projects…" [ref=e49]
+        - generic [ref=e50]:
+          - button "All" [ref=e51] [cursor=pointer]
+          - button "Active" [ref=e52] [cursor=pointer]
+          - button "Archived" [ref=e53] [cursor=pointer]
+        - generic [ref=e54]: 6 projects
+        - button "New Project" [ref=e55] [cursor=pointer]:
+          - img
+          - text: New Project
+      - generic [ref=e58]:
+        - link "dd Add to favorites Active 1 task" [ref=e59] [cursor=pointer]:
+          - /url: /projects/69fd9455c40ba84a762dcc3b
+          - generic [ref=e60]:
+            - generic [ref=e62]:
+              - heading "dd" [level=3] [ref=e64]
+              - button "Add to favorites" [ref=e65]:
+                - img [ref=e66]
+            - generic [ref=e68]:
+              - generic [ref=e69]: Active
+              - generic [ref=e70]:
+                - img [ref=e71]
+                - text: 1 task
+        - link "ldgr-plugin Add to favorites WisdmLabs Active 300h 5 tasks" [ref=e74] [cursor=pointer]:
+          - /url: /projects/69fc45200697be4dce55ea43
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - generic [ref=e77]:
+                - heading "ldgr-plugin" [level=3] [ref=e80]
+                - button "Add to favorites" [ref=e81]:
+                  - img [ref=e82]
+              - paragraph [ref=e84]: WisdmLabs
+            - generic [ref=e85]:
+              - generic [ref=e86]: Active
+              - generic [ref=e87]:
+                - img [ref=e88]
+                - text: 300h
+              - generic [ref=e91]:
+                - img [ref=e92]
+                - text: 5 tasks
+        - link "smart-logger-internal Add to favorites WisdmLabs Active 150h 1 task" [ref=e95] [cursor=pointer]:
+          - /url: /projects/69fc4551c10e106b8374784c
+          - generic [ref=e96]:
+            - generic [ref=e97]:
+              - generic [ref=e98]:
+                - heading "smart-logger-internal" [level=3] [ref=e101]
+                - button "Add to favorites" [ref=e102]:
+                  - img [ref=e103]
+              - paragraph [ref=e105]: WisdmLabs
+            - generic [ref=e106]:
+              - generic [ref=e107]: Active
+              - generic [ref=e108]:
+                - img [ref=e109]
+                - text: 150h
+              - generic [ref=e112]:
+                - img [ref=e113]
+                - text: 1 task
+        - link "two-lines-press Add to favorites Two Lines Press Active 200h 4 tasks" [ref=e116] [cursor=pointer]:
+          - /url: /projects/69fc451f0697be4dce55ea38
+          - generic [ref=e117]:
+            - generic [ref=e118]:
+              - generic [ref=e119]:
+                - heading "two-lines-press" [level=3] [ref=e121]
+                - button "Add to favorites" [ref=e122]:
+                  - img [ref=e123]
+              - paragraph [ref=e125]: Two Lines Press
+            - generic [ref=e126]:
+              - generic [ref=e127]: Active
+              - generic [ref=e128]:
+                - img [ref=e129]
+                - text: 200h
+              - generic [ref=e132]:
+                - img [ref=e133]
+                - text: 4 tasks
+        - link "upep.mx Add to favorites UPEP Active 500h 7 tasks" [ref=e136] [cursor=pointer]:
+          - /url: /projects/69fc451f0697be4dce55ea31
+          - generic [ref=e137]:
+            - generic [ref=e138]:
+              - generic [ref=e139]:
+                - heading "upep.mx" [level=3] [ref=e142]
+                - button "Add to favorites" [ref=e143]:
+                  - img [ref=e144]
+              - paragraph [ref=e146]: UPEP
+            - generic [ref=e147]:
+              - generic [ref=e148]: Active
+              - generic [ref=e149]:
+                - img [ref=e150]
+                - text: 500h
+              - generic [ref=e153]:
+                - img [ref=e154]
+                - text: 7 tasks
+        - link "wisdmlabs-internal Add to favorites Active 5 tasks" [ref=e157] [cursor=pointer]:
+          - /url: /projects/69fc451f0697be4dce55ea3d
+          - generic [ref=e158]:
+            - generic [ref=e160]:
+              - heading "wisdmlabs-internal" [level=3] [ref=e162]
+              - button "Add to favorites" [ref=e163]:
+                - img [ref=e164]
+            - generic [ref=e166]:
+              - generic [ref=e167]: Active
+              - generic [ref=e168]:
+                - img [ref=e169]
+                - text: 5 tasks

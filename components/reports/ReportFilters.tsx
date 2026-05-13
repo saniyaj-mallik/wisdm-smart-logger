@@ -4,6 +4,13 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 function getThisWeek() {
   const now = new Date();
@@ -59,13 +66,25 @@ const PRESETS = [
   { label: "Last Month", fn: getLastMonth },
 ];
 
+export interface UserOption {
+  id: string;
+  name: string;
+  email: string;
+}
+
 export function ReportFilters({
   defaultFrom,
   defaultTo,
+  users,
+  selectedUserId,
+  currentUserId,
   children,
 }: {
   defaultFrom: string;
   defaultTo: string;
+  users?: UserOption[];
+  selectedUserId?: string;
+  currentUserId?: string;
   children?: React.ReactNode;
 }) {
   const router = useRouter();
@@ -81,9 +100,41 @@ export function ReportFilters({
     router.push(`${pathname}?${params.toString()}`);
   }
 
+  function applyUser(uid: string) {
+    const params = new URLSearchParams(searchParams.toString());
+    if (uid === currentUserId) {
+      params.delete("userId");
+    } else {
+      params.set("userId", uid);
+    }
+    router.push(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <div className="flex flex-wrap items-end gap-3 pb-4 border-b border-border mb-6">
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
+        {users && users.length > 0 && (
+          <div className="space-y-1">
+            <Label className="text-xs">User</Label>
+            <Select
+              value={selectedUserId ?? currentUserId ?? ""}
+              onValueChange={applyUser}
+            >
+              <SelectTrigger className="h-8 text-sm w-44">
+                <SelectValue placeholder="Select user" />
+              </SelectTrigger>
+              <SelectContent>
+                {users.map((u) => (
+                  <SelectItem key={u.id} value={u.id}>
+                    {u.name}
+                    {u.id === currentUserId ? " (You)" : ""}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+
         <div className="space-y-1">
           <Label className="text-xs">From</Label>
           <Input
@@ -103,7 +154,9 @@ export function ReportFilters({
           />
         </div>
         <div className="flex items-end">
-          <Button size="sm" onClick={() => apply(from, to)}>Apply</Button>
+          <Button size="sm" onClick={() => apply(from, to)}>
+            Apply
+          </Button>
         </div>
       </div>
 

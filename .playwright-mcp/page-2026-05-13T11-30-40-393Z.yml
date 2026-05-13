@@ -1,0 +1,134 @@
+- generic [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: GENERAL
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+              - link "All Projects" [ref=e25] [cursor=pointer]:
+                - /url: /projects
+                - img [ref=e26]
+                - text: All Projects
+          - generic [ref=e81]:
+            - paragraph [ref=e82]: SME
+            - generic [ref=e83]:
+              - link "Summary" [ref=e84] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e85]
+                - text: Summary
+              - link "Team Overview" [ref=e87] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e88]
+                - text: Team Overview
+              - link "Block Generator" [ref=e93] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e94]
+                - text: Block Generator
+              - link "Send History" [ref=e97] [cursor=pointer]:
+                - /url: /reports/send-history
+                - img [ref=e98]
+                - text: Send History
+              - link "AI Summary" [ref=e102] [cursor=pointer]:
+                - /url: /reports/ai-summary
+                - img [ref=e103]
+                - text: AI Summary
+          - generic [ref=e106]:
+            - paragraph [ref=e107]: ADMIN
+            - generic [ref=e108]:
+              - link "Users" [ref=e109] [cursor=pointer]:
+                - /url: /admin/users
+                - img [ref=e110]
+                - text: Users
+              - link "Custom Fields" [ref=e122] [cursor=pointer]:
+                - /url: /admin/custom-fields
+                - img [ref=e123]
+                - text: Custom Fields
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - generic [ref=e31]: S
+            - generic [ref=e32]:
+              - paragraph [ref=e124]: Saniyaj Mallik
+              - generic [ref=e33]: admin
+          - generic [ref=e34]:
+            - generic [ref=e35]:
+              - link [ref=e36] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e37]:
+                  - img
+              - button [ref=e38] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e39] [cursor=pointer]:
+              - img
+    - main [ref=e40]:
+      - generic [ref=e42]:
+        - generic [ref=e44]:
+          - heading "Block Report Generator" [level=1] [ref=e45]
+          - paragraph [ref=e46]: Generate a formatted time report ready to download or share
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - generic [ref=e49]:
+              - generic [ref=e50]:
+                - generic [ref=e51]: "1"
+                - generic [ref=e52]: Project & Dates
+              - img [ref=e53]
+            - generic [ref=e55]:
+              - generic [ref=e56]:
+                - generic [ref=e57]: "2"
+                - generic [ref=e58]: Select Tasks
+              - img [ref=e59]
+            - generic [ref=e62]:
+              - generic [ref=e63]: "3"
+              - generic [ref=e64]: Download Report
+          - generic [ref=e66]:
+            - generic [ref=e67]:
+              - generic [ref=e68]:
+                - text: Select Project
+                - generic [ref=e69]:
+                  - button "dd" [active] [ref=e125] [cursor=pointer]:
+                    - generic [ref=e127]: dd
+                  - button "ldgr-plugin WisdmLabs" [ref=e128] [cursor=pointer]:
+                    - generic [ref=e131]: ldgr-plugin
+                    - paragraph [ref=e132]: WisdmLabs
+                  - button "smart-logger-internal WisdmLabs" [ref=e133] [cursor=pointer]:
+                    - generic [ref=e136]: smart-logger-internal
+                    - paragraph [ref=e137]: WisdmLabs
+                  - button "two-lines-press Two Lines Press" [ref=e138] [cursor=pointer]:
+                    - generic [ref=e140]: two-lines-press
+                    - paragraph [ref=e141]: Two Lines Press
+                  - button "upep.mx UPEP" [ref=e142] [cursor=pointer]:
+                    - generic [ref=e145]: upep.mx
+                    - paragraph [ref=e146]: UPEP
+                  - button "wisdmlabs-internal" [ref=e147] [cursor=pointer]:
+                    - generic [ref=e149]: wisdmlabs-internal
+              - generic [ref=e74]:
+                - text: Date Range
+                - generic [ref=e75]:
+                  - text: From
+                  - textbox [ref=e76]: 2026-05-15
+                  - paragraph [ref=e150]: Pre-filled from your last report (ended 2026-05-14)
+                - generic [ref=e77]:
+                  - text: To
+                  - textbox [ref=e78]: 2026-05-13
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - img [ref=e154]
+                - generic [ref=e157]: No block report has been sent for this project yet
+              - link "View history →" [ref=e159] [cursor=pointer]:
+                - /url: /reports/send-history
+            - generic [ref=e79]:
+              - button "Next" [disabled]:
+                - text: Next
+                - img
+  - alert [ref=e80]

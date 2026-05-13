@@ -1,21 +1,47 @@
 import { auth } from "@/lib/auth";
 import { connectDB } from "@/lib/mongodb";
 import TimeEntry from "@/models/TimeEntry";
-import Project from "@/models/Project";
+import User from "@/models/User";
 import { Types } from "mongoose";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { SummaryCards } from "@/components/reports/SummaryCards";
 import { ProjectBreakdownTable } from "@/components/reports/ProjectBreakdownTable";
 import { ReportFilters } from "@/components/reports/ReportFilters";
+import { SummaryCharts } from "@/components/reports/SummaryCharts";
 import { getWeekRange } from "@/lib/time-utils";
+
+function fillDailyData(
+  aggregated: { date: string; totalHours: number; billableHours: number }[],
+  from: string,
+  to: string
+) {
+  const map = new Map(aggregated.map((d) => [d.date, d]));
+  const result: { date: string; billableHours: number; nonBillableHours: number }[] = [];
+  const current = new Date(from + "T00:00:00");
+  const end = new Date(to + "T00:00:00");
+  while (current <= end) {
+    const key = current.toISOString().slice(0, 10);
+    const entry = map.get(key);
+    const total = Math.round((entry?.totalHours ?? 0) * 100) / 100;
+    const billable = Math.round((entry?.billableHours ?? 0) * 100) / 100;
+    result.push({
+      date: key,
+      billableHours: billable,
+      nonBillableHours: Math.round((total - billable) * 100) / 100,
+    });
+    current.setDate(current.getDate() + 1);
+  }
+  return result;
+}
 
 export default async function SummaryPage({
   searchParams,
 }: {
-  searchParams: { from?: string; to?: string };
+  searchParams: { from?: string; to?: string; userId?: string };
 }) {
   const session = await auth();
-  const userId = session!.user.id;
+  const currentUserId = session!.user.id;
+  const targetUserId = searchParams.userId ?? currentUserId;
 
   const defaultRange = getWeekRange();
   const from = searchParams.from ?? defaultRange.from.toISOString().slice(0, 10);
@@ -26,11 +52,11 @@ export default async function SummaryPage({
 
   await connectDB();
 
-  const [summaryResult, projectRows] = await Promise.all([
+  const [summaryResult, projectRows, dailyRows, allUsers] = await Promise.all([
     TimeEntry.aggregate([
       {
         $match: {
-          userId: new Types.ObjectId(userId),
+          userId: new Types.ObjectId(targetUserId),
           loggedAt: { $gte: new Date(from), $lte: toDate },
         },
       },
@@ -47,7 +73,7 @@ export default async function SummaryPage({
     TimeEntry.aggregate([
       {
         $match: {
-          userId: new Types.ObjectId(userId),
+          userId: new Types.ObjectId(targetUserId),
           loggedAt: { $gte: new Date(from), $lte: toDate },
         },
       },
@@ -70,6 +96,24 @@ export default async function SummaryPage({
       { $unwind: "$project" },
       { $sort: { totalHours: -1 } },
     ]),
+    TimeEntry.aggregate([
+      {
+        $match: {
+          userId: new Types.ObjectId(targetUserId),
+          loggedAt: { $gte: new Date(from), $lte: toDate },
+        },
+      },
+      {
+        $group: {
+          _id: { $dateToString: { format: "%Y-%m-%d", date: "$loggedAt" } },
+          totalHours:    { $sum: "$hours" },
+          billableHours: { $sum: { $cond: ["$isBillable", "$hours", 0] } },
+        },
+      },
+      { $sort: { _id: 1 } },
+      { $project: { date: "$_id", totalHours: 1, billableHours: 1, _id: 0 } },
+    ]),
+    User.find({ isActive: true }).select("_id name email").sort({ name: 1 }).lean(),
   ]);
 
   const row = summaryResult[0] ?? { totalHours: 0, billableHours: 0, aiHours: 0, entryCount: 0 };
@@ -97,12 +141,37 @@ export default async function SummaryPage({
     entryCount: r.entryCount,
   }));
 
+  const dailyData = fillDailyData(dailyRows, from, to);
+
+  const users = allUsers.map((u: { _id: unknown; name: string; email: string }) => ({
+    id: String(u._id),
+    name: u.name,
+    email: u.email,
+  }));
+
+  const selectedUser = users.find((u) => u.id === targetUserId);
+  const isViewingOther = targetUserId !== currentUserId;
+
   return (
     <div>
-      <PageHeader title="Summary" description="Your logged hours overview" />
-      <ReportFilters defaultFrom={from} defaultTo={to} />
+      <PageHeader
+        title="Summary"
+        description={
+          isViewingOther && selectedUser
+            ? `Viewing ${selectedUser.name}'s logged hours`
+            : "Your logged hours overview"
+        }
+      />
+      <ReportFilters
+        defaultFrom={from}
+        defaultTo={to}
+        users={users}
+        selectedUserId={targetUserId}
+        currentUserId={currentUserId}
+      />
       <div className="space-y-6">
         <SummaryCards data={stats} />
+        <SummaryCharts dailyData={dailyData} stats={stats} />
         <div>
           <h2 className="font-semibold text-sm mb-3">By Project</h2>
           <ProjectBreakdownTable rows={projectData} from={from} to={to} linkable />

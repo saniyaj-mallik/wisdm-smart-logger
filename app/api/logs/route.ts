@@ -4,6 +4,7 @@ import { connectDB } from "@/lib/mongodb";
 import TimeEntry from "@/models/TimeEntry";
 import "@/models/Project";
 import "@/models/Task";
+import "@/models/CustomField";
 import { CreateLogSchema } from "@/lib/zod-schemas";
 import { computeHours, stripTime } from "@/lib/time-utils";
 
@@ -40,6 +41,7 @@ export async function GET(req: Request) {
     .populate("projectId", "name")
     .populate("taskId", "name")
     .populate("userId", "name email")
+    .populate("customFields.fieldId", "label type unit")
     .lean();
 
   return NextResponse.json(entries);
@@ -73,6 +75,7 @@ export async function POST(req: Request) {
     isBillable: data.isBillable,
     aiUsed: data.aiUsed,
     notes: data.notes ?? null,
+    customFields: data.customFields ?? [],
   });
 
   return NextResponse.json(entry, { status: 201 });

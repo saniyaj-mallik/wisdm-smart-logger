@@ -1,0 +1,174 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - generic [ref=e5]:
+          - img [ref=e7]
+          - generic [ref=e10]: Smart Logger
+        - navigation [ref=e11]:
+          - generic [ref=e12]:
+            - paragraph [ref=e13]: MAIN
+            - generic [ref=e14]:
+              - link "Dashboard" [ref=e15] [cursor=pointer]:
+                - /url: /dashboard
+                - img [ref=e16]
+                - text: Dashboard
+              - link "My Logs" [ref=e21] [cursor=pointer]:
+                - /url: /logs
+                - img [ref=e22]
+                - text: My Logs
+          - generic [ref=e25]:
+            - paragraph [ref=e26]: PROJECTS
+            - link "All Projects" [ref=e28] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e29]
+              - text: All Projects
+          - generic [ref=e31]:
+            - paragraph [ref=e32]: REPORTS
+            - generic [ref=e33]:
+              - link "Summary" [ref=e34] [cursor=pointer]:
+                - /url: /reports/summary
+                - img [ref=e35]
+                - text: Summary
+              - link "Team Overview" [ref=e37] [cursor=pointer]:
+                - /url: /reports/team
+                - img [ref=e38]
+                - text: Team Overview
+              - link "Block Generator" [ref=e43] [cursor=pointer]:
+                - /url: /reports/block-generator
+                - img [ref=e44]
+                - text: Block Generator
+              - link "AI Summary" [ref=e47] [cursor=pointer]:
+                - /url: /reports/ai-summary
+                - img [ref=e48]
+                - text: AI Summary
+          - generic [ref=e51]:
+            - paragraph [ref=e52]: ADMIN
+            - generic [ref=e53]:
+              - link "Users" [ref=e54] [cursor=pointer]:
+                - /url: /admin/users
+                - img [ref=e55]
+                - text: Users
+              - link "Custom Fields" [ref=e67] [cursor=pointer]:
+                - /url: /admin/custom-fields
+                - img [ref=e68]
+                - text: Custom Fields
+        - generic [ref=e69]:
+          - generic [ref=e70]:
+            - generic [ref=e72]: U
+            - generic [ref=e73]:
+              - paragraph
+              - generic [ref=e74]: dev
+          - generic [ref=e75]:
+            - generic [ref=e76]:
+              - link [ref=e77] [cursor=pointer]:
+                - /url: /profile
+                - button [ref=e78]:
+                  - img
+              - button [ref=e79] [cursor=pointer]:
+                - img
+            - button "Toggle theme" [ref=e80] [cursor=pointer]:
+              - img
+    - main [ref=e81]:
+      - generic [ref=e83]:
+        - generic [ref=e85]:
+          - heading "Custom Fields" [level=1] [ref=e86]
+          - paragraph [ref=e87]: Define extra fields users can fill in when logging time
+        - button "New Field" [ref=e89] [cursor=pointer]:
+          - img
+          - text: New Field
+        - table [ref=e92]:
+          - rowgroup [ref=e93]:
+            - row "Label Type Unit Status Uses" [ref=e94]:
+              - columnheader "Label" [ref=e95]
+              - columnheader "Type" [ref=e96]
+              - columnheader "Unit" [ref=e97]
+              - columnheader "Status" [ref=e98]
+              - columnheader "Uses" [ref=e99]
+              - columnheader [ref=e100]
+          - rowgroup [ref=e101]:
+            - row "test field Number — Active 1" [ref=e102]:
+              - cell "test field" [ref=e103]
+              - cell "Number" [ref=e104]
+              - cell "—" [ref=e105]
+              - cell "Active" [ref=e106]
+              - cell "1" [ref=e107]
+              - cell [ref=e108]:
+                - generic [ref=e109]:
+                  - button [ref=e110] [cursor=pointer]:
+                    - img
+                  - button [ref=e111] [cursor=pointer]:
+                    - img
+            - row "AI Saved Time? Number — Active 2" [ref=e112]:
+              - cell "AI Saved Time?" [ref=e113]
+              - cell "Number" [ref=e114]
+              - cell "—" [ref=e115]
+              - cell "Active" [ref=e116]
+              - cell "2" [ref=e117]
+              - cell [ref=e118]:
+                - generic [ref=e119]:
+                  - button [ref=e120] [cursor=pointer]:
+                    - img
+                  - button [ref=e121] [cursor=pointer]:
+                    - img
+        - generic [ref=e122]:
+          - heading "Field Analytics" [level=2] [ref=e123]
+          - paragraph [ref=e124]: Usage statistics across all time log entries
+          - generic [ref=e125]:
+            - generic [ref=e126]:
+              - generic [ref=e127]:
+                - generic [ref=e128]:
+                  - img [ref=e129]
+                  - text: test field
+                - generic [ref=e132]: Number
+              - generic [ref=e133]:
+                - generic [ref=e134]:
+                  - generic [ref=e135]:
+                    - generic [ref=e136]: "1"
+                    - generic [ref=e137]: 8% of 13 logs
+                  - paragraph [ref=e140]: total uses
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - text: Total
+                    - paragraph [ref=e143]: "5"
+                  - generic [ref=e144]:
+                    - text: Average
+                    - paragraph [ref=e145]: "5"
+                  - generic [ref=e146]:
+                    - text: Min
+                    - paragraph [ref=e147]: "5"
+                  - generic [ref=e148]:
+                    - text: Max
+                    - paragraph [ref=e149]: "5"
+                - button "View Detailed Report" [ref=e151] [cursor=pointer]:
+                  - img
+                  - text: View Detailed Report
+            - generic [ref=e152]:
+              - generic [ref=e153]:
+                - generic [ref=e154]:
+                  - img [ref=e155]
+                  - text: AI Saved Time?
+                - generic [ref=e158]: Number
+              - generic [ref=e159]:
+                - generic [ref=e160]:
+                  - generic [ref=e161]:
+                    - generic [ref=e162]: "2"
+                    - generic [ref=e163]: 15% of 13 logs
+                  - paragraph [ref=e166]: total uses
+                - generic [ref=e167]:
+                  - generic [ref=e168]:
+                    - text: Total
+                    - paragraph [ref=e169]: "1.82"
+                  - generic [ref=e170]:
+                    - text: Average
+                    - paragraph [ref=e171]: "1.82"
+                  - generic [ref=e172]:
+                    - text: Min
+                    - paragraph [ref=e173]: "1.82"
+                  - generic [ref=e174]:
+                    - text: Max
+                    - paragraph [ref=e175]: "1.82"
+                - button "View Detailed Report" [ref=e177] [cursor=pointer]:
+                  - img
+                  - text: View Detailed Report
+  - alert [ref=e178]

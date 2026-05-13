@@ -1,0 +1,73 @@
+- generic [ref=e2]:
+  - complementary [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]:
+        - img [ref=e7]
+        - generic [ref=e10]: Smart Logger
+      - navigation [ref=e11]:
+        - generic [ref=e12]:
+          - paragraph [ref=e13]: GENERAL
+          - generic [ref=e14]:
+            - link "Dashboard" [ref=e15] [cursor=pointer]:
+              - /url: /dashboard
+              - img [ref=e16]
+              - text: Dashboard
+            - link "My Logs" [ref=e21] [cursor=pointer]:
+              - /url: /logs
+              - img [ref=e22]
+              - text: My Logs
+            - link "All Projects" [ref=e25] [cursor=pointer]:
+              - /url: /projects
+              - img [ref=e26]
+              - text: All Projects
+      - generic [ref=e28]:
+        - generic [ref=e29]:
+          - generic [ref=e31]: U
+          - generic [ref=e32]:
+            - paragraph
+            - generic [ref=e33]: dev
+        - generic [ref=e34]:
+          - generic [ref=e35]:
+            - link [ref=e36] [cursor=pointer]:
+              - /url: /profile
+              - button [ref=e37]:
+                - img
+            - button [ref=e38] [cursor=pointer]:
+              - img
+          - button "Toggle theme" [ref=e39] [cursor=pointer]:
+            - img
+  - main [ref=e40]:
+    - generic [ref=e42]:
+      - generic [ref=e44]:
+        - heading "Block Report Generator" [level=1] [ref=e45]
+        - paragraph [ref=e46]: Generate a formatted time report ready to download or share
+      - generic [ref=e47]:
+        - generic [ref=e48]:
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - generic [ref=e51]: "1"
+              - generic [ref=e52]: Project & Dates
+            - img [ref=e53]
+          - generic [ref=e55]:
+            - generic [ref=e56]:
+              - generic [ref=e57]: "2"
+              - generic [ref=e58]: Select Tasks
+            - img [ref=e59]
+          - generic [ref=e62]:
+            - generic [ref=e63]: "3"
+            - generic [ref=e64]: Download Report
+        - generic [ref=e66]:
+          - generic [ref=e67]:
+            - generic [ref=e68]: Select Project
+            - generic [ref=e74]:
+              - text: Date Range
+              - generic [ref=e75]:
+                - text: From
+                - textbox [ref=e76]: 2026-05-11
+              - generic [ref=e77]:
+                - text: To
+                - textbox [ref=e78]: 2026-05-13
+          - generic [ref=e79]:
+            - button "Next" [disabled]:
+              - text: Next
+              - img
