@@ -464,7 +464,7 @@ export function LogTimeModal({
                   <Select value={String(minutesNum)} onValueChange={(v) => setMinutesNum(Number(v))}>
                     <SelectTrigger><SelectValue /></SelectTrigger>
                     <SelectContent>
-                      {[0, 15, 30, 45].map((m) => (
+                      {Array.from({ length: 12 }, (_, i) => i * 5).map((m) => (
                         <SelectItem key={m} value={String(m)}>{String(m).padStart(2, "0")}m</SelectItem>
                       ))}
                     </SelectContent>
