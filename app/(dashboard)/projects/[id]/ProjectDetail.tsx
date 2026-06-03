@@ -49,7 +49,7 @@ interface Project {
 
 interface ReportSendEntry {
   _id: string;
-  sentAt: string;
+  sentAt: string | null;
   sentBy?: { name: string };
 }
 
@@ -290,13 +290,14 @@ export function ProjectDetail({
 
 // ── Report Schedule helpers ───────────────────────────────────────────────────
 
-function parseDateStr(dateStr: string): Date {
+function parseDateStr(dateStr: string | null | undefined): Date {
+  if (!dateStr) return new Date(0);
   const d = dateStr.slice(0, 10);
   const [y, m, day] = d.split("-").map(Number);
   return new Date(y, m - 1, day);
 }
 
-function daysUntilNext(sentAt: string, frequencyDays: number): number {
+function daysUntilNext(sentAt: string | null, frequencyDays: number): number {
   const last = parseDateStr(sentAt);
   const nextDue = new Date(last);
   nextDue.setDate(nextDue.getDate() + frequencyDays);
@@ -305,18 +306,18 @@ function daysUntilNext(sentAt: string, frequencyDays: number): number {
   return Math.ceil((nextDue.getTime() - today.getTime()) / 86400000);
 }
 
-function addDays(dateStr: string, days: number): string {
+function addDays(dateStr: string | null, days: number): string {
   const d = parseDateStr(dateStr);
   d.setDate(d.getDate() + days);
   return d.toISOString().slice(0, 10);
 }
 
-function formatDateDisplay(dateStr: string): string {
+function formatDateDisplay(dateStr: string | null): string {
   const d = parseDateStr(dateStr);
   return d.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-function relativeDateDisplay(dateStr: string): string {
+function relativeDateDisplay(dateStr: string | null): string {
   const today = new Date(); today.setHours(0, 0, 0, 0);
   const d = parseDateStr(dateStr);
   const diff = Math.round((today.getTime() - d.getTime()) / 86400000);
@@ -410,7 +411,7 @@ function ReportScheduleSection({ projectId, initialFrequencyDays }: {
   useEffect(() => {
     fetch(`/api/report-sends?projectId=${projectId}`)
       .then((r) => r.json())
-      .then((data) => setSends(Array.isArray(data) ? data : []))
+      .then((data) => setSends(Array.isArray(data) ? data.filter((s: ReportSendEntry) => s.sentAt) : []))
       .catch(() => setSends([]))
       .finally(() => setLoading(false));
   }, [projectId]);
