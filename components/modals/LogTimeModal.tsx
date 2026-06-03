@@ -58,7 +58,8 @@ export function LogTimeModal({
   const [taskId, setTaskId]         = useState(defaultTaskId ?? "");
   const [date, setDate]             = useState(defaultDate ?? todayString());
   const [timeMode, setTimeMode]     = useState<TimeMode>("hours");
-  const [hours, setHours]           = useState("");
+  const [hoursNum, setHoursNum]     = useState(0);
+  const [minutesNum, setMinutesNum] = useState(0);
   const [startTime, setStartTime]   = useState("");
   const [endTime, setEndTime]       = useState("");
   const [isBillable, setIsBillable] = useState(true);
@@ -220,7 +221,7 @@ export function LogTimeModal({
     setProjectId(defaultProjectId ?? "");
     setTaskId(defaultTaskId ?? "");
     setDate(defaultDate ?? todayString());
-    setTimeMode("hours"); setHours("");
+    setTimeMode("hours"); setHoursNum(0); setMinutesNum(0);
     setStartTime(""); setEndTime("");
     setIsBillable(true); setAiUsed(false); setNotes(""); setError("");
     setFieldStates({});
@@ -244,8 +245,8 @@ export function LogTimeModal({
     };
 
     if (timeMode === "hours") {
-      const h = parseFloat(hours);
-      if (isNaN(h) || h <= 0) { setError("Enter a valid number of hours"); return; }
+      const h = hoursNum + minutesNum / 60;
+      if (h <= 0) { setError("Select at least 15 minutes"); return; }
       body.hours = h;
     } else {
       if (!startTime || !endTime) { setError("Enter both start and end times"); return; }
@@ -446,8 +447,30 @@ export function LogTimeModal({
               </Button>
             </div>
             {timeMode === "hours" ? (
-              <Input type="number" step="0.01" min="0.01" max="24" placeholder="e.g. 2.5"
-                value={hours} onChange={(e) => setHours(e.target.value)} />
+              <div className="flex gap-2">
+                <div className="flex-1 space-y-1">
+                  <span className="text-xs text-muted-foreground">Hours</span>
+                  <Select value={String(hoursNum)} onValueChange={(v) => setHoursNum(Number(v))}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {Array.from({ length: 24 }, (_, i) => (
+                        <SelectItem key={i} value={String(i)}>{i}h</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="flex-1 space-y-1">
+                  <span className="text-xs text-muted-foreground">Minutes</span>
+                  <Select value={String(minutesNum)} onValueChange={(v) => setMinutesNum(Number(v))}>
+                    <SelectTrigger><SelectValue /></SelectTrigger>
+                    <SelectContent>
+                      {[0, 15, 30, 45].map((m) => (
+                        <SelectItem key={m} value={String(m)}>{String(m).padStart(2, "0")}m</SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
             ) : (
               <div className="space-y-1">
                 <div className="flex items-end gap-2">
