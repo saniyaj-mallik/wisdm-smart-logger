@@ -29,7 +29,7 @@ export async function PATCH(req: NextRequest) {
     );
     if (!valid)
       return NextResponse.json(
-        { error: { currentPassword: ["Incorrect password"] } },
+        { error: { fieldErrors: { currentPassword: ["Incorrect password"] } } },
         { status: 400 }
       );
     user.passwordHash = await bcrypt.hash(parsed.data.newPassword, 12);
