@@ -190,18 +190,6 @@ export default async function AISummaryPage({
     ]),
   ]);
 
-  // ── process users ─────────────────────────────────────────────────────────
-  const users = userRows.map((r) => ({
-    userId: String(r._id),
-    name: r.user?.name ?? "Unknown",
-    role: r.user?.role ?? "dev",
-    totalHours: r2(r.totalHours ?? 0),
-    aiHours: r2(r.aiHours ?? 0),
-    totalEntries: r.totalEntries as number,
-    aiEntries: r.aiEntries as number,
-    savedHours: r2(r.savedHours ?? 0),
-  }));
-
   // ── process tasks ─────────────────────────────────────────────────────────
   const tasks = taskRows.map((r) => {
     const avgWithAI = r.aiEntries > 0 ? r2(r.aiHoursSum / r.aiEntries) : null;
@@ -238,6 +226,50 @@ export default async function AISummaryPage({
       savedHours,
       savedPct,
       vsEstimatePct,
+    };
+  });
+
+  // ── aggregate task-level AI savings per user (fallback when no estimatedHours) ──
+  const taskSavingsPerUser = new Map<string, number>();
+  for (const t of tasks) {
+    if (t.savedHours !== null && t.savedHours > 0) {
+      taskSavingsPerUser.set(t.userId, r2((taskSavingsPerUser.get(t.userId) ?? 0) + t.savedHours));
+    }
+  }
+
+  // ── process users ─────────────────────────────────────────────────────────
+  const users = userRows.map((r) => {
+    const uid = String(r._id);
+    const totalH = r2(r.totalHours ?? 0);
+    const aiH = r2(r.aiHours ?? 0);
+    const nonAiH = r2(totalH - aiH);
+    const aiE = r.aiEntries as number;
+    const totalE = r.totalEntries as number;
+    const nonAiE = totalE - aiE;
+
+    // 1st priority: estimate-based savings from MongoDB aggregate
+    const estimateSaved = r2(r.savedHours ?? 0);
+    // 2nd priority: task-level AI vs non-AI savings aggregated per user
+    const taskSaved = taskSavingsPerUser.get(uid) ?? 0;
+    // 3rd priority: user-level AI vs non-AI average comparison
+    let userLevelSaved = 0;
+    if (aiE > 0 && nonAiE > 0 && nonAiH > 0) {
+      const avgAiPerEntry = aiH / aiE;
+      const avgNonAiPerEntry = nonAiH / nonAiE;
+      if (avgNonAiPerEntry > avgAiPerEntry) {
+        userLevelSaved = r2((avgNonAiPerEntry - avgAiPerEntry) * aiE);
+      }
+    }
+
+    return {
+      userId: uid,
+      name: r.user?.name ?? "Unknown",
+      role: r.user?.role ?? "dev",
+      totalHours: totalH,
+      aiHours: aiH,
+      totalEntries: totalE,
+      aiEntries: aiE,
+      savedHours: r2(Math.max(estimateSaved, taskSaved, userLevelSaved)),
     };
   });
 
