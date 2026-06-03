@@ -72,7 +72,7 @@ export function AddMemberModal({ teamId, currentMemberIds, leaderId, open, onOpe
       setError(json.error ?? "Something went wrong");
     } else {
       onAdded(json);
-      onOpenChange(false);
+      setUsers((prev) => prev.filter((u) => u._id !== userId));
     }
     setAdding(null);
   }
