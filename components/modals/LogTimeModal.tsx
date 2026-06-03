@@ -449,10 +449,18 @@ export function LogTimeModal({
               <Input type="number" step="0.01" min="0.01" max="24" placeholder="e.g. 2.5"
                 value={hours} onChange={(e) => setHours(e.target.value)} />
             ) : (
-              <div className="flex gap-2">
-                <Input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} placeholder="HH:MM" />
-                <span className="self-center text-muted-foreground text-sm">to</span>
-                <Input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} placeholder="HH:MM" />
+              <div className="space-y-1">
+                <div className="flex items-end gap-2">
+                  <div className="flex-1 space-y-1">
+                    <span className="text-xs text-muted-foreground">Start (HH:MM)</span>
+                    <Input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)} />
+                  </div>
+                  <span className="pb-2 text-muted-foreground text-sm">to</span>
+                  <div className="flex-1 space-y-1">
+                    <span className="text-xs text-muted-foreground">End (HH:MM)</span>
+                    <Input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)} />
+                  </div>
+                </div>
               </div>
             )}
           </div>
