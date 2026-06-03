@@ -38,12 +38,15 @@ interface EditProjectModalProps {
   onOpenChange: (open: boolean) => void;
 }
 
+const DESC_MAX = 500;
+
 export function EditProjectModal({ project, open, onOpenChange }: EditProjectModalProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<Record<string, string[]>>({});
   const [archiveOpen, setArchiveOpen] = useState(false);
   const [color, setColor] = useState<string | null>(project.color ?? null);
+  const [desc, setDesc] = useState(project.description ?? "");
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -103,8 +106,20 @@ export function EditProjectModal({ project, open, onOpenChange }: EditProjectMod
               <Input id="ep-budget" name="budgetHours" type="number" min="1" step="0.5" defaultValue={project.budgetHours ?? ""} />
             </div>
             <div className="space-y-1.5">
-              <Label htmlFor="ep-desc">Description</Label>
-              <Textarea id="ep-desc" name="description" rows={2} defaultValue={project.description ?? ""} />
+              <div className="flex items-center justify-between">
+                <Label htmlFor="ep-desc">Description</Label>
+                <span className={cn("text-xs", desc.length > DESC_MAX ? "text-destructive" : "text-muted-foreground")}>
+                  {desc.length} / {DESC_MAX}
+                </span>
+              </div>
+              <Textarea
+                id="ep-desc"
+                name="description"
+                rows={2}
+                maxLength={DESC_MAX}
+                value={desc}
+                onChange={(e) => setDesc(e.target.value)}
+              />
             </div>
             <div className="space-y-1.5">
               <Label>Project color</Label>
