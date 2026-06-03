@@ -428,6 +428,7 @@ export function LogTimeModal({
               value={date}
               onChange={(e) => setDate(e.target.value)}
               required
+              className="w-44"
             />
           </div>
 
