@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Copy, Check, Key, RefreshCw, Trash2, Loader2 } from "lucide-react";
+import { Copy, Check, Key, RefreshCw, Trash2, Loader2, Terminal, FileJson } from "lucide-react";
 
 const MCP_URL = "https://wisdm-smart-logger.vercel.app/api/mcp";
 
@@ -113,15 +113,25 @@ export function McpIntegrationCard() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-base flex items-center gap-2">
-          <Key className="h-4 w-4" />
-          Claude MCP Integration
-        </CardTitle>
-        <CardDescription>
-          Connect Claude to Smart Logger — log time, query projects, and pull
-          reports via AI.
-        </CardDescription>
+      <CardHeader className="pb-3">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <CardTitle className="text-sm font-semibold flex items-center gap-2 text-muted-foreground uppercase tracking-wide">
+              <Key className="h-3.5 w-3.5" />
+              Claude MCP Integration
+            </CardTitle>
+            <CardDescription className="mt-1">
+              Connect Claude to Smart Logger — log time, query projects, and pull
+              reports via AI.
+            </CardDescription>
+          </div>
+          {(status === "exists" || status === "revealed") && (
+            <span className="flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-800 px-2.5 py-1 rounded-full flex-shrink-0">
+              <span className="h-1.5 w-1.5 rounded-full bg-green-500 animate-pulse" />
+              Connected
+            </span>
+          )}
+        </div>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -155,31 +165,22 @@ export function McpIntegrationCard() {
             </div>
 
             <div className="space-y-1.5">
-              <p className="text-xs font-medium text-foreground">
-                Paste into your{" "}
-                <code className="bg-muted px-1 rounded">
-                  claude_desktop_config.json
-                </code>
-                , then replace{" "}
-                <code className="bg-muted px-1 rounded">YOUR_API_KEY</code>{" "}
-                with your saved key:
+              <p className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                <FileJson className="h-3.5 w-3.5 text-muted-foreground" />
+                Claude Desktop —{" "}
+                <code className="bg-muted px-1 rounded font-mono">claude_desktop_config.json</code>
               </p>
               <ConfigSnippet apiKey="YOUR_API_KEY" />
               <p className="text-xs text-muted-foreground">
-                On macOS:{" "}
-                <code className="bg-muted px-1 rounded">
-                  ~/Library/Application Support/Claude/claude_desktop_config.json
-                </code>
-                <br />
-                On Windows:{" "}
-                <code className="bg-muted px-1 rounded">
-                  %APPDATA%\Claude\claude_desktop_config.json
-                </code>
+                Replace <code className="bg-muted px-1 rounded">YOUR_API_KEY</code> with your saved key.
+                macOS: <code className="bg-muted px-1 rounded">~/Library/Application Support/Claude/</code>
+                &nbsp;· Windows: <code className="bg-muted px-1 rounded">%APPDATA%\Claude\</code>
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <p className="text-xs font-medium text-foreground">
+              <p className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                <Terminal className="h-3.5 w-3.5 text-muted-foreground" />
                 Or add via Claude Code CLI:
               </p>
               <CliSnippet apiKey="YOUR_API_KEY" />
@@ -235,29 +236,21 @@ export function McpIntegrationCard() {
             </div>
 
             <div className="space-y-1.5">
-              <p className="text-xs font-medium text-foreground">
-                Paste into your{" "}
-                <code className="bg-muted px-1 rounded">
-                  claude_desktop_config.json
-                </code>
-                :
+              <p className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                <FileJson className="h-3.5 w-3.5 text-muted-foreground" />
+                Claude Desktop —{" "}
+                <code className="bg-muted px-1 rounded font-mono">claude_desktop_config.json</code>
               </p>
               <ConfigSnippet apiKey={fullKey} />
               <p className="text-xs text-muted-foreground">
-                On macOS:{" "}
-                <code className="bg-muted px-1 rounded">
-                  ~/Library/Application Support/Claude/claude_desktop_config.json
-                </code>
-                <br />
-                On Windows:{" "}
-                <code className="bg-muted px-1 rounded">
-                  %APPDATA%\Claude\claude_desktop_config.json
-                </code>
+                On macOS: <code className="bg-muted px-1 rounded">~/Library/Application Support/Claude/</code>
+                &nbsp;· Windows: <code className="bg-muted px-1 rounded">%APPDATA%\Claude\</code>
               </p>
             </div>
 
             <div className="space-y-1.5">
-              <p className="text-xs font-medium text-foreground">
+              <p className="text-xs font-medium text-foreground flex items-center gap-1.5">
+                <Terminal className="h-3.5 w-3.5 text-muted-foreground" />
                 Or add via Claude Code CLI:
               </p>
               <CliSnippet apiKey={fullKey} />
