@@ -8,6 +8,8 @@ export interface IUser extends Document {
   passwordHash: string;
   role: UserRole;
   isActive: boolean;
+  mcpApiKeyHash: string | null;
+  mcpApiKeyHint: string | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -29,6 +31,8 @@ const UserSchema = new Schema<IUser>(
       default: "dev",
     },
     isActive: { type: Boolean, default: true },
+    mcpApiKeyHash: { type: String, default: null },
+    mcpApiKeyHint: { type: String, default: null },
   },
   { timestamps: true }
 );
