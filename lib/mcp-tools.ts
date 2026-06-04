@@ -2,6 +2,7 @@ import { connectDB } from "@/lib/mongodb";
 import Project from "@/models/Project";
 import Task from "@/models/Task";
 import TimeEntry from "@/models/TimeEntry";
+import User from "@/models/User";
 import { Types } from "mongoose";
 import { stripTime } from "@/lib/time-utils";
 import type { AuthUser } from "@/lib/mcp-auth";
@@ -104,6 +105,39 @@ export function listTools() {
         required: ["logId"],
       },
     },
+    {
+      name: "create_task",
+      description:
+        "Create a new task inside a project. Use get_projects first to find the projectId.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          projectId:      { type: "string", description: "Project ID" },
+          name:           { type: "string", description: "Task name" },
+          estimatedHours: { type: "number", description: "Optional estimated hours" },
+          description:    { type: "string", description: "Optional task description" },
+        },
+        required: ["projectId", "name"],
+      },
+    },
+    {
+      name: "delete_log",
+      description:
+        "Delete one of your own time entries. Use get_my_logs to find the log id first.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          logId: { type: "string", description: "ID of the time entry to delete" },
+        },
+        required: ["logId"],
+      },
+    },
+    {
+      name: "get_users",
+      description:
+        "List all active users with their id, name, email, and role. Available to managers and admins only.",
+      inputSchema: { type: "object", properties: {}, required: [] },
+    },
   ];
 }
 
@@ -127,6 +161,12 @@ export async function callTool(
       return getSummary(args, user);
     case "update_log":
       return updateLog(args, user);
+    case "create_task":
+      return createTask(args, user);
+    case "delete_log":
+      return deleteLog(args, user);
+    case "get_users":
+      return getUsers(user);
     default:
       throw new Error(`Unknown tool: ${name}`);
   }
@@ -317,4 +357,69 @@ async function updateLog(
   await entry.save();
 
   return ok({ success: true, message: "Entry updated successfully." });
+}
+
+async function createTask(
+  args: Record<string, unknown>,
+  _user: AuthUser
+): Promise<ToolResult> {
+  const { projectId, name, estimatedHours, description } = args;
+  if (!projectId || !name) throw new Error("projectId and name are required");
+
+  await connectDB();
+  const existing = await Task.findOne({ projectId, name });
+  if (existing) throw new Error(`Task "${name}" already exists in this project`);
+
+  const task = await Task.create({
+    projectId:      new Types.ObjectId(projectId as string),
+    name:           name as string,
+    estimatedHours: estimatedHours != null ? (estimatedHours as number) : null,
+    description:    description != null ? (description as string) : null,
+    isActive:       true,
+  });
+
+  return ok({
+    id:      task._id.toString(),
+    name:    task.name,
+    message: `Task "${task.name}" created successfully.`,
+  });
+}
+
+async function deleteLog(
+  args: Record<string, unknown>,
+  user: AuthUser
+): Promise<ToolResult> {
+  const { logId } = args;
+  if (!logId) throw new Error("logId is required");
+
+  await connectDB();
+  const entry = await TimeEntry.findById(logId as string);
+  if (!entry) throw new Error(`Time entry not found: ${logId}`);
+  if (entry.userId.toString() !== user._id) {
+    throw new Error("Not authorized to delete this entry");
+  }
+
+  await entry.deleteOne();
+  return ok({ success: true, message: "Time entry deleted successfully." });
+}
+
+async function getUsers(user: AuthUser): Promise<ToolResult> {
+  if (!["manager", "admin"].includes(user.role)) {
+    throw new Error("Access denied: only managers and admins can list users");
+  }
+
+  await connectDB();
+  const users = await User.find({ isActive: true })
+    .select("_id name email role")
+    .sort({ name: 1 })
+    .lean();
+
+  return ok(
+    users.map((u) => ({
+      id:    u._id.toString(),
+      name:  u.name,
+      email: u.email,
+      role:  u.role,
+    }))
+  );
 }

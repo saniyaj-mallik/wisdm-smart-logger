@@ -30,6 +30,21 @@ function CopyButton({ text, className }: { text: string; className?: string }) {
   );
 }
 
+function CliSnippet({ apiKey }: { apiKey: string }) {
+  const cmd = `claude mcp add --transport http smart-logger ${MCP_URL} --header "Authorization: Bearer ${apiKey}"`;
+  return (
+    <div className="relative">
+      <pre className="rounded-md bg-muted p-3 pr-8 text-xs overflow-x-auto font-mono leading-relaxed whitespace-pre-wrap break-all">
+        {cmd}
+      </pre>
+      <CopyButton
+        text={cmd}
+        className="absolute top-2 right-2 p-1.5 rounded hover:bg-accent"
+      />
+    </div>
+  );
+}
+
 function ConfigSnippet({ apiKey }: { apiKey: string }) {
   const config = JSON.stringify(
     {
@@ -163,9 +178,16 @@ export function McpIntegrationCard() {
               </p>
             </div>
 
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-foreground">
+                Or add via Claude Code CLI:
+              </p>
+              <CliSnippet apiKey="YOUR_API_KEY" />
+            </div>
+
             <p className="text-xs text-amber-600 dark:text-amber-400">
               Don&apos;t have your key? Click Regenerate — you&apos;ll get a
-              fresh key with the full snippet pre-filled.
+              fresh key with all snippets pre-filled.
             </p>
 
             <div className="flex gap-2">
@@ -232,6 +254,13 @@ export function McpIntegrationCard() {
                   %APPDATA%\Claude\claude_desktop_config.json
                 </code>
               </p>
+            </div>
+
+            <div className="space-y-1.5">
+              <p className="text-xs font-medium text-foreground">
+                Or add via Claude Code CLI:
+              </p>
+              <CliSnippet apiKey={fullKey} />
             </div>
 
             <div className="flex gap-2 pt-1">
