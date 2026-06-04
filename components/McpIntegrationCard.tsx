@@ -140,23 +140,32 @@ export function McpIntegrationCard() {
             </div>
 
             <div className="space-y-1.5">
-              <p className="text-xs text-muted-foreground font-medium">
-                MCP server URL
-              </p>
-              <div className="flex items-center gap-2">
-                <code className="text-xs font-mono bg-muted px-2 py-1 rounded flex-1">
-                  {MCP_URL}
+              <p className="text-xs font-medium text-foreground">
+                Paste into your{" "}
+                <code className="bg-muted px-1 rounded">
+                  claude_desktop_config.json
                 </code>
-                <CopyButton
-                  text={MCP_URL}
-                  className="p-1.5 rounded hover:bg-accent flex-shrink-0"
-                />
-              </div>
+                , then replace{" "}
+                <code className="bg-muted px-1 rounded">YOUR_API_KEY</code>{" "}
+                with your saved key:
+              </p>
+              <ConfigSnippet apiKey="YOUR_API_KEY" />
+              <p className="text-xs text-muted-foreground">
+                On macOS:{" "}
+                <code className="bg-muted px-1 rounded">
+                  ~/Library/Application Support/Claude/claude_desktop_config.json
+                </code>
+                <br />
+                On Windows:{" "}
+                <code className="bg-muted px-1 rounded">
+                  %APPDATA%\Claude\claude_desktop_config.json
+                </code>
+              </p>
             </div>
 
-            <p className="text-xs text-muted-foreground">
-              The full key is not shown again. Regenerate to get a fresh key
-              with a ready-to-paste config snippet.
+            <p className="text-xs text-amber-600 dark:text-amber-400">
+              Don&apos;t have your key? Click Regenerate — you&apos;ll get a
+              fresh key with the full snippet pre-filled.
             </p>
 
             <div className="flex gap-2">
