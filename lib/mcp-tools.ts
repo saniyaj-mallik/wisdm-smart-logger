@@ -138,6 +138,35 @@ export function listTools() {
         "List all active users with their id, name, email, and role. Available to managers and admins only.",
       inputSchema: { type: "object", properties: {}, required: [] },
     },
+    {
+      name: "create_project",
+      description:
+        "Create a new project. Available to managers and admins only.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          name:        { type: "string", description: "Project name (required, must be unique)" },
+          clientName:  { type: "string", description: "Optional client name" },
+          description: { type: "string", description: "Optional project description" },
+          budgetHours: { type: "number", description: "Optional budget in hours" },
+          color:       { type: "string", description: "Optional hex color, e.g. #3b82f6" },
+        },
+        required: ["name"],
+      },
+    },
+    {
+      name: "assign_user_to_task",
+      description:
+        "Assign a user to a task. Use get_projects + get_tasks to find taskId, and get_users to find userId. Available to managers and admins only.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          taskId: { type: "string", description: "Task ID" },
+          userId: { type: "string", description: "User ID to assign" },
+        },
+        required: ["taskId", "userId"],
+      },
+    },
   ];
 }
 
@@ -167,6 +196,10 @@ export async function callTool(
       return deleteLog(args, user);
     case "get_users":
       return getUsers(user);
+    case "create_project":
+      return createProject(args, user);
+    case "assign_user_to_task":
+      return assignUserToTask(args, user);
     default:
       throw new Error(`Unknown tool: ${name}`);
   }
@@ -422,4 +455,73 @@ async function getUsers(user: AuthUser): Promise<ToolResult> {
       role:  u.role,
     }))
   );
+}
+
+async function createProject(
+  args: Record<string, unknown>,
+  user: AuthUser
+): Promise<ToolResult> {
+  if (!["manager", "admin"].includes(user.role)) {
+    throw new Error("Access denied: only managers and admins can create projects");
+  }
+
+  const { name, clientName, description, budgetHours, color } = args;
+  if (!name) throw new Error("name is required");
+
+  if (color && !/^#[0-9a-fA-F]{6}$/.test(color as string)) {
+    throw new Error("color must be a valid hex color, e.g. #3b82f6");
+  }
+
+  await connectDB();
+  const existing = await Project.findOne({ name });
+  if (existing) throw new Error(`Project "${name}" already exists`);
+
+  const project = await Project.create({
+    name:        (name as string).trim(),
+    clientName:  clientName != null ? (clientName as string).trim() : null,
+    description: description != null ? (description as string) : null,
+    budgetHours: budgetHours != null ? (budgetHours as number) : null,
+    color:       color != null ? (color as string) : null,
+  });
+
+  return ok({
+    id:      project._id.toString(),
+    name:    project.name,
+    message: `Project "${project.name}" created successfully.`,
+  });
+}
+
+async function assignUserToTask(
+  args: Record<string, unknown>,
+  user: AuthUser
+): Promise<ToolResult> {
+  if (!["manager", "admin"].includes(user.role)) {
+    throw new Error("Access denied: only managers and admins can assign users to tasks");
+  }
+
+  const { taskId, userId } = args;
+  if (!taskId || !userId) throw new Error("taskId and userId are required");
+
+  await connectDB();
+
+  const task = await Task.findById(taskId as string);
+  if (!task) throw new Error(`Task not found: ${taskId}`);
+
+  const targetUser = await User.findById(userId as string);
+  if (!targetUser) throw new Error(`User not found: ${userId}`);
+
+  const userObjId = new Types.ObjectId(userId as string);
+  const alreadyAssigned = task.assignees.some((a) => a.equals(userObjId));
+  if (alreadyAssigned) {
+    return ok({ message: `User "${targetUser.name}" is already assigned to this task.` });
+  }
+
+  task.assignees.push(userObjId);
+  await task.save();
+
+  return ok({
+    taskId:  task._id.toString(),
+    userId:  targetUser._id.toString(),
+    message: `User "${targetUser.name}" assigned to task "${task.name}" successfully.`,
+  });
 }
