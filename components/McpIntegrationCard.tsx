@@ -31,7 +31,7 @@ function CopyButton({ text, className }: { text: string; className?: string }) {
 }
 
 function CliSnippet({ apiKey }: { apiKey: string }) {
-  const cmd = `claude mcp add --transport http smart-logger ${MCP_URL} --header "Authorization: Bearer ${apiKey}"`;
+  const cmd = `claude mcp add --transport http --scope user smart-logger ${MCP_URL} --header "Authorization: Bearer ${apiKey}"`;
   return (
     <div className="relative">
       <pre className="rounded-md bg-muted p-3 pr-8 text-xs overflow-x-auto font-mono leading-relaxed whitespace-pre-wrap break-all">
