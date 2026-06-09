@@ -33,6 +33,15 @@ export default defineConfig({
       use: { ...devices["Desktop Chrome"] },
       testMatch: /unauth\.spec\.ts/,
     },
+    {
+      name: "chromium-calendar",
+      use: {
+        ...devices["Desktop Chrome"],
+        storageState: "tests/e2e/.auth/user.json",
+      },
+      dependencies: ["auth-setup"],
+      testMatch: /calendar\.spec\.ts/,
+    },
   ],
   webServer: {
     command: "npm run dev",

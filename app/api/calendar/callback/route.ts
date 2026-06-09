@@ -18,7 +18,14 @@ export async function GET(req: Request) {
   }
 
   try {
-    const { accessToken, refreshToken, expiresAt } = await exchangeCodeForTokens(code);
+    const { accessToken, refreshToken, expiresAt } = await exchangeCodeForTokens(code!);
+
+    // Google only returns refresh_token on first authorization or after revoke+reauth.
+    // If missing, the previous refresh token (if any) is still valid — don't overwrite it.
+    if (!refreshToken) {
+      console.warn("[calendar/callback] No refresh_token in response — user may need to revoke and reconnect.");
+      redirect("/profile?calendar=error");
+    }
 
     await connectDB();
     await User.findByIdAndUpdate(session.user.id, {
@@ -27,7 +34,7 @@ export async function GET(req: Request) {
       googleTokenExpiry:  expiresAt,
     });
   } catch (err) {
-    console.error("Google Calendar callback error:", err);
+    console.error("[calendar/callback] Error:", err);
     redirect("/profile?calendar=error");
   }
 

@@ -38,21 +38,38 @@ export async function GET(req: Request) {
         googleAccessToken: refreshed.accessToken,
         googleTokenExpiry: refreshed.expiresAt,
       });
-    } catch {
-      // Refresh token invalid — clear and ask user to reconnect
+    } catch (err) {
+      console.error("[calendar/events] Token refresh failed:", err);
       await User.findByIdAndUpdate(session.user.id, {
         googleAccessToken:  null,
         googleRefreshToken: null,
         googleTokenExpiry:  null,
       });
-      return NextResponse.json({ connected: false, events: [] });
+      return NextResponse.json({ connected: false, events: [], error: "token_refresh_failed" });
     }
   }
 
   try {
-    const events = await fetchCalendarEvents(accessToken!, from, to);
-    return NextResponse.json({ connected: true, events });
-  } catch {
-    return NextResponse.json({ connected: true, events: [], error: "Failed to fetch events" });
+    const result = await fetchCalendarEvents(accessToken!, from, to);
+
+    if (result.errors.length > 0) {
+      console.error("[calendar/events] Partial errors:", JSON.stringify(result.errors));
+    }
+
+    return NextResponse.json({
+      connected:  true,
+      events:     result.events,
+      // include debug info only in non-production or when events are empty
+      ...(result.events.length === 0 && {
+        _debug: { calendars: result.calendars, errors: result.errors },
+      }),
+    });
+  } catch (err) {
+    console.error("[calendar/events] Fetch failed:", err);
+    return NextResponse.json({
+      connected: true,
+      events: [],
+      error: String(err),
+    });
   }
 }
