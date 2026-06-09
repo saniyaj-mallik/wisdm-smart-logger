@@ -24,6 +24,25 @@ function endOfDay(dateStr: string): Date {
   return d;
 }
 
+// Parse "HH:MM" (24-hour) → total minutes from midnight
+function parseTimeToMinutes(timeStr: string): number {
+  const match = timeStr.trim().match(/^(\d{1,2}):(\d{2})$/);
+  if (!match) throw new Error(`Invalid time format "${timeStr}" — expected HH:MM (24-hour), e.g. 09:30`);
+  const h = parseInt(match[1], 10);
+  const m = parseInt(match[2], 10);
+  if (h > 23 || m > 59) throw new Error(`Invalid time "${timeStr}" — hours must be 0-23 and minutes 0-59`);
+  return h * 60 + m;
+}
+
+function hoursFromStartEnd(start: string, end: string): number {
+  let startMin = parseTimeToMinutes(start);
+  let endMin   = parseTimeToMinutes(end);
+  if (endMin <= startMin) endMin += 24 * 60; // overnight span
+  const diff = (endMin - startMin) / 60;
+  if (diff > 24) throw new Error("Duration between startTime and endTime cannot exceed 24 hours");
+  return Math.round(diff * 100) / 100;
+}
+
 // ---- Tool definitions (returned to Claude via tools/list) ----
 
 export function listTools() {
@@ -49,19 +68,21 @@ export function listTools() {
     {
       name: "log_time",
       description:
-        "Create a new time entry. Use get_projects and get_tasks to obtain valid IDs first.",
+        "Create a new time entry. Provide either 'hours' OR both 'startTime' and 'endTime' (HH:MM 24-hour format). Use get_projects and get_tasks to obtain valid IDs first.",
       inputSchema: {
         type: "object",
         properties: {
           projectId:  { type: "string",  description: "Project ID" },
           taskId:     { type: "string",  description: "Task ID" },
-          hours:      { type: "number",  description: "Hours worked, e.g. 2.5" },
+          hours:      { type: "number",  description: "Hours worked, e.g. 2.5. Optional if startTime and endTime are provided." },
+          startTime:  { type: "string",  description: "Start time in HH:MM 24-hour format, e.g. 09:30. Optional if hours is provided." },
+          endTime:    { type: "string",  description: "End time in HH:MM 24-hour format, e.g. 17:45. Optional if hours is provided." },
           notes:      { type: "string",  description: "Optional description of work done" },
           date:       { type: "string",  description: "Date in YYYY-MM-DD format. Defaults to today." },
           isBillable: { type: "boolean", description: "Whether the time is billable. Defaults to true." },
           aiUsed:     { type: "boolean", description: "Whether AI assistance was used. Defaults to false." },
         },
-        required: ["projectId", "taskId", "hours"],
+        required: ["projectId", "taskId"],
       },
     },
     {
@@ -93,12 +114,14 @@ export function listTools() {
     {
       name: "update_log",
       description:
-        "Update an existing time entry. Use get_my_logs to find the entry id first.",
+        "Update an existing time entry. Use get_my_logs to find the entry id first. You can update hours directly or provide startTime/endTime to recalculate hours.",
       inputSchema: {
         type: "object",
         properties: {
           logId:      { type: "string",  description: "ID of the time entry to update" },
           hours:      { type: "number",  description: "Updated hours" },
+          startTime:  { type: "string",  description: "Updated start time in HH:MM 24-hour format" },
+          endTime:    { type: "string",  description: "Updated end time in HH:MM 24-hour format" },
           notes:      { type: "string",  description: "Updated notes" },
           isBillable: { type: "boolean", description: "Updated billable flag" },
         },
@@ -246,9 +269,26 @@ async function logTime(
   args: Record<string, unknown>,
   user: AuthUser
 ): Promise<ToolResult> {
-  const { projectId, taskId, hours, notes, date, isBillable = true, aiUsed = false } = args;
-  if (!projectId || !taskId || !hours) {
-    throw new Error("projectId, taskId, and hours are required");
+  const { projectId, taskId, notes, date, isBillable = true, aiUsed = false } = args;
+  let { hours, startTime, endTime } = args as {
+    hours?: number;
+    startTime?: string;
+    endTime?: string;
+  };
+
+  if (!projectId || !taskId) {
+    throw new Error("projectId and taskId are required");
+  }
+
+  if (startTime && endTime) {
+    const computed = hoursFromStartEnd(startTime, endTime);
+    if (hours === undefined) hours = computed;
+  } else if (startTime || endTime) {
+    throw new Error("Provide both startTime and endTime together, or neither");
+  }
+
+  if (hours === undefined) {
+    throw new Error("Provide either 'hours' or both 'startTime' and 'endTime'");
   }
 
   await connectDB();
@@ -260,9 +300,9 @@ async function logTime(
     userId:       new Types.ObjectId(user._id),
     projectId:    new Types.ObjectId(projectId as string),
     taskId:       new Types.ObjectId(taskId as string),
-    hours:        hours as number,
-    startTime:    null,
-    endTime:      null,
+    hours,
+    startTime:    startTime ?? null,
+    endTime:      endTime   ?? null,
     loggedAt:     logDate,
     isBillable:   isBillable as boolean,
     aiUsed:       aiUsed as boolean,
@@ -270,7 +310,11 @@ async function logTime(
     customFields: [],
   });
 
-  return ok({ id: entry._id.toString(), message: `Logged ${hours}h successfully.` });
+  const timeLabel = startTime && endTime
+    ? `${startTime}–${endTime} (${hours}h)`
+    : `${hours}h`;
+
+  return ok({ id: entry._id.toString(), message: `Logged ${timeLabel} successfully.` });
 }
 
 async function getMyLogs(
@@ -301,6 +345,8 @@ async function getMyLogs(
       project:    (e.projectId as unknown as { name: string })?.name ?? "Unknown",
       task:       (e.taskId as unknown as { name: string })?.name ?? "Unknown",
       hours:      e.hours,
+      startTime:  e.startTime ?? null,
+      endTime:    e.endTime   ?? null,
       notes:      e.notes,
       isBillable: e.isBillable,
       aiUsed:     e.aiUsed,
@@ -374,7 +420,13 @@ async function updateLog(
   args: Record<string, unknown>,
   user: AuthUser
 ): Promise<ToolResult> {
-  const { logId, hours, notes, isBillable } = args;
+  const { logId, notes, isBillable } = args;
+  let { hours, startTime, endTime } = args as {
+    hours?: number;
+    startTime?: string;
+    endTime?: string;
+  };
+
   if (!logId) throw new Error("logId is required");
 
   await connectDB();
@@ -384,7 +436,22 @@ async function updateLog(
     throw new Error("Not authorized to update this entry");
   }
 
-  if (hours !== undefined)      entry.hours      = hours as number;
+  // Resolve start/end from existing values when only one side is supplied
+  const resolvedStart = startTime ?? (entry.startTime ?? undefined);
+  const resolvedEnd   = endTime   ?? (entry.endTime   ?? undefined);
+
+  if (startTime !== undefined || endTime !== undefined) {
+    if (!resolvedStart || !resolvedEnd) {
+      throw new Error("Provide both startTime and endTime (or the entry must already have both stored)");
+    }
+    entry.startTime = resolvedStart;
+    entry.endTime   = resolvedEnd;
+    if (hours === undefined) {
+      hours = hoursFromStartEnd(resolvedStart, resolvedEnd);
+    }
+  }
+
+  if (hours !== undefined)      entry.hours      = hours;
   if (notes !== undefined)      entry.notes      = notes as string;
   if (isBillable !== undefined) entry.isBillable = isBillable as boolean;
   await entry.save();
