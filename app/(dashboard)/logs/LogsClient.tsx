@@ -1,15 +1,16 @@
 "use client";
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { Plus, ChevronLeft, ChevronRight, Pencil, Trash2 } from "lucide-react";
+import { Plus, ChevronLeft, ChevronRight, Pencil, Trash2, CalendarDays, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
 import { LogTimeModal } from "@/components/modals/LogTimeModal";
 import { EditLogModal } from "@/components/modals/EditLogModal";
 import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
 import { cn } from "@/lib/utils";
+import type { CalendarEvent } from "@/lib/google-calendar";
 
 interface LogEntry {
   _id: string;
@@ -126,13 +127,54 @@ export function LogsClient({
   const [weekOffset,    setWeekOffset]    = useState(0);
   const [logOpen,       setLogOpen]       = useState(false);
   const [defaultDate,   setDefaultDate]   = useState("");
+  const [defaultStartTime, setDefaultStartTime] = useState<string | undefined>();
+  const [defaultEndTime,   setDefaultEndTime]   = useState<string | undefined>();
+  const [defaultNotes,     setDefaultNotes]     = useState<string | undefined>();
   const [editing,       setEditing]       = useState<LogEntry | null>(null);
   const [deleting,      setDeleting]      = useState<string | null>(null);
 
+  // calendar events
+  const [calEvents,    setCalEvents]    = useState<CalendarEvent[]>([]);
+  const [calConnected, setCalConnected] = useState<boolean | null>(null); // null = loading
+  const [calExpanded,  setCalExpanded]  = useState(true);
+  const [calLoading,   setCalLoading]   = useState(false);
+
   function onMutated() { router.refresh(); }
+
+  function openAdd(dateKey: string) {
+    setDefaultDate(dateKey);
+    setDefaultStartTime(undefined);
+    setDefaultEndTime(undefined);
+    setDefaultNotes(undefined);
+    setLogOpen(true);
+  }
+
+  function openFromEvent(event: CalendarEvent) {
+    setDefaultDate(event.date);
+    setDefaultStartTime(event.startTime ?? undefined);
+    setDefaultEndTime(event.endTime ?? undefined);
+    setDefaultNotes(event.title);
+    setLogOpen(true);
+  }
 
   const weekDays = useMemo(() => getWeekDays(weekOffset), [weekOffset]);
   const todayKey = useMemo(() => toDateKey(new Date()), []);
+
+  // Fetch Google Calendar events for the current week when viewing own logs
+  useEffect(() => {
+    if (!isViewingOwn) return;
+    const from = toDateKey(weekDays[0]);
+    const to   = toDateKey(weekDays[4]);
+    setCalLoading(true);
+    fetch(`/api/calendar/events?from=${from}&to=${to}`)
+      .then((r) => r.json())
+      .then((data: { connected: boolean; events: CalendarEvent[] }) => {
+        setCalConnected(data.connected);
+        setCalEvents(data.events ?? []);
+      })
+      .catch(() => setCalConnected(false))
+      .finally(() => setCalLoading(false));
+  }, [weekOffset, isViewingOwn, weekDays]);
 
   const entriesByDate = useMemo(() => {
     const map: Record<string, LogEntry[]> = {};
@@ -150,11 +192,6 @@ export function LogsClient({
     const d = weekDays[0];
     return `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   }, [weekDays]);
-
-  function openAdd(dateKey: string) {
-    setDefaultDate(dateKey);
-    setLogOpen(true);
-  }
 
   return (
     <div className="space-y-4">
@@ -389,12 +426,83 @@ export function LogsClient({
         </div>
       </div>
 
+      {/* ── Google Calendar Events panel ── */}
+      {isViewingOwn && calConnected !== null && (
+        <div className="rounded-2xl border border-border overflow-hidden">
+          {/* header */}
+          <button
+            className="w-full flex items-center justify-between px-4 py-3 bg-muted/30 hover:bg-muted/50 transition-colors"
+            onClick={() => setCalExpanded((v) => !v)}
+          >
+            <div className="flex items-center gap-2">
+              <CalendarDays className="h-4 w-4 text-muted-foreground" />
+              <span className="text-sm font-semibold">Google Calendar Events</span>
+              {calLoading && <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />}
+              {!calLoading && calConnected && calEvents.length > 0 && (
+                <span className="text-xs text-muted-foreground">({calEvents.length})</span>
+              )}
+            </div>
+            {calExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
+          </button>
+
+          {calExpanded && (
+            <div className="bg-background">
+              {!calConnected ? (
+                <div className="px-4 py-6 text-center space-y-2">
+                  <p className="text-sm text-muted-foreground">Google Calendar is not connected.</p>
+                  <a href="/profile" className="text-xs text-primary hover:underline">
+                    Connect in Profile →
+                  </a>
+                </div>
+              ) : calEvents.length === 0 ? (
+                <div className="px-4 py-6 text-center text-sm text-muted-foreground">
+                  No events this week.
+                </div>
+              ) : (
+                <div className="divide-y divide-border">
+                  {calEvents.map((event) => {
+                    const dayDate  = new Date(event.date + "T00:00:00");
+                    const dayLabel = dayDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+                    const timeLabel = event.isAllDay
+                      ? "All day"
+                      : event.startTime && event.endTime
+                        ? `${fmtTime12(event.startTime)} – ${fmtTime12(event.endTime)}`
+                        : "";
+
+                    return (
+                      <div key={event.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-muted/20 transition-colors">
+                        <span className="w-24 shrink-0 text-xs text-muted-foreground">{dayLabel}</span>
+                        <span className="flex-1 text-sm font-medium truncate">{event.title}</span>
+                        {timeLabel && (
+                          <span className="shrink-0 text-xs text-muted-foreground">{timeLabel}</span>
+                        )}
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="h-7 text-xs shrink-0"
+                          onClick={() => openFromEvent(event)}
+                        >
+                          Log
+                        </Button>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* ── modals ── */}
       <LogTimeModal
         open={logOpen}
         onOpenChange={setLogOpen}
         onSuccess={onMutated}
         defaultDate={defaultDate || todayKey}
+        defaultStartTime={defaultStartTime}
+        defaultEndTime={defaultEndTime}
+        defaultNotes={defaultNotes}
       />
       {editing && (
         <EditLogModal

@@ -10,6 +10,9 @@ export interface IUser extends Document {
   isActive: boolean;
   mcpApiKeyHash: string | null;
   mcpApiKeyHint: string | null;
+  googleAccessToken:  string | null;
+  googleRefreshToken: string | null;
+  googleTokenExpiry:  number | null;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -31,8 +34,11 @@ const UserSchema = new Schema<IUser>(
       default: "dev",
     },
     isActive: { type: Boolean, default: true },
-    mcpApiKeyHash: { type: String, default: null },
-    mcpApiKeyHint: { type: String, default: null },
+    mcpApiKeyHash:       { type: String, default: null },
+    mcpApiKeyHint:       { type: String, default: null },
+    googleAccessToken:   { type: String, default: null },
+    googleRefreshToken:  { type: String, default: null },
+    googleTokenExpiry:   { type: Number, default: null },
   },
   { timestamps: true }
 );

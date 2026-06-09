@@ -1,7 +1,7 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -11,7 +11,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Loader2, User, Lock, Mail, Pencil, X } from "lucide-react";
+import { Loader2, User, Lock, Mail, Pencil, X, CalendarDays, CheckCircle2, AlertCircle } from "lucide-react";
 
 const ROLE_STYLES: Record<string, string> = {
   admin:   "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400",
@@ -165,6 +165,101 @@ export function AccountCard() {
               </Button>
             </div>
           </form>
+        )}
+      </CardContent>
+    </Card>
+  );
+}
+
+export function GoogleCalendarCard({ initialConnected }: { initialConnected: boolean }) {
+  const searchParams   = useSearchParams();
+  const router         = useRouter();
+  const [connected, setConnected]   = useState(initialConnected);
+  const [loading,   setLoading]     = useState(false);
+  const [banner,    setBanner]      = useState<"connected" | "denied" | "error" | null>(
+    (searchParams.get("calendar") as "connected" | "denied" | "error" | null) ?? null
+  );
+
+  // clear query param from URL after showing banner
+  useEffect(() => {
+    if (!banner) return;
+    if (banner === "connected") setConnected(true);
+    const t = setTimeout(() => {
+      setBanner(null);
+      router.replace("/profile");
+    }, 4000);
+    return () => clearTimeout(t);
+  }, [banner, router]);
+
+  async function handleDisconnect() {
+    setLoading(true);
+    try {
+      await fetch("/api/calendar/disconnect", { method: "DELETE" });
+      setConnected(false);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  return (
+    <Card>
+      <CardHeader className="pb-3">
+        <CardTitle className="text-sm font-semibold flex items-center gap-2 text-muted-foreground uppercase tracking-wide">
+          <CalendarDays className="h-3.5 w-3.5" />
+          Google Calendar
+        </CardTitle>
+      </CardHeader>
+      <CardContent className="space-y-4">
+
+        {banner === "connected" && (
+          <div className="flex items-center gap-2 text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 rounded-md px-3 py-2">
+            <CheckCircle2 className="h-3.5 w-3.5 flex-shrink-0" />
+            Google Calendar connected successfully!
+          </div>
+        )}
+        {(banner === "denied" || banner === "error") && (
+          <div className="flex items-center gap-2 text-xs text-destructive bg-destructive/10 rounded-md px-3 py-2">
+            <AlertCircle className="h-3.5 w-3.5 flex-shrink-0" />
+            {banner === "denied" ? "Access denied — you can try again below." : "Something went wrong. Please try again."}
+          </div>
+        )}
+
+        {connected ? (
+          <div className="space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="inline-flex items-center gap-1.5 text-xs font-medium text-green-700 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-full">
+                <CheckCircle2 className="h-3 w-3" />
+                Connected
+              </span>
+              <span className="text-xs text-muted-foreground">
+                Your calendar events appear on the Logs page.
+              </span>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              className="h-8 text-destructive hover:text-destructive"
+              onClick={handleDisconnect}
+              disabled={loading}
+            >
+              {loading && <Loader2 className="h-3.5 w-3.5 animate-spin mr-1.5" />}
+              Disconnect
+            </Button>
+          </div>
+        ) : (
+          <div className="space-y-3">
+            <p className="text-sm text-muted-foreground">
+              Connect your Google Calendar to see upcoming events on the Logs page and log time directly from them.
+            </p>
+            <Button
+              size="sm"
+              className="h-8 gap-1.5"
+              onClick={() => { window.location.href = "/api/calendar/connect"; }}
+            >
+              <CalendarDays className="h-3.5 w-3.5" />
+              Connect Google Calendar
+            </Button>
+          </div>
         )}
       </CardContent>
     </Card>

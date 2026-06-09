@@ -42,6 +42,9 @@ export function LogTimeModal({
   defaultDate,
   defaultProjectId,
   defaultTaskId,
+  defaultStartTime,
+  defaultEndTime,
+  defaultNotes,
 }: {
   open: boolean;
   onOpenChange: (o: boolean) => void;
@@ -49,6 +52,9 @@ export function LogTimeModal({
   defaultDate?: string;
   defaultProjectId?: string;
   defaultTaskId?: string;
+  defaultStartTime?: string;
+  defaultEndTime?: string;
+  defaultNotes?: string;
 }) {
   const router = useRouter();
 
@@ -90,10 +96,17 @@ export function LogTimeModal({
   const [savingTask, setSavingTask]   = useState(false);
   const [taskError, setTaskError]     = useState("");
 
-  // Sync date on open
+  // Sync date and calendar pre-fills on open
   useEffect(() => {
-    if (open) setDate(defaultDate ?? todayString());
-  }, [open, defaultDate]);
+    if (!open) return;
+    setDate(defaultDate ?? todayString());
+    if (defaultStartTime && defaultEndTime) {
+      setTimeMode("range");
+      setStartTime(defaultStartTime);
+      setEndTime(defaultEndTime);
+    }
+    if (defaultNotes) setNotes(defaultNotes);
+  }, [open, defaultDate, defaultStartTime, defaultEndTime, defaultNotes]);
 
   // Fetch projects & active custom fields on open
   useEffect(() => {
