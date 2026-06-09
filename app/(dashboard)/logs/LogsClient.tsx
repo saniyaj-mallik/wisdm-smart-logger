@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { Plus, ChevronLeft, ChevronRight, Pencil, Trash2, CalendarDays, ChevronDown, ChevronUp, Loader2 } from "lucide-react";
+import { Plus, ChevronLeft, ChevronRight, Pencil, Trash2, CalendarDays } from "lucide-react";
 import { LogTimeModal } from "@/components/modals/LogTimeModal";
 import { EditLogModal } from "@/components/modals/EditLogModal";
 import { ConfirmDeleteModal } from "@/components/modals/ConfirmDeleteModal";
@@ -135,9 +135,6 @@ export function LogsClient({
 
   // calendar events
   const [calEvents,    setCalEvents]    = useState<CalendarEvent[]>([]);
-  const [calConnected, setCalConnected] = useState<boolean | null>(null); // null = loading
-  const [calExpanded,  setCalExpanded]  = useState(true);
-  const [calLoading,   setCalLoading]   = useState(false);
   const [calDebug,     setCalDebug]     = useState<{ calendars?: string[]; errors?: { calendarId: string; status: number; message: string }[] } | null>(null);
 
   function onMutated() { router.refresh(); }
@@ -166,21 +163,18 @@ export function LogsClient({
     if (!isViewingOwn) return;
     const from = toDateKey(weekDays[0]);
     const to   = toDateKey(weekDays[4]);
-    setCalLoading(true);
     fetch(`/api/calendar/events?from=${from}&to=${to}`)
       .then((r) => r.json())
       .then((data: { connected: boolean; events: CalendarEvent[]; _debug?: { calendars?: string[]; errors?: { calendarId: string; status: number; message: string }[] } }) => {
-        setCalConnected(data.connected);
         setCalEvents(data.events ?? []);
-        if (data._debug) {
+        if (data._debug?.errors?.length) {
           setCalDebug(data._debug);
-          console.warn("[Calendar] No events found. Debug info:", data._debug);
+          console.warn("[Calendar] Errors fetching events:", data._debug);
         } else {
           setCalDebug(null);
         }
       })
-      .catch(() => setCalConnected(false))
-      .finally(() => setCalLoading(false));
+      .catch(() => {});
   }, [weekOffset, isViewingOwn, weekDays]);
 
   const entriesByDate = useMemo(() => {
@@ -199,6 +193,20 @@ export function LogsClient({
     const d = weekDays[0];
     return `${MONTHS[d.getMonth()]} ${d.getFullYear()}`;
   }, [weekDays]);
+
+  const calEventsByDate = useMemo(() => {
+    const map: Record<string, CalendarEvent[]> = {};
+    for (const e of calEvents) (map[e.date] ??= []).push(e);
+    return map;
+  }, [calEvents]);
+
+  function calBlockH(event: CalendarEvent): number {
+    if (!event.startTime || !event.endTime) return MIN_BLOCK_H;
+    const [sh, sm] = event.startTime.split(":").map(Number);
+    const [eh, em] = event.endTime.split(":").map(Number);
+    const hrs = (eh * 60 + em - sh * 60 - sm) / 60;
+    return Math.max(MIN_BLOCK_H, hrs * PX_PER_HOUR);
+  }
 
   return (
     <div className="space-y-4">
@@ -330,6 +338,40 @@ export function LogsClient({
                     </div>
                   )}
 
+                  {/* ── calendar event ghost blocks ── */}
+                  {isViewingOwn && (calEventsByDate[dateKey] ?? []).map((event) => {
+                    const blockH    = event.isAllDay ? 36 : calBlockH(event);
+                    const timeLabel = event.isAllDay
+                      ? "All day"
+                      : event.startTime && event.endTime
+                        ? `${fmtTime12(event.startTime)} – ${fmtTime12(event.endTime)}`
+                        : "";
+
+                    return (
+                      <div
+                        key={event.id}
+                        style={{ minHeight: blockH }}
+                        className={cn(
+                          "rounded-xl px-2.5 py-2 flex flex-col justify-between flex-shrink-0",
+                          "border border-dashed border-primary/40 bg-primary/5",
+                          "cursor-pointer hover:bg-primary/10 transition-colors",
+                          "relative overflow-hidden",
+                        )}
+                        onClick={(e) => { e.stopPropagation(); openFromEvent(event); }}
+                      >
+                        <div className="flex items-start gap-1.5">
+                          <CalendarDays className="h-3 w-3 text-primary/50 mt-0.5 flex-shrink-0" />
+                          <p className="text-xs font-medium text-foreground/70 leading-snug line-clamp-2">
+                            {event.title}
+                          </p>
+                        </div>
+                        {timeLabel && blockH >= 52 && (
+                          <p className="text-[10px] text-muted-foreground mt-1 leading-none">{timeLabel}</p>
+                        )}
+                      </div>
+                    );
+                  })}
+
                   {dayEntries.map((entry) => {
                     const canEdit = isViewingOwn;
                     const blockH  = Math.max(MIN_BLOCK_H, (entry.hours ?? 0.5) * PX_PER_HOUR);
@@ -432,84 +474,6 @@ export function LogsClient({
           })}
         </div>
       </div>
-
-      {/* ── Google Calendar Events panel ── */}
-      {isViewingOwn && calConnected !== null && (
-        <div className="rounded-2xl border border-border overflow-hidden">
-          {/* header */}
-          <button
-            className="w-full flex items-center justify-between px-4 py-3 bg-muted/30 hover:bg-muted/50 transition-colors"
-            onClick={() => setCalExpanded((v) => !v)}
-          >
-            <div className="flex items-center gap-2">
-              <CalendarDays className="h-4 w-4 text-muted-foreground" />
-              <span className="text-sm font-semibold">Google Calendar Events</span>
-              {calLoading && <Loader2 className="h-3.5 w-3.5 animate-spin text-muted-foreground" />}
-              {!calLoading && calConnected && calEvents.length > 0 && (
-                <span className="text-xs text-muted-foreground">({calEvents.length})</span>
-              )}
-            </div>
-            {calExpanded ? <ChevronUp className="h-4 w-4 text-muted-foreground" /> : <ChevronDown className="h-4 w-4 text-muted-foreground" />}
-          </button>
-
-          {calExpanded && (
-            <div className="bg-background">
-              {!calConnected ? (
-                <div className="px-4 py-6 text-center space-y-2">
-                  <p className="text-sm text-muted-foreground">Google Calendar is not connected.</p>
-                  <a href="/profile" className="text-xs text-primary hover:underline">
-                    Connect in Profile →
-                  </a>
-                </div>
-              ) : calEvents.length === 0 ? (
-                <div className="px-4 py-6 text-center text-sm text-muted-foreground space-y-1">
-                  <p>No events this week.</p>
-                  {calDebug?.errors && calDebug.errors.length > 0 && (
-                    <p className="text-xs text-destructive">
-                      {calDebug.errors.length} calendar{calDebug.errors.length > 1 ? "s" : ""} returned errors
-                      ({calDebug.errors.map((e) => `${e.calendarId.split("@")[0]}: ${e.status}`).join(", ")}).
-                      Try <a href="/profile" className="underline">reconnecting</a>.
-                    </p>
-                  )}
-                  {calDebug?.calendars && calDebug.errors?.length === 0 && (
-                    <p className="text-xs">Checked {calDebug.calendars.length} calendar{calDebug.calendars.length !== 1 ? "s" : ""}.</p>
-                  )}
-                </div>
-              ) : (
-                <div className="divide-y divide-border">
-                  {calEvents.map((event) => {
-                    const dayDate  = new Date(event.date + "T00:00:00");
-                    const dayLabel = dayDate.toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
-                    const timeLabel = event.isAllDay
-                      ? "All day"
-                      : event.startTime && event.endTime
-                        ? `${fmtTime12(event.startTime)} – ${fmtTime12(event.endTime)}`
-                        : "";
-
-                    return (
-                      <div key={event.id} className="flex items-center gap-3 px-4 py-2.5 hover:bg-muted/20 transition-colors">
-                        <span className="w-24 shrink-0 text-xs text-muted-foreground">{dayLabel}</span>
-                        <span className="flex-1 text-sm font-medium truncate">{event.title}</span>
-                        {timeLabel && (
-                          <span className="shrink-0 text-xs text-muted-foreground">{timeLabel}</span>
-                        )}
-                        <Button
-                          size="sm"
-                          variant="outline"
-                          className="h-7 text-xs shrink-0"
-                          onClick={() => openFromEvent(event)}
-                        >
-                          Log
-                        </Button>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      )}
 
       {/* ── modals ── */}
       <LogTimeModal
