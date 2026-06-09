@@ -12,7 +12,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
 } from "@/components/ui/select";
-import { Plus, X, Loader2 } from "lucide-react";
+import { Plus, X, Loader2, Repeat2 } from "lucide-react";
 
 interface Project { _id: string; name: string }
 interface Task    { _id: string; name: string }
@@ -67,6 +67,12 @@ export function LogTimeModal({
   const [notes, setNotes]           = useState("");
   const [error, setError]           = useState("");
   const [submitting, setSubmitting] = useState(false);
+
+  // repeat across dates
+  const [repeatEnabled, setRepeatEnabled] = useState(false);
+  const [repeatFrom, setRepeatFrom]       = useState("");
+  const [repeatTo, setRepeatTo]           = useState("");
+  const [repeatDays, setRepeatDays]       = useState<Set<number>>(new Set([1, 2, 3, 4, 5]));
 
   // custom fields
   const [customFieldDefs, setCustomFieldDefs] = useState<CustomFieldDef[]>([]);
@@ -216,6 +222,42 @@ export function LogTimeModal({
       });
   }
 
+  // ── repeat helpers ─────────────────────────────────────────────────────────
+  const DAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+
+  function getRepeatDates(): string[] {
+    if (!repeatFrom || !repeatTo || repeatDays.size === 0) return [];
+    const dates: string[] = [];
+    const end = new Date(repeatTo + "T00:00:00");
+    const cur = new Date(repeatFrom + "T00:00:00");
+    while (cur <= end) {
+      if (repeatDays.has(cur.getDay())) dates.push(cur.toISOString().slice(0, 10));
+      cur.setDate(cur.getDate() + 1);
+    }
+    return dates;
+  }
+
+  function toggleRepeatDay(day: number) {
+    setRepeatDays((prev) => {
+      const next = new Set(prev);
+      if (next.has(day)) next.delete(day); else next.add(day);
+      return next;
+    });
+  }
+
+  function handleToggleRepeat(enabled: boolean) {
+    setRepeatEnabled(enabled);
+    if (enabled) {
+      const base = date || todayString();
+      setRepeatFrom(base);
+      const d = new Date(base + "T00:00:00");
+      const daysToFri = (5 - d.getDay() + 7) % 7;
+      const fri = new Date(d);
+      fri.setDate(d.getDate() + daysToFri);
+      setRepeatTo(fri.toISOString().slice(0, 10));
+    }
+  }
+
   // ── form reset & submit ────────────────────────────────────────────────────
   function resetForm() {
     setProjectId(defaultProjectId ?? "");
@@ -228,6 +270,8 @@ export function LogTimeModal({
     if (!defaultProjectId) setTasks([]);
     setAddingProject(false); setNewProjectName(""); setProjectError("");
     setAddingTask(false); setNewTaskName(""); setTaskError("");
+    setRepeatEnabled(false); setRepeatFrom(""); setRepeatTo("");
+    setRepeatDays(new Set([1, 2, 3, 4, 5]));
   }
 
   function handleOpenChange(o: boolean) {
@@ -239,32 +283,50 @@ export function LogTimeModal({
     e.preventDefault();
     setError("");
 
-    const body: Record<string, unknown> = {
-      projectId, taskId, loggedAt: date, isBillable, aiUsed, notes: notes || null,
+    const baseBody: Record<string, unknown> = {
+      projectId, taskId, isBillable, aiUsed, notes: notes || null,
       customFields: buildCustomFields(),
     };
 
     if (timeMode === "hours") {
       const h = hoursNum + minutesNum / 60;
       if (h <= 0) { setError("Select at least 15 minutes"); return; }
-      body.hours = h;
+      baseBody.hours = h;
     } else {
       if (!startTime || !endTime) { setError("Enter both start and end times"); return; }
-      body.startTime = startTime;
-      body.endTime   = endTime;
+      baseBody.startTime = startTime;
+      baseBody.endTime   = endTime;
     }
 
     setSubmitting(true);
     try {
-      const res = await fetch("/api/logs", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
-      if (!res.ok) {
-        const err = await res.json();
-        setError(err.error?.formErrors?.[0] ?? err.error ?? "Failed to save");
-        return;
+      if (repeatEnabled) {
+        const dates = getRepeatDates();
+        if (dates.length === 0) { setError("No dates match the selected range and days"); return; }
+        let failed = 0;
+        for (const d of dates) {
+          const res = await fetch("/api/logs", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ ...baseBody, loggedAt: d }),
+          });
+          if (!res.ok) failed++;
+        }
+        if (failed > 0) {
+          setError(`${failed} of ${dates.length} entries failed to save`);
+          return;
+        }
+      } else {
+        const res = await fetch("/api/logs", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...baseBody, loggedAt: date }),
+        });
+        if (!res.ok) {
+          const err = await res.json();
+          setError(err.error?.formErrors?.[0] ?? err.error ?? "Failed to save");
+          return;
+        }
       }
       handleOpenChange(false);
       onSuccess?.();
@@ -421,16 +483,83 @@ export function LogTimeModal({
             )}
           </div>
 
-          {/* ── Date ── */}
+          {/* ── Date / Repeat ── */}
           <div className="space-y-1.5">
-            <Label>Date</Label>
-            <Input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-              className="w-44"
-            />
+            <div className="flex items-center justify-between">
+              <Label>{repeatEnabled ? "Date Range" : "Date"}</Label>
+              <button
+                type="button"
+                onClick={() => handleToggleRepeat(!repeatEnabled)}
+                className={`flex items-center gap-1 text-xs rounded px-1.5 py-0.5 transition-colors ${
+                  repeatEnabled
+                    ? "bg-primary/10 text-primary font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                <Repeat2 className="h-3 w-3" />
+                Repeat
+              </button>
+            </div>
+
+            {!repeatEnabled ? (
+              <Input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+                className="w-44"
+              />
+            ) : (
+              <div className="space-y-2">
+                {/* From → To */}
+                <div className="flex items-center gap-2">
+                  <Input
+                    type="date"
+                    value={repeatFrom}
+                    onChange={(e) => setRepeatFrom(e.target.value)}
+                    className="flex-1"
+                  />
+                  <span className="text-sm text-muted-foreground shrink-0">to</span>
+                  <Input
+                    type="date"
+                    value={repeatTo}
+                    min={repeatFrom}
+                    onChange={(e) => setRepeatTo(e.target.value)}
+                    className="flex-1"
+                  />
+                </div>
+
+                {/* Day-of-week toggles */}
+                <div className="flex gap-1">
+                  {DAY_LABELS.map((label, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => toggleRepeatDay(i)}
+                      className={`flex-1 text-xs py-1 rounded transition-colors ${
+                        repeatDays.has(i)
+                          ? "bg-primary text-primary-foreground"
+                          : "bg-muted text-muted-foreground hover:bg-muted/80"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Entry count preview */}
+                {(() => {
+                  const count = getRepeatDates().length;
+                  return count > 0 ? (
+                    <p className="text-xs text-muted-foreground">
+                      {count} {count === 1 ? "entry" : "entries"} will be created
+                    </p>
+                  ) : repeatFrom && repeatTo ? (
+                    <p className="text-xs text-destructive">No matching dates — select at least one day</p>
+                  ) : null;
+                })()}
+              </div>
+            )}
           </div>
 
           {/* ── Time mode ── */}
@@ -572,7 +701,11 @@ export function LogTimeModal({
               Cancel
             </Button>
             <Button type="submit" disabled={submitting || !projectId || !taskId}>
-              {submitting ? "Saving…" : "Save Log"}
+              {submitting
+                ? "Saving…"
+                : repeatEnabled
+                  ? `Save ${getRepeatDates().length || 0} Logs`
+                  : "Save Log"}
             </Button>
           </DialogFooter>
         </div>

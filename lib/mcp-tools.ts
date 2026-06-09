@@ -178,6 +178,32 @@ export function listTools() {
       },
     },
     {
+      name: "repeat_log",
+      description:
+        "Log the same time entry across multiple dates (e.g. every weekday for a week). Provide a date range and which days to include. Use get_projects and get_tasks to obtain valid IDs first.",
+      inputSchema: {
+        type: "object",
+        properties: {
+          projectId:  { type: "string",  description: "Project ID" },
+          taskId:     { type: "string",  description: "Task ID" },
+          startDate:  { type: "string",  description: "First date of the range in YYYY-MM-DD format" },
+          endDate:    { type: "string",  description: "Last date of the range in YYYY-MM-DD format" },
+          days:       {
+            type: "array",
+            items: { type: "string", enum: ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"] },
+            description: "Which days of the week to log on. Defaults to Mon–Fri if omitted.",
+          },
+          hours:      { type: "number",  description: "Hours per entry, e.g. 2.5. Optional if startTime and endTime are provided." },
+          startTime:  { type: "string",  description: "Start time in HH:MM 24-hour format. Optional if hours is provided." },
+          endTime:    { type: "string",  description: "End time in HH:MM 24-hour format. Optional if hours is provided." },
+          notes:      { type: "string",  description: "Optional notes applied to every entry" },
+          isBillable: { type: "boolean", description: "Whether entries are billable. Defaults to true." },
+          aiUsed:     { type: "boolean", description: "Whether AI assistance was used. Defaults to false." },
+        },
+        required: ["projectId", "taskId", "startDate", "endDate"],
+      },
+    },
+    {
       name: "assign_user_to_task",
       description:
         "Assign a user to a task. Use get_projects + get_tasks to find taskId, and get_users to find userId. Available to managers and admins only.",
@@ -221,6 +247,8 @@ export async function callTool(
       return getUsers(user);
     case "create_project":
       return createProject(args, user);
+    case "repeat_log":
+      return repeatLog(args, user);
     case "assign_user_to_task":
       return assignUserToTask(args, user);
     default:
@@ -555,6 +583,79 @@ async function createProject(
     id:      project._id.toString(),
     name:    project.name,
     message: `Project "${project.name}" created successfully.`,
+  });
+}
+
+const DAY_NAME_TO_INDEX: Record<string, number> = {
+  Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6,
+};
+const DEFAULT_WEEKDAYS = new Set([1, 2, 3, 4, 5]);
+
+async function repeatLog(
+  args: Record<string, unknown>,
+  user: AuthUser
+): Promise<ToolResult> {
+  const { projectId, taskId, startDate, endDate, notes, isBillable = true, aiUsed = false } = args;
+  let { hours, startTime, endTime } = args as {
+    hours?: number; startTime?: string; endTime?: string;
+  };
+
+  if (!projectId || !taskId || !startDate || !endDate) {
+    throw new Error("projectId, taskId, startDate, and endDate are required");
+  }
+
+  if (startTime && endTime) {
+    if (hours === undefined) hours = hoursFromStartEnd(startTime, endTime);
+  } else if (startTime || endTime) {
+    throw new Error("Provide both startTime and endTime together, or neither");
+  }
+  if (hours === undefined) {
+    throw new Error("Provide either 'hours' or both 'startTime' and 'endTime'");
+  }
+
+  const rawDays = args.days as string[] | undefined;
+  const allowedDays: Set<number> = rawDays && rawDays.length > 0
+    ? new Set(rawDays.map((d) => {
+        const idx = DAY_NAME_TO_INDEX[d];
+        if (idx === undefined) throw new Error(`Invalid day name "${d}" — use Sun/Mon/Tue/Wed/Thu/Fri/Sat`);
+        return idx;
+      }))
+    : DEFAULT_WEEKDAYS;
+
+  // Generate matching dates
+  const dates: string[] = [];
+  const end = new Date(endDate as string + "T00:00:00Z");
+  const cur = new Date(startDate as string + "T00:00:00Z");
+  while (cur <= end) {
+    if (allowedDays.has(cur.getUTCDay())) dates.push(cur.toISOString().slice(0, 10));
+    cur.setUTCDate(cur.getUTCDate() + 1);
+  }
+
+  if (dates.length === 0) throw new Error("No dates match the selected range and days");
+  if (dates.length > 90)  throw new Error("Range too large — maximum 90 entries per call");
+
+  await connectDB();
+  const docs = dates.map((d) => ({
+    userId:     new Types.ObjectId(user._id),
+    projectId:  new Types.ObjectId(projectId as string),
+    taskId:     new Types.ObjectId(taskId as string),
+    hours,
+    startTime:  startTime ?? null,
+    endTime:    endTime   ?? null,
+    loggedAt:   stripTime(d),
+    isBillable: isBillable as boolean,
+    aiUsed:     aiUsed as boolean,
+    notes:      (notes as string) ?? null,
+    customFields: [],
+  }));
+
+  await TimeEntry.insertMany(docs);
+
+  const timeLabel = startTime && endTime ? `${startTime}–${endTime} (${hours}h)` : `${hours}h`;
+  return ok({
+    created: dates.length,
+    dates,
+    message: `Logged ${timeLabel} on ${dates.length} dates (${startDate} to ${endDate}).`,
   });
 }
 
