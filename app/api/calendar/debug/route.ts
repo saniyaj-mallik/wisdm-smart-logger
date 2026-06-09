@@ -56,6 +56,17 @@ export async function GET() {
     });
   }
 
+  // Get Google account email
+  let googleEmail: string | null = null;
+  const userInfoRes = await fetch("https://www.googleapis.com/oauth2/v2/userinfo", {
+    headers: { Authorization: `Bearer ${accessToken}` },
+    cache: "no-store",
+  });
+  if (userInfoRes.ok) {
+    const ui = await userInfoRes.json();
+    googleEmail = ui.email ?? null;
+  }
+
   // Fetch calendar list to verify scope
   const listRes = await fetch("https://www.googleapis.com/calendar/v3/users/me/calendarList?maxResults=20", {
     headers: { Authorization: `Bearer ${accessToken}` },
@@ -106,6 +117,7 @@ export async function GET() {
 
   return NextResponse.json({
     status:       "ok",
+    googleEmail,
     hasRefreshToken,
     tokenExpired,
     expiresInSec,

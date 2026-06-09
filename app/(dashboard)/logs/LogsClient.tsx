@@ -138,6 +138,7 @@ export function LogsClient({
   const [calConnected, setCalConnected] = useState<boolean | null>(null); // null = loading
   const [calExpanded,  setCalExpanded]  = useState(true);
   const [calLoading,   setCalLoading]   = useState(false);
+  const [calDebug,     setCalDebug]     = useState<{ calendars?: string[]; errors?: { calendarId: string; status: number; message: string }[] } | null>(null);
 
   function onMutated() { router.refresh(); }
 
@@ -168,9 +169,15 @@ export function LogsClient({
     setCalLoading(true);
     fetch(`/api/calendar/events?from=${from}&to=${to}`)
       .then((r) => r.json())
-      .then((data: { connected: boolean; events: CalendarEvent[] }) => {
+      .then((data: { connected: boolean; events: CalendarEvent[]; _debug?: { calendars?: string[]; errors?: { calendarId: string; status: number; message: string }[] } }) => {
         setCalConnected(data.connected);
         setCalEvents(data.events ?? []);
+        if (data._debug) {
+          setCalDebug(data._debug);
+          console.warn("[Calendar] No events found. Debug info:", data._debug);
+        } else {
+          setCalDebug(null);
+        }
       })
       .catch(() => setCalConnected(false))
       .finally(() => setCalLoading(false));
@@ -455,8 +462,18 @@ export function LogsClient({
                   </a>
                 </div>
               ) : calEvents.length === 0 ? (
-                <div className="px-4 py-6 text-center text-sm text-muted-foreground">
-                  No events this week.
+                <div className="px-4 py-6 text-center text-sm text-muted-foreground space-y-1">
+                  <p>No events this week.</p>
+                  {calDebug?.errors && calDebug.errors.length > 0 && (
+                    <p className="text-xs text-destructive">
+                      {calDebug.errors.length} calendar{calDebug.errors.length > 1 ? "s" : ""} returned errors
+                      ({calDebug.errors.map((e) => `${e.calendarId.split("@")[0]}: ${e.status}`).join(", ")}).
+                      Try <a href="/profile" className="underline">reconnecting</a>.
+                    </p>
+                  )}
+                  {calDebug?.calendars && calDebug.errors?.length === 0 && (
+                    <p className="text-xs">Checked {calDebug.calendars.length} calendar{calDebug.calendars.length !== 1 ? "s" : ""}.</p>
+                  )}
                 </div>
               ) : (
                 <div className="divide-y divide-border">

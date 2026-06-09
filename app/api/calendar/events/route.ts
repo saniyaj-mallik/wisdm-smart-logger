@@ -59,10 +59,7 @@ export async function GET(req: Request) {
     return NextResponse.json({
       connected:  true,
       events:     result.events,
-      // include debug info only in non-production or when events are empty
-      ...(result.events.length === 0 && {
-        _debug: { calendars: result.calendars, errors: result.errors },
-      }),
+      _debug: { calendars: result.calendars, errors: result.errors },
     });
   } catch (err) {
     console.error("[calendar/events] Fetch failed:", err);
