@@ -22,10 +22,14 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     async session({ session, token }) {
       session.user.id = token.id as string;
       if (token.name) session.user.name = token.name as string;
-      // Always read role fresh from DB so admin role changes take effect immediately
-      await connectDB();
-      const dbUser = await User.findById(token.id).select("role").lean() as { role?: string } | null;
-      session.user.role = dbUser?.role ?? (token.role as string);
+      try {
+        await connectDB();
+        const dbUser = await User.findById(token.id).select("role").lean() as { role?: string } | null;
+        session.user.role = dbUser?.role ?? (token.role as string);
+      } catch {
+        // Fall back to token role if DB is unreachable — avoids invalidating the session
+        session.user.role = token.role as string;
+      }
       return session;
     },
   },

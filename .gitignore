@@ -8,6 +8,12 @@
 
 # testing
 /coverage
+/test-results
+/playwright-report
+tests/e2e/.auth
+
+# playwright-mcp logs
+/.playwright-mcp
 
 # next.js
 /.next/
